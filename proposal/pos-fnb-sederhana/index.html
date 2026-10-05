@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Proposal POS FnB Sederhana</title>
+  <meta name="description" content="Proposal POS FnB sederhana untuk calon partner: kasir cepat, pesanan jelas, owner pegang angka.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="icon" href="../../assets/mascot.svg">
+  <style>
+    :root { --line: #e6d9bf; --muted: #7d715d; --paper: #fbf6ec; }
+    body { background: var(--paper); }
+    .wrap { max-width: 980px; }
+
+    /* Cover */
+    .cover { background: var(--brick); color: var(--cream); padding: 28px 0 72px; position: relative; overflow: hidden; }
+    .cover .meta { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 64px; font-size: .9rem; }
+    .cover .meta span { opacity: .8; }
+    .pill { display: inline-block; font-family: var(--font-display); font-weight: 600; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; background: var(--maroon); color: var(--cream); padding: 6px 12px; border-radius: 999px; }
+    .cover h1 { font-size: clamp(2.6rem, 7.5vw, 5.4rem); max-width: 14ch; margin: 18px 0 22px; }
+    .cover h1 em { font-style: normal; color: var(--crema); }
+    .cover .lede { font-size: clamp(1.05rem, 2vw, 1.25rem); max-width: 54ch; opacity: .92; }
+    .cover [data-mascot] { position: absolute; width: 230px; right: -20px; bottom: -40px; color: var(--crema); --mascot-fill: var(--brick); transform: rotate(-12deg); opacity: .9; }
+    .flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 32px; font-family: var(--font-display); font-weight: 600; }
+    .flow span { background: var(--cream); color: var(--brick); padding: 8px 14px; border-radius: 999px; }
+    .flow i { font-style: normal; color: var(--crema); }
+
+    section { padding: clamp(48px, 7vw, 80px) 0; border-bottom: 1.5px solid var(--line); }
+    section:last-of-type { border-bottom: 0; }
+    .eyebrow { color: var(--brick); }
+    h2 { font-size: clamp(1.9rem, 4.2vw, 2.9rem); color: var(--maroon); margin: 10px 0 14px; }
+    h3 { font-size: 1.35rem; color: var(--maroon); margin-bottom: 10px; }
+    p { max-width: 68ch; }
+    .sub { color: var(--muted); font-size: 1.05rem; }
+
+    .callout { background: var(--cream); border-left: 5px solid var(--brick); border-radius: 0 18px 18px 0; padding: 16px 20px; margin-top: 24px; }
+    .callout b { font-family: var(--font-display); color: var(--maroon); }
+
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px; }
+    .panel { background: #fff; border: 1.5px solid var(--line); border-radius: var(--radius); padding: 24px; }
+    .panel .icon { width: 44px; height: 44px; border-radius: 14px; background: var(--brick); color: var(--cream); display: grid; place-items: center; margin-bottom: 14px; }
+    .panel .icon svg { width: 22px; height: 22px; }
+    .panel .who { color: var(--muted); font-size: .9rem; margin: -6px 0 12px; }
+    ul.ticks { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    ul.ticks li { position: relative; padding-left: 26px; }
+    ul.ticks li::before { content: ""; position: absolute; left: 0; top: .45em; width: 14px; height: 9px; border-left: 2.5px solid var(--brick); border-bottom: 2.5px solid var(--brick); transform: rotate(-45deg); }
+    ul.ticks li small { color: var(--muted); }
+    ul.dots { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    ul.dots li { position: relative; padding-left: 20px; }
+    ul.dots li::before { content: ""; position: absolute; left: 2px; top: .6em; width: 7px; height: 7px; border-radius: 50%; background: var(--brick); }
+
+    /* Option cards */
+    .options { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px; }
+    .opt { background: #fff; border: 2px solid var(--line); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; gap: 14px; position: relative; }
+    .opt.featured { border-color: var(--brick); }
+    .opt .price { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--brick); background: var(--cream); padding: 6px 12px; border-radius: 999px; align-self: flex-start; }
+    .opt.featured .price { background: var(--brick); color: var(--cream); }
+    .opt h3 { margin: 0; }
+    .opt h3 sup { color: var(--brick); }
+    .opt .foot { font-size: .88rem; color: var(--muted); margin-top: auto; padding-top: 10px; border-top: 1.5px dashed var(--line); }
+
+    /* Calculator */
+    .calc { margin-top: 30px; background: var(--maroon); color: var(--cream); border-radius: var(--radius-lg); padding: clamp(22px, 4vw, 36px); display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; }
+    .calc h3 { color: var(--crema); }
+    .calc fieldset { border: 0; margin-bottom: 18px; }
+    .calc legend { font-family: var(--font-display); font-weight: 600; margin-bottom: 8px; opacity: .9; }
+    .choice { display: flex; gap: 8px; flex-wrap: wrap; }
+    .choice label { cursor: pointer; }
+    .choice input { position: absolute; opacity: 0; pointer-events: none; }
+    .choice span { display: inline-block; padding: 10px 16px; border-radius: 999px; border: 1.5px solid rgba(242,230,207,.4); font-family: var(--font-display); font-weight: 500; }
+    .choice input:checked + span { background: var(--cream); color: var(--brick); border-color: var(--cream); }
+    .choice input:focus-visible + span { outline: 3px solid var(--crema); outline-offset: 2px; }
+    .result { background: var(--brick); border-radius: 22px; padding: 22px; display: flex; flex-direction: column; gap: 12px; }
+    .result .row { display: flex; justify-content: space-between; gap: 12px; font-size: .95rem; opacity: .9; }
+    .result .total { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 5vw, 2.8rem); color: var(--crema); line-height: 1; }
+    .result .time { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; }
+    .result small { opacity: .75; font-size: .82rem; }
+    .result hr { border: 0; border-top: 1.5px dashed rgba(242,230,207,.3); }
+
+    /* Numbers table */
+    .numbers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 28px; }
+    .num { background: #fff; border: 1.5px solid var(--line); border-radius: var(--radius); padding: 20px 22px; }
+    .num b { display: block; font-family: var(--font-display); font-size: clamp(1.7rem, 3.4vw, 2.3rem); color: var(--brick); line-height: 1.05; }
+    .num span { display: block; font-family: var(--font-display); font-weight: 600; color: var(--maroon); margin: 6px 0 8px; }
+    .num small { display: block; color: var(--muted); font-size: .8rem; line-height: 1.45; }
+    .num.total { background: var(--brick); border-color: var(--brick); }
+    .num.total b { color: var(--crema); } .num.total span { color: var(--cream); } .num.total small { color: var(--cream); opacity: .75; }
+
+    .split { display: flex; height: 54px; border-radius: 14px; overflow: hidden; gap: 2px; margin: 18px 0 12px; }
+    .split div { display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; color: var(--cream); font-size: 1.05rem; }
+
+    /* Timeline */
+    .timeline { list-style: none; margin-top: 30px; position: relative; }
+    .timeline::before { content: ""; position: absolute; left: 21px; top: 10px; bottom: 10px; width: 2px; background: var(--line); }
+    .timeline li { position: relative; padding: 0 0 30px 64px; }
+    .timeline li:last-child { padding-bottom: 0; }
+    .timeline .wk { position: absolute; left: 0; top: 0; width: 44px; height: 44px; border-radius: 50%; background: var(--brick); color: var(--cream); display: grid; place-items: center; font-family: var(--font-display); font-weight: 700; font-size: .95rem; }
+    .timeline h3 { margin-bottom: 6px; padding-top: 8px; }
+    .timeline h3 small { font-family: var(--font-body); font-weight: 500; font-size: .85rem; color: var(--muted); margin-left: 6px; }
+    .them { margin-top: 10px; background: var(--cream); border-radius: 14px; padding: 10px 14px; font-size: .95rem; }
+    .them b { font-family: var(--font-display); color: var(--brick); }
+
+    /* Decisions */
+    .decisions { list-style: none; counter-reset: d; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 28px; }
+    .decisions li { counter-increment: d; background: #fff; border: 1.5px solid var(--line); border-radius: var(--radius); padding: 20px 22px 20px 70px; position: relative; font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; color: var(--maroon); }
+    .decisions li::before { content: counter(d); position: absolute; left: 20px; top: 18px; width: 34px; height: 34px; border-radius: 50%; background: var(--crema); color: var(--maroon); display: grid; place-items: center; }
+
+    .demo { display: flex; gap: 18px; align-items: center; justify-content: space-between; flex-wrap: wrap; background: var(--cream); border-radius: var(--radius); padding: 20px 24px; margin-top: 28px; }
+    .demo p { margin: 0; }
+    .demo .links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn-ghost-dark { color: var(--brick); border-color: var(--brick); padding: 10px 18px; font-size: .95rem; }
+
+    /* Sticky nav */
+    .topnav { position: sticky; top: 0; z-index: 20; background: rgba(251,246,236,.94); backdrop-filter: blur(8px); border-bottom: 1.5px solid var(--line); }
+    .topnav .wrap { display: flex; align-items: center; gap: 18px; height: 60px; }
+    .topnav .logo { font-size: 1.6rem; color: var(--brick); --logo-bg: var(--paper); }
+    .topnav nav { display: flex; gap: 18px; font-family: var(--font-display); font-weight: 500; font-size: .95rem; overflow-x: auto; scrollbar-width: none; flex: 1; }
+    .topnav nav a { text-decoration: none; color: var(--maroon); opacity: .75; white-space: nowrap; }
+    .topnav nav a:hover { opacity: 1; }
+    .topnav .btn { padding: 9px 16px; font-size: .9rem; white-space: nowrap; }
+
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+
+    /* 30-second summary */
+    .summary { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; background: var(--line); border-radius: var(--radius); overflow: hidden; margin-top: -36px; position: relative; z-index: 2; box-shadow: 0 18px 40px -24px rgba(93,16,9,.45); }
+    .summary div { background: #fff; padding: 18px 16px; }
+    .summary b { display: block; font-family: var(--font-display); font-size: 1.35rem; color: var(--brick); line-height: 1.1; }
+    .summary span { font-size: .85rem; color: var(--muted); }
+
+    /* Problem -> solution */
+    .ps { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 28px; border-radius: var(--radius); overflow: hidden; border: 1.5px solid var(--line); }
+    .ps > div { padding: 24px; }
+    .ps .before { background: #fff; }
+    .ps .after { background: var(--brick); color: var(--cream); }
+    .ps h3 { font-size: 1.15rem; margin-bottom: 12px; }
+    .ps .after h3 { color: var(--crema); }
+    .ps ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .ps .before li { padding-left: 26px; position: relative; color: var(--bean); }
+    .ps .before li::before { content: "✕"; position: absolute; left: 0; color: #b3261e; font-weight: 700; }
+    .ps .after li { padding-left: 26px; position: relative; }
+    .ps .after li::before { content: "✓"; position: absolute; left: 0; color: var(--crema); font-weight: 700; }
+
+    .why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 24px; }
+    .why div { background: var(--cream); border-radius: var(--radius); padding: 20px; }
+    .why b { display: block; font-family: var(--font-display); color: var(--maroon); font-size: 1.1rem; margin-bottom: 6px; }
+    .why p { font-size: .95rem; }
+
+    /* Demo previews */
+    .demos { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 28px; }
+    .demo-card { background: #fff; border: 1.5px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; text-decoration: none; color: inherit; transition: transform .15s, box-shadow .15s; }
+    .demo-card:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -24px rgba(93,16,9,.5); }
+    .shot { position: relative; aspect-ratio: 16/10; overflow: hidden; background: var(--cream); border-bottom: 1.5px solid var(--line); }
+    .shot iframe { position: absolute; top: 0; left: 0; width: 1280px; height: 800px; border: 0; transform-origin: 0 0; pointer-events: none; }
+    .shot .tagline { position: absolute; left: 12px; top: 12px; }
+    .demo-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .demo-body h3 { margin: 0; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .demo-body h3 .go { font-size: .9rem; color: var(--brick); white-space: nowrap; }
+    .demo-body .try { font-size: .92rem; color: var(--muted); }
+    .demo-body .try b { color: var(--maroon); font-family: var(--font-display); font-weight: 600; }
+    .scope { align-self: flex-start; font-family: var(--font-display); font-weight: 600; font-size: .75rem; padding: 4px 10px; border-radius: 999px; background: var(--cream); color: var(--brick); }
+    .scope.extra { background: var(--maroon); color: var(--cream); }
+
+    /* Closing CTA */
+    .closing { background: var(--brick); color: var(--cream); border-radius: var(--radius-lg); padding: clamp(28px, 5vw, 56px); margin-top: 32px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: center; }
+    .closing h2 { color: var(--cream); margin-top: 0; }
+    .closing p { opacity: .9; }
+    .closing .actions { display: flex; flex-direction: column; gap: 10px; }
+    .closing .btn { justify-content: center; }
+
+    footer { background: var(--maroon); color: var(--cream); padding: 40px 0; font-size: .9rem; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
+    footer .logo { font-size: 2rem; color: var(--crema); --logo-bg: var(--maroon); }
+
+    @media (max-width: 760px) {
+      .two, .options, .calc, .numbers, .decisions, .ps, .why, .demos, .closing { grid-template-columns: 1fr; }
+      .summary { grid-template-columns: 1fr 1fr; }
+      .summary div:last-child { grid-column: 1/-1; }
+      .topnav nav { display: none; }
+      .topnav .wrap { justify-content: space-between; }
+      .cover [data-mascot] { width: 150px; opacity: .35; }
+    }
+    @media print {
+      body { background: #fff; }
+      .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .calc, .demo, .no-print, .topnav, .cta-row { display: none !important; }
+      .demos { display: none; }
+      section { break-inside: avoid-page; padding: 28px 0; }
+      .panel, .opt, .num, .timeline li { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topnav no-print">
+  <div class="wrap">
+    <a href="#top" class="logo" aria-label="Ke atas">Kafe<span class="bean"></span></a>
+    <nav aria-label="Bagian proposal"><a href="#contoh">Contoh</a><a href="#fitur">Fitur</a><a href="#pembayaran">Pembayaran</a><a href="#harga">Harga</a><a href="#timeline">Timeline</a><a href="#keputusan">Keputusan</a></nav>
+    <a href="#contoh" class="btn btn-brick">Coba demonya</a>
+  </div>
+</div>
+
+<header class="cover" id="top">
+  <div class="wrap">
+    <div class="meta">
+      <span class="pill">Proposal</span>
+      <span>Untuk: <b>Calon Partner FnB</b> · Disiapkan oleh Arketype · 5 Oktober 2026</span>
+    </div>
+    <span class="eyebrow" style="color:var(--crema)">POS FnB Sederhana</span>
+    <h1>POS yang cukup buat <em>jualan jalan rapi.</em></h1>
+    <p class="lede">Untuk bisnis FnB kecil yang butuh kasir cepat, pesanan jelas, dan owner bisa lihat angka — tanpa bayar sistem enterprise.</p>
+    <div class="flow" aria-label="Alur jualan"><span>Pilih menu</span><i>→</i><span>Bayar</span><i>→</i><span>Pesanan masuk</span><i>→</i><span>Owner tahu</span></div>
+    <div class="cta-row">
+      <a href="#contoh" class="btn btn-solid">Lihat contoh yang sudah jalan →</a>
+      <a href="#harga" class="btn btn-ghost">Lihat harga</a>
+    </div>
+  </div>
+  <div data-mascot aria-hidden="true"></div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="summary" aria-label="Ringkasan">
+      <div><b>Rp 10 jt</b><span>POS inti, 1 outlet</span></div>
+      <div><b>6 minggu</b><span>sampai go-live</span></div>
+      <div><b>50 / 50</b><span>bayar bertahap</span></div>
+      <div><b>14 hari</b><span>perbaikan bug &amp; penambahan fitur setelah go-live</span></div>
+      <div><b>Bisa upgrade</b><span>Midtrans &amp; website tanpa bangun ulang</span></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">Gambaran</span>
+      <h2>Bukan versi kecil MOKA.</h2>
+      <p class="sub">Ini POS yang fokus ke alur jualan Anda: pilih menu → bayar → pesanan masuk → owner tahu apa yang terjadi. Tidak ada fitur yang dibayar tapi tidak dipakai.</p>
+      <div class="ps">
+        <div class="before"><h3>Tanpa sistem yang pas</h3><ul>
+          <li>Kasir hitung manual, antrean melambat saat ramai.</li>
+          <li>Pesanan dan catatan pelanggan tercecer.</li>
+          <li>Harga dan menu bisa diubah siapa saja.</li>
+          <li>Owner baru tahu omzet setelah rekap di akhir hari.</li>
+          <li>Atau bayar langganan sistem besar yang fiturnya tidak dipakai.</li>
+        </ul></div>
+        <div class="after"><h3>Dengan POS ini</h3><ul>
+          <li>Kasir pilih menu, varian, catatan — total langsung terhitung.</li>
+          <li>Setiap pesanan punya status: baru, diproses, selesai, dibatalkan.</li>
+          <li>Hak akses per peran: owner, manager, kasir.</li>
+          <li>Dashboard harian dan laporan yang bisa diexport ke CSV.</li>
+          <li>Dibangun untuk alur jualan Anda, bayar sekali per fase.</li>
+        </ul></div>
+      </div>
+      <div class="why">
+        <div><b>Fokus, bukan bloat</b><p>Hanya alur yang Anda pakai setiap hari. Fitur besar menunggu sampai ada data pemakaian nyata.</p></div>
+        <div><b>Tumbuh tanpa bangun ulang</b><p>Mulai transfer manual, naik ke Midtrans. Website bisa ditambah belakangan — struktur datanya sudah disiapkan.</p></div>
+        <div><b>Jelas dari awal</b><p>Harga, timeline, apa yang termasuk dan tidak, serta apa yang perlu Anda siapkan — semuanya tertulis di sini.</p></div>
+      </div>
+      <div class="callout"><b>Yang masih perlu dikunci:</b> nama bisnis, jumlah outlet, menu, dan kebutuhan dapur — sebelum build dimulai. Harga di proposal ini adalah estimasi untuk <b>1 outlet dan 1 brand</b>.</div>
+    </div>
+  </section>
+
+  <section id="contoh">
+    <div class="wrap">
+      <span class="eyebrow">Contoh yang sudah jalan</span>
+      <h2>Jangan percaya kata-kata. Coba sendiri.</h2>
+      <p class="sub">Ini demo untuk kafe contoh bernama Kafe. Semuanya bisa diklik — data tersimpan di browser Anda sendiri, jadi aman dicoba.</p>
+      <div class="demos">
+        <a class="demo-card" href="../../pos.html" target="_blank" rel="noopener">
+          <div class="shot"><iframe src="../../pos.html" title="Pratinjau POS" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+          <div class="demo-body"><span class="scope">Fase inti</span><h3>Front POS <span class="go">Buka ↗</span></h3>
+            <p class="try"><b>Coba:</b> tap Kafe Latte, pilih Iced + Oat, tambah catatan, lalu bayar Cash dan lihat kembaliannya.</p></div>
+        </a>
+        <a class="demo-card" href="../../backoffice.html" target="_blank" rel="noopener">
+          <div class="shot"><iframe src="../../backoffice.html" title="Pratinjau backoffice" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+          <div class="demo-body"><span class="scope">Fase inti</span><h3>Backoffice owner <span class="go">Buka ↗</span></h3>
+            <p class="try"><b>Coba:</b> lihat omzet hari ini, tandai satu menu “habis”, lalu buka POS — menunya langsung tidak bisa dipesan.</p></div>
+        </a>
+        <a class="demo-card" href="../../kitchen.html" target="_blank" rel="noopener">
+          <div class="shot"><iframe src="../../kitchen.html?demo" title="Pratinjau kitchen display" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+          <div class="demo-body"><span class="scope extra">Fase berikutnya</span><h3>Kitchen display <span class="go">Buka ↗</span></h3>
+            <p class="try"><b>Coba:</b> klik “+ Test order”, centang item, lalu geser ke Ready. Tidak termasuk fase inti — ditambah jika dapur memang butuh layar sendiri.</p></div>
+        </a>
+        <a class="demo-card" href="../../index.html" target="_blank" rel="noopener">
+          <div class="shot"><iframe src="../../index.html" title="Pratinjau website" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+          <div class="demo-body"><span class="scope extra">Opsional + Rp 12 jt</span><h3>Website satu halaman <span class="go">Buka ↗</span></h3>
+            <p class="try"><b>Coba:</b> buka di HP. Brand, menu unggulan, jam buka, dan lokasi dalam satu halaman — cocok untuk QR meja atau link Instagram.</p></div>
+        </a>
+      </div>
+      <p class="sub" style="margin-top:18px;font-size:.92rem">Demo menunjukkan alur dasar. Hak akses kasir, diskon, hold/resume cart, bukti transfer, dan laporan per kasir dibangun di fase inti sesuai menu dan alur Anda.</p>
+      <p style="margin-top:8px"><a href="../../brand.html" target="_blank" rel="noopener" style="color:var(--brick);font-family:var(--font-display);font-weight:600">Lihat juga contoh brand guideline Kafe ↗</a></p>
+    </div>
+  </section>
+
+  <section id="fitur">
+    <div class="wrap">
+      <span class="eyebrow">Fase inti</span>
+      <h2>Yang Anda dapat</h2>
+      <div class="two">
+        <div class="panel">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div>
+          <h3>Front POS</h3><p class="who">Kasir dan pelanggan</p>
+          <ul class="ticks">
+            <li>Katalog menu per kategori dengan foto, harga, varian, dan stok habis.</li>
+            <li>Kasir bisa pilih menu, tambah/kurangi quantity, catatan pesanan, diskon yang diizinkan, dan hold/resume cart.</li>
+            <li>Cart menghitung subtotal, diskon, pajak/service charge bila dipakai, dan total bayar.</li>
+            <li>Pilihan makan di tempat, take away, atau delivery manual.</li>
+            <li>Status pesanan: baru, diproses, selesai, dibatalkan.</li>
+            <li>Tampilan pesanan yang bisa dilihat customer/kasir di satu layar. <small>KDS/dapur terpisah hanya ditambah jika memang dibutuhkan.</small></li>
+            <li>Riwayat transaksi dan reprint receipt sederhana.</li>
+            <li>Hak akses kasir — harga, menu, refund, dan laporan tidak bisa diubah sembarang orang.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
+          <h3>Backoffice</h3><p class="who">Owner pegang kontrol</p>
+          <ul class="ticks">
+            <li>Dashboard harian: omzet, jumlah transaksi, rata-rata nilai transaksi, diskon, refund, dan metode pembayaran.</li>
+            <li>Laporan penjualan per hari, minggu, bulan, outlet, kasir, kategori, dan item menu.</li>
+            <li>Menu &amp; harga: tambah/edit menu, kategori, varian, modifier, foto, status tersedia/habis.</li>
+            <li>Stok ringan: tersedia/habis, penyesuaian stok manual, dan log perubahan. <small>BOM/resep bahan detail tidak termasuk fase inti.</small></li>
+            <li>Kasir &amp; akses: akun kasir, peran owner/manager/kasir, dan audit sederhana untuk refund atau perubahan harga.</li>
+            <li>Promo &amp; diskon: aturan diskon sederhana dan kode promo manual.</li>
+            <li>Pelanggan: nama/nomor WhatsApp opsional dan riwayat belanja. <small>Loyalty/points tidak masuk fase inti.</small></li>
+            <li>Export laporan CSV untuk akuntansi.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pembayaran">
+    <div class="wrap">
+      <span class="eyebrow">Pembayaran</span>
+      <h2>Pilih salah satu dulu</h2>
+      <div class="options">
+        <div class="opt">
+          <span class="price">Termasuk fase inti</span>
+          <h3>Transfer bank + upload bukti</h3>
+          <ul class="dots">
+            <li>Customer transfer ke rekening bisnis.</li>
+            <li>Kasir/customer upload bukti bayar.</li>
+            <li>Owner atau kasir yang diberi akses verifikasi manual sebelum pesanan dianggap lunas.</li>
+          </ul>
+          <p class="foot">Paling murah untuk mulai, tapi ada kerja manual dan risiko salah cek.</p>
+        </div>
+        <div class="opt featured">
+          <span class="price">+ Rp 5 jt</span>
+          <h3>Integrasi Midtrans<sup>*</sup></h3>
+          <ul class="dots">
+            <li>Generate QRIS / Virtual Account dari checkout.</li>
+            <li>Status pembayaran masuk otomatis ke pesanan bila callback Midtrans aktif.</li>
+            <li>Lebih cepat untuk kasir dan lebih rapi untuk rekonsiliasi.</li>
+          </ul>
+          <p class="foot">Biaya transaksi Midtrans dan proses aktivasi merchant dibayar/diurus langsung oleh bisnis ke Midtrans.</p>
+        </div>
+      </div>
+      <div class="callout"><b>* Rekomendasi:</b> mulai dari Midtrans kalau volume transaksi harian sudah cukup tinggi atau owner tidak mau tim cek bukti transfer satu-satu. Kalau masih sangat kecil, transfer manual bisa dipakai dulu lalu di-upgrade tanpa membangun ulang POS.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">Opsional</span>
+      <h2>Website FnB</h2>
+      <div class="options">
+        <div class="opt featured">
+          <span class="price">+ Rp 12 jt</span>
+          <h3>Website satu halaman</h3>
+          <ul class="dots">
+            <li>Landing page mobile-first untuk brand, lokasi, jam buka, menu unggulan, WhatsApp, Google Maps, dan link order.</li>
+            <li>Bisa dipakai sebagai halaman QR meja atau link Instagram.</li>
+          </ul>
+          <p class="foot">Tidak termasuk SEO campaign, copywriting panjang, pemotretan, atau sistem delivery sendiri.</p>
+        </div>
+        <div class="opt">
+          <span class="price">Rp 0</span>
+          <h3>Tidak ambil website sekarang</h3>
+          <ul class="dots">
+            <li>POS tetap bisa jalan tanpa website.</li>
+            <li>Kita sisakan struktur data dan link agar website bisa ditambah belakangan.</li>
+          </ul>
+        </div>
+      </div>
+
+      <form class="calc no-print" id="calc" aria-labelledby="calc-title">
+        <div>
+          <h3 id="calc-title">Hitung paket Anda</h3>
+          <fieldset><legend>Pembayaran</legend><div class="choice">
+            <label><input type="radio" name="pay" value="manual"><span>Transfer manual</span></label>
+            <label><input type="radio" name="pay" value="midtrans" checked><span>Midtrans</span></label>
+          </div></fieldset>
+          <fieldset><legend>Website FnB</legend><div class="choice">
+            <label><input type="radio" name="web" value="no" checked><span>Nanti saja</span></label>
+            <label><input type="radio" name="web" value="yes"><span>Sekarang</span></label>
+          </div></fieldset>
+          <p style="opacity:.75;font-size:.9rem">Estimasi untuk 1 outlet, 1 brand. Belum termasuk perangkat fisik dan biaya payment gateway.</p>
+        </div>
+        <div class="result" aria-live="polite">
+          <div class="row"><span>POS inti</span><span>Rp 10 jt</span></div>
+          <div class="row" id="r-mid"><span>Integrasi Midtrans</span><span>Rp 5 jt</span></div>
+          <div class="row" id="r-web"><span>Website satu halaman</span><span>Rp 12 jt</span></div>
+          <hr>
+          <small>Total estimasi</small>
+          <div class="total" id="total">Rp 15 jt</div>
+          <div class="time" id="time">± 7 minggu</div>
+          <small id="time-note">6 minggu POS inti + 1 minggu Midtrans</small>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section id="harga">
+    <div class="wrap">
+      <span class="eyebrow">Investasi</span>
+      <h2>Harga dan timeline</h2>
+      <div class="numbers">
+        <div class="num"><b>Rp 10 jt</b><span>POS inti untuk 1 outlet</span><small>Estimasi komersial Arketype, 5 Oktober 2026; scope fase inti di proposal ini.</small></div>
+        <div class="num"><b>6 minggu</b><span>Target delivery POS inti</span><small>Estimasi delivery Arketype, 5 Oktober 2026; berlaku setelah scope, menu, dan akses disetujui.</small></div>
+        <div class="num"><b>+ Rp 5 jt</b><span>Tambahan integrasi Midtrans</span><small>Estimasi komersial Arketype, 5 Oktober 2026; belum termasuk biaya Midtrans.</small></div>
+        <div class="num"><b>+1 minggu</b><span>Tambahan waktu Midtrans</span><small>Estimasi delivery Arketype, 5 Oktober 2026; tergantung merchant account dan callback test.</small></div>
+        <div class="num"><b>+ Rp 12 jt</b><span>Tambahan website FnB satu halaman</span><small>Estimasi komersial Arketype, 5 Oktober 2026; scope website di proposal ini.</small></div>
+        <div class="num"><b>+2 minggu</b><span>Tambahan waktu website</span><small>Estimasi delivery Arketype, 5 Oktober 2026; bisa paralel sebagian dengan POS setelah materi brand diterima.</small></div>
+        <div class="num total"><b>Rp 15 jt</b><span>Total POS + Midtrans</span><small>Penjumlahan estimasi Arketype: Rp 10 jt + Rp 5 jt, 5 Oktober 2026.</small></div>
+        <div class="num total"><b>Rp 27 jt</b><span>Total POS + Midtrans + website</span><small>Penjumlahan estimasi Arketype: Rp 10 jt + Rp 5 jt + Rp 12 jt, 5 Oktober 2026.</small></div>
+      </div>
+
+      <h3 style="margin-top:44px">Pembayaran proyek</h3>
+      <div class="split" role="img" aria-label="Termin: 50% saat disetujui, 50% saat go-live">
+        <div style="flex:50;background:var(--brick)">50% · saat disetujui</div>
+        <div style="flex:50;background:var(--maroon)">50% · saat go-live</div>
+      </div>
+      <ul class="dots">
+        <li><b>50%</b> saat scope dan proposal disetujui.</li>
+        <li><b>50%</b> setelah go-live dan handover.</li>
+        <li>Harga belum termasuk perangkat fisik: tablet/PC kasir, printer thermal, scanner, jaringan, domain, atau biaya payment gateway.</li>
+        <li>Perubahan besar setelah scope disetujui dihitung terpisah supaya timeline tidak geser diam-diam.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div class="wrap">
+      <span class="eyebrow">Cara kerja</span>
+      <h2>Apa yang terjadi tiap minggu</h2>
+      <ol class="timeline">
+        <li><span class="wk">1</span><h3>Kunci alur jualan</h3>
+          <p>Kita setujui menu, kategori, varian, pajak/service charge, role kasir, alur refund, dan pilihan pembayaran.</p>
+          <div class="them"><b>Dari Anda:</b> logo, menu, harga, foto bila ada, rekening bisnis, serta 1 orang yang bisa ambil keputusan.</div></li>
+        <li><span class="wk">2–4</span><h3>Bangun dan cek alur inti</h3>
+          <p>POS, cart, transaksi, pesanan, menu, user kasir, dan dashboard owner dibangun di staging. Anda dapat update mingguan.</p>
+          <div class="them"><b>Dari Anda:</b> feedback maksimal 2 hari kerja agar timeline tidak berhenti.</div></li>
+        <li><span class="wk">5</span><h3>Testing operasional</h3>
+          <p>Owner dan kasir mencoba transaksi nyata/simulasi: menu habis, diskon, cancel, refund, bukti transfer, laporan penjualan, dan pergantian shift. Semua temuan dikumpulkan dalam satu list prioritas.</p></li>
+        <li><span class="wk">6</span><h3>Go-live dan handover</h3>
+          <p>Data menu final dimasukkan, akses owner/kasir diserahkan, SOP pendek kasir diberikan, lalu POS aktif untuk outlet pertama.</p>
+          <div class="them"><b>Garansi:</b> 14 hari perbaikan bug &amp; penambahan fitur setelah go-live.</div></li>
+      </ol>
+      <div class="callout"><b>Yang paling sering bikin mundur bukan coding:</b> menu belum final, harga berubah terus, akun Midtrans belum aktif, atau feedback test telat. Kalau empat hal itu cepat, timeline ini realistis.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">Batas</span>
+      <h2>Yang tidak masuk fase inti</h2>
+      <div class="two">
+        <div class="panel"><h3>Fase inti mencakup</h3>
+          <ul class="ticks"><li>1 brand dan 1 outlet.</li><li>Web app yang dipakai dari tablet/desktop.</li></ul></div>
+        <div class="panel"><h3>Belum termasuk</h3>
+          <ul class="dots"><li>Native Android/iOS app</li><li>Integrasi GoFood / GrabFood / ShopeeFood</li><li>Software akuntansi, loyalty program, multi-outlet</li><li>Kitchen display terpisah, integrasi printer khusus</li><li>Procurement dan resep/BOM detail</li></ul></div>
+      </div>
+      <p class="sub" style="margin-top:20px">Semua itu bisa jadi fase berikutnya setelah transaksi inti sudah jalan dan ada data pemakaian nyata.</p>
+    </div>
+  </section>
+
+  <section id="keputusan">
+    <div class="wrap">
+      <span class="eyebrow">Langkah berikutnya</span>
+      <h2>Keputusan yang perlu dipilih</h2>
+      <ol class="decisions">
+        <li>Mulai dengan transfer manual atau langsung Midtrans?</li>
+        <li>Perlu website FnB sekarang atau nanti?</li>
+        <li>Siapa PIC owner yang mengunci menu, harga, dan feedback testing?</li>
+        <li>Kapan target soft launch outlet pertama?</li>
+      </ol>
+      <div class="closing">
+        <div>
+          <h2>Empat jawaban, lalu Minggu 1 dimulai.</h2>
+          <p>Begitu empat keputusan di atas terjawab dan proposal disetujui, kita kunci alur jualan Anda di Minggu 1 — dan 6 minggu kemudian kasir sudah pakai POS sendiri.</p>
+        </div>
+        <div class="actions no-print">
+          <a href="#harga" class="btn btn-solid">Hitung ulang paket</a>
+          <a href="../../pos.html" target="_blank" rel="noopener" class="btn btn-ghost">Coba POS sekali lagi</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="logo">Kafe<span class="bean"></span></span>
+    <span style="opacity:.75">Proposal POS FnB Sederhana · Estimasi per 5 Oktober 2026</span>
+    <button class="btn btn-solid no-print" onclick="window.print()" style="padding:10px 18px;font-size:.95rem">Simpan sebagai PDF</button>
+  </div>
+</footer>
+
+<script>
+  // mascot.js fetches relative to the page, so inline it from the site root.
+  fetch("../../assets/mascot.svg").then((r) => r.text()).then((svg) => document.querySelectorAll("[data-mascot]").forEach((el) => (el.innerHTML = svg)));
+
+  // Scale the live demo previews (rendered at 1280×800) to fit their cards.
+  const fit = () => document.querySelectorAll(".shot").forEach((el) => {
+    const f = el.querySelector("iframe"); if (f) f.style.transform = `scale(${el.clientWidth / 1280})`;
+  });
+  new ResizeObserver(fit).observe(document.body);
+  fit();
+
+  const form = document.getElementById("calc");
+  function update() {
+    const mid = form.pay.value === "midtrans", web = form.web.value === "yes";
+    const total = 10 + (mid ? 5 : 0) + (web ? 12 : 0);
+    const weeks = 6 + (mid ? 1 : 0) + (web ? 2 : 0);
+    document.getElementById("r-mid").hidden = !mid;
+    document.getElementById("r-web").hidden = !web;
+    document.getElementById("total").textContent = `Rp ${total} jt`;
+    document.getElementById("time").textContent = weeks === 6 ? "6 minggu" : `hingga ± ${weeks} minggu`;
+    const parts = ["6 minggu POS inti"];
+    if (mid) parts.push("+1 minggu Midtrans");
+    if (web) parts.push("+2 minggu website (sebagian bisa paralel)");
+    document.getElementById("time-note").textContent = parts.join(" ");
+  }
+  form.addEventListener("change", update);
+  update();
+</script>
+</body>
+</html>

@@ -266,6 +266,17 @@
   window.addEventListener("storage", (e) => { if (e.key === "kafe.orders" || e.key === "kafe.menu") render(); });
   setInterval(render, 2000);   // also catches orders from this same browser
   setInterval(tick, 1000);
+  // ?demo: fill an empty board with a few example tickets (used by the proposal preview).
+  if (new URLSearchParams(location.search).has("demo") && !active().length) {
+    [[2, "new"], [7, "making"], [12, "new"], [4, "ready"]].forEach(([minAgo, status]) => {
+      testOrder();
+      const no = Kafe.orders().reduce((a, o) => Math.max(a, o.no), 0);
+      Kafe.updateOrder(no, (o) => ({ at: new Date(Date.now() - minAgo * 60000).toISOString(), status,
+        ...(status !== "new" ? { startedAt: new Date().toISOString() } : {}),
+        ...(status === "making" ? { doneLines: [0] } : {}),
+        ...(status === "ready" ? { readyAt: new Date().toISOString(), doneLines: o.lines.map((_, i) => i) } : {}) }));
+    });
+  }
   setSound(sound);
   render(true);
 </script>
