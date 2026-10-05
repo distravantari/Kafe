@@ -320,7 +320,7 @@
         </a>
         <a class="demo-card" href="../../index.html" target="_blank" rel="noopener">
           <div class="shot"><iframe src="../../index.html" title="Pratinjau website" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
-          <div class="demo-body"><span class="scope extra">Opsional + Rp 12 jt</span><h3>Website satu halaman <span class="go">Buka ↗</span></h3>
+          <div class="demo-body"><span class="scope extra">Opsional + Rp 5 jt</span><h3>Website satu halaman <span class="go">Buka ↗</span></h3>
             <p class="try"><b>Coba:</b> buka di HP. Brand, menu unggulan, jam buka, dan lokasi dalam satu halaman — cocok untuk QR meja atau link Instagram.</p></div>
         </a>
       </div>
@@ -402,7 +402,7 @@
       <h2>Website FnB</h2>
       <div class="options">
         <div class="opt featured">
-          <span class="price">+ Rp 12 jt</span>
+          <span class="price">+ Rp 5 jt</span>
           <h3>Website satu halaman</h3>
           <ul class="dots">
             <li>Landing page mobile-first untuk brand, lokasi, jam buka, menu unggulan, WhatsApp, Google Maps, dan link order.</li>
@@ -436,7 +436,7 @@
         <div class="result" aria-live="polite">
           <div class="row"><span>POS inti</span><span>Rp 10 jt</span></div>
           <div class="row" id="r-mid"><span>Integrasi Midtrans</span><span>Rp 5 jt</span></div>
-          <div class="row" id="r-web"><span>Website satu halaman</span><span>Rp 12 jt</span></div>
+          <div class="row" id="r-web"><span>Website satu halaman</span><span>Rp 5 jt</span></div>
           <hr>
           <small>Total estimasi</small>
           <div class="total" id="total">Rp 15 jt</div>
@@ -456,10 +456,10 @@
         <div class="num"><b>6 minggu</b><span>Target delivery POS inti</span><small>Estimasi delivery Arketype, 5 Oktober 2026; berlaku setelah scope, menu, dan akses disetujui.</small></div>
         <div class="num"><b>+ Rp 5 jt</b><span>Tambahan integrasi Midtrans</span><small>Estimasi komersial Arketype, 5 Oktober 2026; belum termasuk biaya Midtrans.</small></div>
         <div class="num"><b>+1 minggu</b><span>Tambahan waktu Midtrans</span><small>Estimasi delivery Arketype, 5 Oktober 2026; tergantung merchant account dan callback test.</small></div>
-        <div class="num"><b>+ Rp 12 jt</b><span>Tambahan website FnB satu halaman</span><small>Estimasi komersial Arketype, 5 Oktober 2026; scope website di proposal ini.</small></div>
+        <div class="num"><b>+ Rp 5 jt</b><span>Tambahan website FnB satu halaman</span><small>Estimasi komersial Arketype, 5 Oktober 2026; scope website di proposal ini.</small></div>
         <div class="num"><b>+2 minggu</b><span>Tambahan waktu website</span><small>Estimasi delivery Arketype, 5 Oktober 2026; bisa paralel sebagian dengan POS setelah materi brand diterima.</small></div>
         <div class="num total"><b>Rp 15 jt</b><span>Total POS + Midtrans</span><small>Penjumlahan estimasi Arketype: Rp 10 jt + Rp 5 jt, 5 Oktober 2026.</small></div>
-        <div class="num total"><b>Rp 27 jt</b><span>Total POS + Midtrans + website</span><small>Penjumlahan estimasi Arketype: Rp 10 jt + Rp 5 jt + Rp 12 jt, 5 Oktober 2026.</small></div>
+        <div class="num total"><b>Rp 20 jt</b><span>Total POS + Midtrans + website</span><small>Penjumlahan estimasi Arketype: Rp 10 jt + Rp 5 jt + Rp 5 jt, 5 Oktober 2026.</small></div>
       </div>
 
       <h3 style="margin-top:44px">Pembayaran proyek</h3>
@@ -557,7 +557,7 @@
   const form = document.getElementById("calc");
   function update() {
     const mid = form.pay.value === "midtrans", web = form.web.value === "yes";
-    const total = 10 + (mid ? 5 : 0) + (web ? 12 : 0);
+    const total = 10 + (mid ? 5 : 0) + (web ? 5 : 0);
     const weeks = 6 + (mid ? 1 : 0) + (web ? 2 : 0);
     document.getElementById("r-mid").hidden = !mid;
     document.getElementById("r-web").hidden = !web;
