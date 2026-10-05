@@ -164,6 +164,14 @@
     .scope { align-self: flex-start; font-family: var(--font-display); font-weight: 600; font-size: .75rem; padding: 4px 10px; border-radius: 999px; background: var(--cream); color: var(--brick); }
     .scope.extra { background: var(--maroon); color: var(--cream); }
 
+    /* Brand step */
+    .brand-step { display: grid; grid-template-columns: 1.05fr 1fr; gap: 28px; align-items: center; margin-top: 28px; }
+    .brand-step .shot { border-radius: var(--radius); border: 1.5px solid var(--line); aspect-ratio: 16/11; }
+    .brand-step .shot iframe { height: 880px; }
+    .swatches { display: flex; gap: 6px; margin: 4px 0 16px; }
+    .swatches i { width: 34px; height: 34px; border-radius: 10px; border: 1.5px solid rgba(0,0,0,.06); }
+    .step-no { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--brick); color: var(--cream); font-family: var(--font-display); font-weight: 700; margin-right: 10px; vertical-align: middle; font-size: 1rem; }
+
     /* Closing CTA */
     .closing { background: var(--brick); color: var(--cream); border-radius: var(--radius-lg); padding: clamp(28px, 5vw, 56px); margin-top: 32px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: center; }
     .closing h2 { color: var(--cream); margin-top: 0; }
@@ -176,7 +184,7 @@
     footer .logo { font-size: 2rem; color: var(--crema); --logo-bg: var(--maroon); }
 
     @media (max-width: 760px) {
-      .two, .options, .calc, .numbers, .decisions, .ps, .why, .demos, .closing { grid-template-columns: 1fr; }
+      .two, .options, .calc, .numbers, .decisions, .ps, .why, .demos, .closing, .brand-step { grid-template-columns: 1fr; }
       .summary { grid-template-columns: 1fr 1fr; }
       .summary div:last-child { grid-column: 1/-1; }
       .topnav nav { display: none; }
@@ -198,7 +206,7 @@
 <div class="topnav no-print">
   <div class="wrap">
     <a href="#top" class="logo" aria-label="Ke atas">Kafe<span class="bean"></span></a>
-    <nav aria-label="Bagian proposal"><a href="#contoh">Contoh</a><a href="#fitur">Fitur</a><a href="#pembayaran">Pembayaran</a><a href="#harga">Harga</a><a href="#timeline">Timeline</a><a href="#keputusan">Keputusan</a></nav>
+    <nav aria-label="Bagian proposal"><a href="#brand">Brand</a><a href="#contoh">Contoh</a><a href="#fitur">Fitur</a><a href="#pembayaran">Pembayaran</a><a href="#harga">Harga</a><a href="#timeline">Timeline</a><a href="#keputusan">Keputusan</a></nav>
     <a href="#contoh" class="btn btn-brick">Coba demonya</a>
   </div>
 </div>
@@ -212,7 +220,7 @@
     <span class="eyebrow" style="color:var(--crema)">POS FnB Sederhana</span>
     <h1>POS yang cukup buat <em>jualan jalan rapi.</em></h1>
     <p class="lede">Untuk bisnis FnB kecil yang butuh kasir cepat, pesanan jelas, dan owner bisa lihat angka — tanpa bayar sistem enterprise.</p>
-    <div class="flow" aria-label="Alur jualan"><span>Pilih menu</span><i>→</i><span>Bayar</span><i>→</i><span>Pesanan masuk</span><i>→</i><span>Owner tahu</span></div>
+    <div class="flow" aria-label="Alur kerja"><span>Brand Anda</span><i>→</i><span>Pilih menu</span><i>→</i><span>Bayar</span><i>→</i><span>Pesanan masuk</span><i>→</i><span>Owner tahu</span></div>
     <div class="cta-row">
       <a href="#contoh" class="btn btn-solid">Lihat contoh yang sudah jalan →</a>
       <a href="#harga" class="btn btn-ghost">Lihat harga</a>
@@ -262,11 +270,38 @@
     </div>
   </section>
 
+  <section id="brand">
+    <div class="wrap">
+      <span class="eyebrow">Langkah pertama</span>
+      <h2><span class="step-no">1</span>Kita mulai dari brand Anda.</h2>
+      <p class="sub">Sebelum satu tombol kasir dibuat, kita desain <b>brand system</b> bisnis Anda — supaya POS, struk, menu, dan website terasa seperti milik Anda, bukan template.</p>
+      <div class="brand-step">
+        <a class="demo-card" href="../../brand.html" target="_blank" rel="noopener" aria-label="Buka contoh brand guideline Kafe">
+          <div class="shot"><iframe src="../../brand.html" title="Pratinjau brand guideline Kafe" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+          <div class="demo-body"><span class="scope">Contoh</span><h3>Brand guideline Kafe <span class="go">Buka ↗</span></h3>
+            <p class="try">Kafe adalah brand contoh. Untuk Anda, isinya diganti total dengan identitas bisnis Anda sendiri.</p></div>
+        </a>
+        <div>
+          <h3>Yang Anda dapat</h3>
+          <div class="swatches" aria-hidden="true"><i style="background:#9A3B26"></i><i style="background:#F2E6CF"></i><i style="background:#5D1009"></i><i style="background:#DDB77B"></i><i style="background:#4A3C31"></i></div>
+          <ul class="ticks">
+            <li>Logo atau penyempurnaan logo yang sudah ada, plus aturan pemakaiannya.</li>
+            <li>Palet warna dan tipografi yang konsisten di layar kasir, struk, dan media sosial.</li>
+            <li>Ilustrasi/maskot sederhana dan gaya bahasa (voice) brand.</li>
+            <li>Brand guideline online yang bisa dibagikan ke tim, desainer, atau percetakan.</li>
+            <li>Langsung dipakai di POS, backoffice, struk, dan website (bila diambil).</li>
+          </ul>
+          <div class="callout" style="margin-top:20px"><b>Sudah punya brand?</b> Kita pakai yang ada dan rapikan jadi guideline — tidak perlu mulai dari nol.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="contoh">
     <div class="wrap">
-      <span class="eyebrow">Contoh yang sudah jalan</span>
+      <span class="eyebrow">Langkah berikutnya · contoh yang sudah jalan</span>
       <h2>Jangan percaya kata-kata. Coba sendiri.</h2>
-      <p class="sub">Ini demo untuk kafe contoh bernama Kafe. Semuanya bisa diklik — data tersimpan di browser Anda sendiri, jadi aman dicoba.</p>
+      <p class="sub">Ini demo untuk brand contoh “Kafe”. Di proyek Anda, semua layar ini memakai brand Anda sendiri. Semuanya bisa diklik — data tersimpan di browser Anda, jadi aman dicoba.</p>
       <div class="demos">
         <a class="demo-card" href="../../pos.html" target="_blank" rel="noopener">
           <div class="shot"><iframe src="../../pos.html" title="Pratinjau POS" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
@@ -290,7 +325,6 @@
         </a>
       </div>
       <p class="sub" style="margin-top:18px;font-size:.92rem">Demo menunjukkan alur dasar. Hak akses kasir, diskon, hold/resume cart, bukti transfer, dan laporan per kasir dibangun di fase inti sesuai menu dan alur Anda.</p>
-      <p style="margin-top:8px"><a href="../../brand.html" target="_blank" rel="noopener" style="color:var(--brick);font-family:var(--font-display);font-weight:600">Lihat juga contoh brand guideline Kafe ↗</a></p>
     </div>
   </section>
 
@@ -298,6 +332,7 @@
     <div class="wrap">
       <span class="eyebrow">Fase inti</span>
       <h2>Yang Anda dapat</h2>
+      <p class="sub">Brand system di langkah pertama, lalu dua aplikasi ini — semuanya memakai brand Anda.</p>
       <div class="two">
         <div class="panel">
           <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div>
@@ -446,9 +481,9 @@
       <span class="eyebrow">Cara kerja</span>
       <h2>Apa yang terjadi tiap minggu</h2>
       <ol class="timeline">
-        <li><span class="wk">1</span><h3>Kunci alur jualan</h3>
-          <p>Kita setujui menu, kategori, varian, pajak/service charge, role kasir, alur refund, dan pilihan pembayaran.</p>
-          <div class="them"><b>Dari Anda:</b> logo, menu, harga, foto bila ada, rekening bisnis, serta 1 orang yang bisa ambil keputusan.</div></li>
+        <li><span class="wk">1</span><h3>Brand system &amp; kunci alur jualan</h3>
+          <p>Kita desain brand system Anda — logo, warna, tipografi, ilustrasi, dan guideline — lalu setujui menu, kategori, varian, pajak/service charge, role kasir, alur refund, dan pilihan pembayaran.</p>
+          <div class="them"><b>Dari Anda:</b> logo atau referensi brand, menu, harga, foto bila ada, rekening bisnis, serta 1 orang yang bisa ambil keputusan.</div></li>
         <li><span class="wk">2–4</span><h3>Bangun dan cek alur inti</h3>
           <p>POS, cart, transaksi, pesanan, menu, user kasir, dan dashboard owner dibangun di staging. Anda dapat update mingguan.</p>
           <div class="them"><b>Dari Anda:</b> feedback maksimal 2 hari kerja agar timeline tidak berhenti.</div></li>
