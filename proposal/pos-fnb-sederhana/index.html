@@ -233,7 +233,7 @@
   <div class="wrap">
     <div class="summary" aria-label="Ringkasan">
       <div><b>Rp 10 jt</b><span>POS inti, 1 outlet</span></div>
-      <div><b>6 minggu</b><span>sampai go-live</span></div>
+      <div><b>4 minggu</b><span>sampai go-live</span></div>
       <div><b>50 / 50</b><span>bayar bertahap</span></div>
       <div><b>14 hari</b><span>perbaikan bug &amp; penambahan fitur setelah go-live</span></div>
       <div><b>Bisa upgrade</b><span>Midtrans &amp; website tanpa bangun ulang</span></div>
@@ -441,7 +441,7 @@
           <small>Total estimasi</small>
           <div class="total" id="total">Rp 15 jt</div>
           <div class="time" id="time">± 7 minggu</div>
-          <small id="time-note">6 minggu POS inti + 1 minggu Midtrans</small>
+          <small id="time-note">4 minggu POS inti + 1 minggu Midtrans</small>
         </div>
       </form>
     </div>
@@ -453,7 +453,7 @@
       <h2>Harga dan timeline</h2>
       <div class="numbers">
         <div class="num"><b>Rp 10 jt</b><span>POS inti untuk 1 outlet</span><small>Estimasi komersial Arketype, 5 Oktober 2026; scope fase inti di proposal ini.</small></div>
-        <div class="num"><b>6 minggu</b><span>Target delivery POS inti</span><small>Estimasi delivery Arketype, 5 Oktober 2026; berlaku setelah scope, menu, dan akses disetujui.</small></div>
+        <div class="num"><b>4 minggu</b><span>Target delivery POS inti</span><small>Estimasi delivery Arketype, 5 Oktober 2026; berlaku setelah scope, menu, dan akses disetujui.</small></div>
         <div class="num"><b>+ Rp 5 jt</b><span>Tambahan integrasi Midtrans</span><small>Estimasi komersial Arketype, 5 Oktober 2026; belum termasuk biaya Midtrans.</small></div>
         <div class="num"><b>+1 minggu</b><span>Tambahan waktu Midtrans</span><small>Estimasi delivery Arketype, 5 Oktober 2026; tergantung merchant account dan callback test.</small></div>
         <div class="num"><b>+ Rp 5 jt</b><span>Tambahan website FnB satu halaman</span><small>Estimasi komersial Arketype, 5 Oktober 2026; scope website di proposal ini.</small></div>
@@ -484,13 +484,12 @@
         <li><span class="wk">1</span><h3>Brand system &amp; kunci alur jualan</h3>
           <p>Kita desain brand system Anda — logo, warna, tipografi, ilustrasi, dan guideline — lalu setujui menu, kategori, varian, pajak/service charge, role kasir, alur refund, dan pilihan pembayaran.</p>
           <div class="them"><b>Dari Anda:</b> logo atau referensi brand, menu, harga, foto bila ada, rekening bisnis, serta 1 orang yang bisa ambil keputusan.</div></li>
-        <li><span class="wk">2–4</span><h3>Bangun dan cek alur inti</h3>
+        <li><span class="wk">2–3</span><h3>Bangun dan cek alur inti</h3>
           <p>POS, cart, transaksi, pesanan, menu, user kasir, dan dashboard owner dibangun di staging. Anda dapat update mingguan.</p>
           <div class="them"><b>Dari Anda:</b> feedback maksimal 2 hari kerja agar timeline tidak berhenti.</div></li>
-        <li><span class="wk">5</span><h3>Testing operasional</h3>
-          <p>Owner dan kasir mencoba transaksi nyata/simulasi: menu habis, diskon, cancel, refund, bukti transfer, laporan penjualan, dan pergantian shift. Semua temuan dikumpulkan dalam satu list prioritas.</p></li>
-        <li><span class="wk">6</span><h3>Go-live dan handover</h3>
-          <p>Data menu final dimasukkan, akses owner/kasir diserahkan, SOP pendek kasir diberikan, lalu POS aktif untuk outlet pertama.</p>
+        <li><span class="wk">4</span><h3>Testing operasional, go-live &amp; handover</h3>
+          <p>Awal minggu, owner dan kasir mencoba transaksi nyata/simulasi: menu habis, diskon, cancel, refund, bukti transfer, laporan penjualan, dan pergantian shift. Semua temuan dikumpulkan dalam satu list prioritas.</p>
+          <p style="margin-top:8px">Akhir minggu, data menu final dimasukkan, akses owner/kasir diserahkan, SOP pendek kasir diberikan, lalu POS aktif untuk outlet pertama.</p>
           <div class="them"><b>Garansi:</b> 14 hari perbaikan bug &amp; penambahan fitur setelah go-live.</div></li>
       </ol>
       <div class="callout"><b>Yang paling sering bikin mundur bukan coding:</b> menu belum final, harga berubah terus, akun Midtrans belum aktif, atau feedback test telat. Kalau empat hal itu cepat, timeline ini realistis.</div>
@@ -524,7 +523,7 @@
       <div class="closing">
         <div>
           <h2>Empat jawaban, lalu Minggu 1 dimulai.</h2>
-          <p>Begitu empat keputusan di atas terjawab dan proposal disetujui, kita kunci alur jualan Anda di Minggu 1 — dan 6 minggu kemudian kasir sudah pakai POS sendiri.</p>
+          <p>Begitu empat keputusan di atas terjawab dan proposal disetujui, kita kunci alur jualan Anda di Minggu 1 — dan 4 minggu kemudian kasir sudah pakai POS sendiri.</p>
         </div>
         <div class="actions no-print">
           <a href="#harga" class="btn btn-solid">Hitung ulang paket</a>
@@ -558,12 +557,12 @@
   function update() {
     const mid = form.pay.value === "midtrans", web = form.web.value === "yes";
     const total = 10 + (mid ? 5 : 0) + (web ? 5 : 0);
-    const weeks = 6 + (mid ? 1 : 0) + (web ? 2 : 0);
+    const weeks = 4 + (mid ? 1 : 0) + (web ? 2 : 0);
     document.getElementById("r-mid").hidden = !mid;
     document.getElementById("r-web").hidden = !web;
     document.getElementById("total").textContent = `Rp ${total} jt`;
-    document.getElementById("time").textContent = weeks === 6 ? "6 minggu" : `hingga ± ${weeks} minggu`;
-    const parts = ["6 minggu POS inti"];
+    document.getElementById("time").textContent = weeks === 4 ? "4 minggu" : `hingga ± ${weeks} minggu`;
+    const parts = ["4 minggu POS inti"];
     if (mid) parts.push("+1 minggu Midtrans");
     if (web) parts.push("+2 minggu website (sebagian bisa paralel)");
     document.getElementById("time-note").textContent = parts.join(" ");
