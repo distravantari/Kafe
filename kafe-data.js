@@ -63,6 +63,13 @@ const Kafe = {
   orders: () => KafeStore.get("kafe.orders", []),
   saveOrders: (o) => KafeStore.set("kafe.orders", o),
   addOrder(order) { const o = Kafe.orders(); o.push(order); Kafe.saveOrders(o); },
+  updateOrder(no, patch) {
+    const all = Kafe.orders(); const o = all.find((x) => x.no === no);
+    if (o) { Object.assign(o, typeof patch === "function" ? patch(o) : patch); Kafe.saveOrders(all); }
+    return o;
+  },
+  // Which prep station makes a category. Retail goods need no prep.
+  station: (cat) => (cat === "oven" ? "Kitchen" : cat === "beans" ? null : "Bar"),
   rp: (n) => "Rp " + Math.round(n).toLocaleString("id-ID"),
   catName: (id) => (CATEGORIES.find((c) => c.id === id) || { name: id }).name,
 
@@ -103,7 +110,7 @@ const Kafe = {
           const method = r < 0.55 ? "QRIS" : r < 0.8 ? "Cash" : "Card";
           const total = subtotal + tax;
           orders.push({ no: no++, at: at.toISOString(), type: rnd() < 0.6 ? "Dine in" : "Takeaway", method,
-            lines, subtotal, tax, total, paid: method === "Cash" ? Math.ceil(total / 50000) * 50000 : total, sample: true });
+            lines, subtotal, tax, total, status: "done", paid: method === "Cash" ? Math.ceil(total / 50000) * 50000 : total, sample: true });
         }
       }
     }

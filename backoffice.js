@@ -111,6 +111,7 @@ const pages = {
       <p class="features-title">What's included with Kafe POS</p>
       <div class="features">
         <a class="feature" href="pos.html"><b>Counter POS</b><span>Tap-to-order menu, drink options, dine-in or takeaway, cash change, QRIS &amp; card.</span></a>
+        <a class="feature" href="kitchen.html"><b>Kitchen display</b><span>Orders flow from the counter to the bar &amp; kitchen with timers, tick-offs and a chime.</span></a>
         <a class="feature" href="#overview"><b>Live sales dashboard</b><span>Sales, orders, average order and best sellers — today or the last 7 days.</span></a>
         <a class="feature" href="#orders"><b>Order history</b><span>Every receipt, searchable and filterable, with CSV export for your accountant.</span></a>
         <a class="feature" href="#menu"><b>Menu control</b><span>Change prices, add items, or mark something sold out — the counter updates instantly.</span></a>
@@ -145,7 +146,7 @@ const pages = {
         <select id="o-type" aria-label="Order type"><option value="">Dine in &amp; takeaway</option><option>Dine in</option><option>Takeaway</option></select>
       </div>
       <p class="muted" id="o-count" style="margin-bottom:10px;font-size:.9rem"></p>
-      <div class="table-wrap"><table><thead><tr><th>Order</th><th>When</th><th>Type</th><th>Items</th><th>Payment</th><th class="num">Total</th></tr></thead><tbody id="o-body"></tbody></table></div>`;
+      <div class="table-wrap"><table><thead><tr><th>Order</th><th>When</th><th>Type</th><th>Items</th><th>Payment</th><th>Status</th><th class="num">Total</th></tr></thead><tbody id="o-body"></tbody></table></div>`;
   },
 
   menu() {
@@ -201,8 +202,14 @@ function renderOrders() {
       <td>${fmtDate(o.at)}, ${fmtTime(o.at)}</td><td>${o.type}</td>
       <td class="muted">${esc(o.lines.map((l) => `${l.qty}× ${l.name}`).join(", "))}</td>
       <td><span class="badge"><i style="background:${METHOD_COLOR[o.method]}"></i>${o.method}</span></td>
-      <td class="num">${rp(o.total)}</td></tr>`).join("") || `<tr><td colspan="6" class="empty-row">No orders match.</td></tr>`;
-  if (rows.length > 200) $("#o-body").insertAdjacentHTML("beforeend", `<tr><td colspan="6" class="empty-row">Showing the latest 200 — export CSV for everything.</td></tr>`);
+      <td>${statusBadge(o)}</td>
+      <td class="num">${rp(o.total)}</td></tr>`).join("") || `<tr><td colspan="7" class="empty-row">No orders match.</td></tr>`;
+  if (rows.length > 200) $("#o-body").insertAdjacentHTML("beforeend", `<tr><td colspan="7" class="empty-row">Showing the latest 200 — export CSV for everything.</td></tr>`);
+}
+
+function statusBadge(o) {
+  const s = { new: ["New", "#b07f1a"], making: ["Making", "#a8432c"], ready: ["Ready", "#13886a"] }[o.status];
+  return s ? `<span class="badge"><i style="background:${s[1]}"></i>${s[0]}</span>` : `<span class="muted">Done</span>`;
 }
 
 function openOrder(no) {

@@ -171,7 +171,7 @@ function confirmPay() {
       <button class="btn btn-brick" type="button" id="new-order">New order →</button></div>`;
   Kafe.addOrder({ no: orderNo, at: now.toISOString(), type: orderType, method: payMethod,
     lines: cart.map((c) => ({ id: c.id, name: c.name, cat: (MENU.find((m) => m.id === c.id) || {}).cat, unit: c.unit, qty: c.qty, opts: c.opts, note: c.note })),
-    subtotal: t.subtotal, tax: t.tax, total: t.total, paid });
+    subtotal: t.subtotal, tax: t.tax, total: t.total, paid, status: "new" });
   $("#pay-step").hidden = true;
   $("#receipt").hidden = false;
   $("#new-order").onclick = newOrder;
