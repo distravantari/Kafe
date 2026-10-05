@@ -1,62 +1,20 @@
 // Kafe POS — front counter. Pure client-side: cart lives in localStorage.
 
-const TAX_RATE = 0.10; // PB1 restaurant tax
-const TAX_LABEL = "PB1 10%";
-
-const CATEGORIES = [
-  { id: "espresso", name: "Espresso Bar" },
-  { id: "manual", name: "Manual Brew" },
-  { id: "notcoffee", name: "Not Coffee" },
-  { id: "oven", name: "From the Oven" },
-  { id: "beans", name: "Beans & Goods" },
-];
-
-// Option groups. Each choice may add to the price.
-const OPT = {
-  temp: { name: "Temperature", choices: [["Hot", 0], ["Iced", 3000]] },
-  size: { name: "Size", choices: [["Regular", 0], ["Large", 8000]] },
-  milk: { name: "Milk", choices: [["Whole", 0], ["Oat", 8000], ["Almond", 8000]] },
-  sugar: { name: "Sweetness", choices: [["Normal", 0], ["Less", 0], ["None", 0]] },
-  shot: { name: "Extra shot", choices: [["No", 0], ["+1 shot", 7000]] },
-  warm: { name: "Serve", choices: [["Warmed", 0], ["As is", 0]] },
-};
-
-const MENU = [
-  { id: "esp", cat: "espresso", name: "Espresso", desc: "Double shot, house blend", price: 25000, opts: ["shot"] },
-  { id: "ame", cat: "espresso", name: "Americano", desc: "Bright & clean", price: 30000, opts: ["temp", "size", "shot"] },
-  { id: "fw", cat: "espresso", name: "Flat White", desc: "Silky, strong, small", price: 35000, opts: ["milk", "shot"] },
-  { id: "lat", cat: "espresso", name: "Kafe Latte", desc: "Palm sugar & sea salt", price: 38000, opts: ["temp", "size", "milk", "sugar"], tag: "Signature" },
-  { id: "cap", cat: "espresso", name: "Cappuccino", desc: "Thick foam, cocoa dust", price: 35000, opts: ["size", "milk"] },
-  { id: "moc", cat: "espresso", name: "Mocha", desc: "70% dark chocolate", price: 40000, opts: ["temp", "size", "milk", "sugar"] },
-  { id: "v60", cat: "manual", name: "V60", desc: "Single origin of the week", price: 40000, opts: [] },
-  { id: "jpi", cat: "manual", name: "Japanese Iced", desc: "Flash-brewed over ice", price: 42000, opts: [] },
-  { id: "cb", cat: "manual", name: "Cold Brew", desc: "18-hour steep", price: 36000, opts: ["size"] },
-  { id: "hoj", cat: "notcoffee", name: "Hojicha Latte", desc: "Roasted green tea", price: 36000, opts: ["temp", "milk", "sugar"] },
-  { id: "mat", cat: "notcoffee", name: "Matcha Latte", desc: "Ceremonial grade", price: 38000, opts: ["temp", "milk", "sugar"] },
-  { id: "cho", cat: "notcoffee", name: "Chocolate", desc: "Steamed milk, dark choc", price: 34000, opts: ["temp", "milk", "sugar"] },
-  { id: "lem", cat: "notcoffee", name: "Lemon Tea", desc: "Fresh-squeezed", price: 28000, opts: ["temp", "sugar"] },
-  { id: "cro", cat: "oven", name: "Butter Croissant", desc: "Flaky, every morning", price: 28000, opts: ["warm"] },
-  { id: "pac", cat: "oven", name: "Pain au Chocolat", desc: "Two bars of dark choc", price: 32000, opts: ["warm"] },
-  { id: "ban", cat: "oven", name: "Banana Bread", desc: "Toasted, with butter", price: 26000, opts: ["warm"] },
-  { id: "cook", cat: "oven", name: "Sea Salt Cookie", desc: "Brown butter, chunky", price: 22000, opts: [] },
-  { id: "hb", cat: "beans", name: "House Blend 250g", desc: "Choc, caramel, red apple", price: 120000, opts: [] },
-  { id: "cup", cat: "beans", name: "Kopi Tumbler", desc: "Keeps warm for 6h", price: 185000, opts: [] },
-  { id: "tote", cat: "beans", name: "Kopi Tote", desc: "Heavy canvas", price: 150000, opts: [] },
-];
+let MENU = Kafe.menu();
+let SETTINGS = Kafe.settings();
+const taxLabel = () => `${SETTINGS.taxLabel} ${SETTINGS.taxRate}%`;
+const nextOrderNo = () => Kafe.orders().reduce((a, o) => Math.max(a, o.no), 0) + 1;
 
 // ───────── state ─────────
-const store = {
-  get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
-  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
-};
+const store = KafeStore;
 let cart = store.get("kafe.cart", []);       // [{key, id, name, unit, qty, opts:{}, note}]
 let orderType = store.get("kafe.type", "Dine in");
-let orderNo = store.get("kafe.orderNo", 1);
+let orderNo = nextOrderNo();
 let activeCat = "all";
 let query = "";
 
 const $ = (s, r = document) => r.querySelector(s);
-const rp = (n) => "Rp " + n.toLocaleString("id-ID");
+const rp = Kafe.rp;
 const save = () => { store.set("kafe.cart", cart); store.set("kafe.type", orderType); };
 
 // ───────── menu ─────────
@@ -73,6 +31,9 @@ function renderMenu() {
     (!q || (m.name + " " + m.desc).toLowerCase().includes(q)));
   $("#grid").innerHTML = items.length ? items.map((m) => {
     const inCart = cart.filter((c) => c.id === m.id).reduce((a, c) => a + c.qty, 0);
+    if (!m.available) return `<div class="item cat-${m.cat} soldout" aria-disabled="true">
+      <span class="tag">Sold out</span><span class="glyph" aria-hidden="true"></span>
+      <span class="name">${m.name}</span><span class="desc">${m.desc}</span><span class="price">${rp(m.price)}</span></div>`;
     return `<button class="item cat-${m.cat}" data-id="${m.id}">
       ${inCart ? `<span class="badge">${inCart}</span>` : ""}
       ${m.tag ? `<span class="tag">${m.tag}</span>` : ""}
@@ -122,7 +83,7 @@ function addToCart(m, sel, note) {
 
 function totals() {
   const subtotal = cart.reduce((a, c) => a + c.unit * c.qty, 0);
-  const tax = Math.round(subtotal * TAX_RATE);
+  const tax = Math.round(subtotal * SETTINGS.taxRate / 100);
   return { subtotal, tax, total: subtotal + tax, count: cart.reduce((a, c) => a + c.qty, 0) };
 }
 
@@ -148,7 +109,7 @@ function renderCart() {
   $("#subtotal").textContent = rp(t.subtotal);
   $("#tax").textContent = rp(t.tax);
   $("#total").textContent = rp(t.total);
-  $("#tax-label").textContent = TAX_LABEL;
+  $("#tax-label").textContent = taxLabel();
   $("#charge").disabled = !cart.length;
   $("#charge").textContent = cart.length ? `Charge ${rp(t.total)}` : "Charge";
   $("#fab-count").textContent = t.count;
@@ -198,23 +159,26 @@ function confirmPay() {
   const now = new Date();
   $("#receipt").innerHTML = `
     <div class="rc-head"><span class="logo">Kafe<span class="bean"></span></span>
-      <p>Jl. Senja Hangat No. 7, Kota Kopi</p>
+      <p>${SETTINGS.address}</p>
       <p>${now.toLocaleDateString("id-ID")} · ${now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" })}</p></div>
     <div class="rc-order"><span>Order</span><b>${no}</b><span>${orderType}</span></div>
     <ul>${cart.map((c) => `<li><span>${c.qty}× ${c.name}${optSummary(c) ? `<small>${optSummary(c)}</small>` : ""}</span><span>${rp(c.unit * c.qty)}</span></li>`).join("")}</ul>
-    <div class="rc-sum"><span>Subtotal</span><span>${rp(t.subtotal)}</span><span>${TAX_LABEL}</span><span>${rp(t.tax)}</span>
+    <div class="rc-sum"><span>Subtotal</span><span>${rp(t.subtotal)}</span><span>${taxLabel()}</span><span>${rp(t.tax)}</span>
       <b>Total</b><b>${rp(t.total)}</b><span>${payMethod}</span><span>${rp(paid)}</span>
       ${payMethod === "Cash" ? `<span>Change</span><span>${rp(paid - t.total)}</span>` : ""}</div>
-    <p class="rc-thanks">Thank you! Sit, sip, stay a while.</p>
+    <p class="rc-thanks">${SETTINGS.footer}</p>
     <div class="rc-actions"><button class="btn btn-ghost-dark" type="button" onclick="window.print()">Print</button>
       <button class="btn btn-brick" type="button" id="new-order">New order →</button></div>`;
+  Kafe.addOrder({ no: orderNo, at: now.toISOString(), type: orderType, method: payMethod,
+    lines: cart.map((c) => ({ id: c.id, name: c.name, cat: (MENU.find((m) => m.id === c.id) || {}).cat, unit: c.unit, qty: c.qty, opts: c.opts, note: c.note })),
+    subtotal: t.subtotal, tax: t.tax, total: t.total, paid });
   $("#pay-step").hidden = true;
   $("#receipt").hidden = false;
   $("#new-order").onclick = newOrder;
 }
 
 function newOrder() {
-  cart = []; orderNo++; store.set("kafe.orderNo", orderNo); save();
+  cart = []; orderNo = nextOrderNo(); save();
   $("#pay-modal").close(); document.body.classList.remove("cart-open"); render();
 }
 
@@ -249,5 +213,11 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "/" && document.activeElement.tagName !== "INPUT") { e.preventDefault(); $("#search").focus(); }
 });
 setInterval(() => { $("#clock").textContent = new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }); }, 1000);
+
+// Pick up menu/settings changes made in the back office (other tab) without a reload.
+window.addEventListener("storage", (e) => {
+  if (e.key === "kafe.menu" || e.key === "kafe.settings") { MENU = Kafe.menu(); SETTINGS = Kafe.settings(); render(); }
+  if (e.key === "kafe.orders") { orderNo = nextOrderNo(); renderCart(); }
+});
 
 render();

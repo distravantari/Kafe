@@ -49,6 +49,8 @@
     .item .price { font-family: var(--font-display); font-weight: 600; color: var(--brick); margin-top: 6px; }
     .item .badge { position: absolute; top: 12px; right: 12px; min-width: 28px; height: 28px; border-radius: 999px; background: var(--brick); color: var(--cream); font-family: var(--font-display); font-weight: 600; display: grid; place-items: center; padding: 0 8px; font-size: .9rem; }
     .item .tag { position: absolute; top: 16px; left: 66px; font-size: .68rem; font-family: var(--font-display); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--brick); background: var(--cream); padding: 3px 8px; border-radius: 999px; }
+    .item.soldout { opacity: .5; cursor: not-allowed; }
+    .item.soldout .tag { left: auto; right: 12px; background: var(--maroon); color: var(--cream); }
     .empty-grid { grid-column: 1/-1; text-align: center; padding: 60px; color: var(--oat); }
 
     /* ── Cart side ── */
@@ -176,6 +178,7 @@
   <header class="topbar">
     <a href="index.html" class="logo" aria-label="Kafe home">Kafe<span class="bean"></span></a>
     <span class="pos-tag">COUNTER</span>
+    <a href="backoffice.html" class="pos-tag" style="background:transparent;border:1.5px solid var(--cream);text-decoration:none">BACK OFFICE</a>
     <label class="search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input id="search" type="search" placeholder="Search menu…" aria-label="Search menu" autocomplete="off">
@@ -259,6 +262,7 @@
 </dialog>
 
 <script src="mascot.js"></script>
+<script src="kafe-data.js"></script>
 <script src="pos.js"></script>
 </body>
 </html>
