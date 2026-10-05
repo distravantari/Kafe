@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kafe — Brewed Slow, Served Warm</title>
+  <meta name="description" content="Kafe is a cozy neighbourhood coffee shop. Espresso, manual brew and fresh pastries.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="assets/mascot.svg">
+  <style>
+    /* Nav */
+    .nav { position: sticky; top: 0; z-index: 20; background: var(--brick); color: var(--cream); }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+    .nav .logo { font-size: 2.2rem; }
+    .nav ul { display: flex; gap: 28px; list-style: none; font-family: var(--font-display); font-weight: 500; }
+    .nav ul a { text-decoration: none; opacity: .85; }
+    .nav ul a:hover { opacity: 1; }
+    .nav .btn { padding: 10px 20px; font-size: .95rem; }
+
+    /* Hero */
+    .hero { background: var(--brick); color: var(--cream); padding: 40px 0 0; position: relative; overflow: hidden; }
+    .hero .wrap { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: end; }
+    .hero-copy { padding-bottom: 80px; }
+    .hero h1 { font-size: clamp(3.4rem, 9vw, 7.5rem); margin: 18px 0 24px; }
+    .hero h1 em { font-style: normal; color: var(--crema); }
+    .hero p { font-size: 1.15rem; max-width: 30ch; opacity: .9; margin-bottom: 32px; }
+    .hero .ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-art { position: relative; align-self: stretch; display: flex; align-items: flex-end; justify-content: center; }
+    .hero-art .sun { position: absolute; width: 88%; aspect-ratio: 1; border-radius: 50%; background: var(--cinnamon); bottom: -18%; }
+    .hero-art [data-mascot] { position: relative; width: 78%; color: var(--cream); --mascot-fill: var(--brick); animation: bob 4s ease-in-out infinite; }
+    .sparkle { position: absolute; width: 14px; height: 38px; border-radius: 10px; background: var(--crema); }
+    @keyframes bob { 50% { transform: translateY(-12px) rotate(-2deg); } }
+
+    /* Marquee */
+    .marquee { background: var(--crema); color: var(--brick); overflow: hidden; padding: 22px 0; border-block: 4px solid var(--maroon); }
+    .marquee-track { display: flex; gap: 48px; width: max-content; animation: scroll 28s linear infinite; }
+    .marquee span { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.2rem, 6vw, 4.5rem); text-transform: uppercase; white-space: nowrap; line-height: 1; display: flex; align-items: center; gap: 48px; }
+    .marquee span::after { content: ""; width: .4em; height: .55em; border-radius: 50%; background: var(--maroon); transform: rotate(25deg); }
+    @keyframes scroll { to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) { .marquee-track, .hero-art [data-mascot] { animation: none; } }
+
+    section { padding: clamp(64px, 9vw, 120px) 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 48px; flex-wrap: wrap; }
+    .section-head h2 { font-size: clamp(2.4rem, 5.5vw, 4.2rem); color: var(--brick); }
+    .section-head p { max-width: 38ch; }
+
+    /* Menu */
+    .menu-board { background: var(--brick); color: var(--cream); border-radius: var(--radius-lg); padding: clamp(28px, 5vw, 56px); display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px 64px; position: relative; }
+    .menu-cat h3 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: .1em; color: var(--brick); background: var(--cream); display: inline-block; padding: 8px 16px; border-radius: 999px; margin-bottom: 18px; line-height: 1; }
+    .menu-item { display: flex; align-items: baseline; gap: 10px; padding: 10px 0; border-bottom: 1.5px dashed rgba(242,230,207,.3); }
+    .menu-item b { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; }
+    .menu-item small { display: block; opacity: .7; font-size: .88rem; }
+    .menu-item .dots { flex: 1; }
+    .menu-item .price { font-family: var(--font-display); font-weight: 600; color: var(--crema); }
+
+    /* Story */
+    .story { background: var(--maroon); color: var(--cream); }
+    .story .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .story-card { background: var(--brick); border-radius: var(--radius-lg); aspect-ratio: 1; padding: 36px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+    .story-card h3 { font-size: clamp(1.6rem, 3vw, 2.4rem); color: var(--crema); max-width: 12ch; }
+    .story-card [data-mascot] { position: absolute; width: 62%; right: -6%; bottom: -8%; color: var(--crema); --mascot-fill: var(--brick); transform: rotate(-14deg); }
+    .story h2 { font-size: clamp(2.4rem, 5vw, 4rem); margin: 14px 0 24px; }
+    .story p { opacity: .85; margin-bottom: 16px; max-width: 46ch; font-size: 1.05rem; }
+    .stats { display: flex; gap: 40px; margin-top: 32px; flex-wrap: wrap; }
+    .stats b { font-family: var(--font-display); font-size: 2.6rem; color: var(--crema); display: block; line-height: 1; }
+
+    /* Goods */
+    .goods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .good { border-radius: var(--radius-lg); padding: 28px; aspect-ratio: 4/5; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+    .good h3 { font-size: 1.6rem; }
+    .good p { font-size: .95rem; opacity: .8; }
+    .good-art { flex: 1; display: flex; align-items: center; justify-content: center; }
+    .g1 { background: var(--brick); color: var(--cream); }
+    .g2 { background: var(--crema); color: var(--maroon); }
+    .g3 { background: var(--milk); color: var(--brick); }
+    /* CSS cup */
+    .cup { width: 44%; aspect-ratio: 3/4; background: var(--cream); clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%); position: relative; display: grid; place-items: center; }
+    .cup::before { content: ""; position: absolute; top: -8%; left: -6%; right: -6%; height: 12%; background: var(--crema); border-radius: 8px; }
+    .cup .logo { color: var(--brick); font-size: 1.6rem; --logo-bg: var(--cream); }
+    /* CSS bag */
+    .bag { width: 52%; aspect-ratio: 3/4.2; background: var(--milk); border-radius: 6px 6px 14px 14px; position: relative; padding: 18% 12% 0; box-shadow: 0 20px 30px -18px rgba(93,16,9,.5); }
+    .bag::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 9%; background: repeating-linear-gradient(90deg, var(--steam) 0 2px, transparent 2px 7px); opacity: .5; }
+    .bag .label { background: var(--brick); color: var(--cream); border-radius: 10px; padding: 10px; text-align: center; }
+    .bag .label .logo { font-size: 1.5rem; }
+    .bag [data-mascot] { width: 70%; margin: 8px auto 0; color: var(--brick); }
+    /* tote */
+    .tote { width: 56%; aspect-ratio: 1/1.05; background: var(--cream); border-radius: 4px 4px 10px 10px; position: relative; margin-top: 18%; display: grid; place-items: center; box-shadow: 0 20px 30px -18px rgba(93,16,9,.4); }
+    .tote::before { content: ""; position: absolute; width: 50%; height: 40%; border: 7px solid var(--cream); border-bottom: 0; border-radius: 60px 60px 0 0; top: -34%; }
+    .tote [data-mascot] { width: 60%; color: var(--brick); }
+
+    /* Visit */
+    .visit { background: var(--brick); color: var(--cream); border-radius: var(--radius-lg); padding: clamp(32px, 6vw, 72px); display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; }
+    .visit h2 { font-size: clamp(2.4rem, 5vw, 4rem); margin-bottom: 18px; }
+    .hours { list-style: none; }
+    .hours li { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1.5px dashed rgba(242,230,207,.35); font-family: var(--font-display); font-weight: 500; font-size: 1.1rem; }
+
+    footer { background: var(--maroon); color: var(--cream); padding: 64px 0 40px; margin-top: clamp(64px, 9vw, 120px); }
+    footer .wrap { display: flex; justify-content: space-between; align-items: end; gap: 32px; flex-wrap: wrap; }
+    footer .logo { font-size: clamp(5rem, 16vw, 11rem); color: var(--crema); --logo-bg: var(--maroon); }
+    footer nav { display: flex; gap: 24px; font-family: var(--font-display); }
+    footer small { opacity: .6; display: block; margin-top: 12px; }
+
+    @media (max-width: 860px) {
+      .nav ul { display: none; }
+      .hero .wrap, .story .wrap, .visit { grid-template-columns: 1fr; }
+      .hero-copy { padding-bottom: 0; }
+      .hero-art { height: 340px; }
+      .menu-board { grid-template-columns: 1fr; }
+      .goods { grid-template-columns: 1fr; }
+      .good { aspect-ratio: auto; min-height: 380px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="#" class="logo" aria-label="Kafe home">Kafe<span class="bean"></span></a>
+    <ul>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#goods">Goods</a></li>
+      <li><a href="#visit">Visit</a></li>
+      <li><a href="brand.html">Brand</a></li>
+    </ul>
+    <a href="#menu" class="btn btn-solid">Order ahead</a>
+  </div>
+</header>
+
+<section class="hero" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">Neighbourhood coffee · since 2026</span>
+      <h1>Brewed slow,<br><em>served warm.</em></h1>
+      <p>Every cup tells a story. Come in, pull up a chair, and stay a while — the kettle's always on.</p>
+      <div class="ctas">
+        <a href="#menu" class="btn btn-solid">See the menu</a>
+        <a href="#visit" class="btn btn-ghost">Find us</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="sun"></div>
+      <span class="sparkle" style="top:18%;left:8%;transform:rotate(-30deg)"></span>
+      <span class="sparkle" style="top:10%;right:12%;transform:rotate(25deg)"></span>
+      <span class="sparkle" style="top:42%;right:2%;transform:rotate(60deg);height:24px"></span>
+      <div data-mascot></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Brewed slow</span><span>Served warm</span><span>Stay a while</span><span>One cup at a time</span>
+    <span>Brewed slow</span><span>Served warm</span><span>Stay a while</span><span>One cup at a time</span>
+  </div>
+</div>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>On the bar<br>today</h2>
+      <p>House-roasted beans, fresh milk, and pastries baked every morning. Prices in thousands of rupiah.</p>
+    </div>
+    <div class="menu-board">
+      <div class="menu-cat">
+        <h3>Espresso Bar</h3>
+        <div class="menu-item"><div><b>Espresso</b><small>Double shot, house blend</small></div><span class="dots"></span><span class="price">25</span></div>
+        <div class="menu-item"><div><b>Flat White</b><small>Silky, strong, small</small></div><span class="dots"></span><span class="price">35</span></div>
+        <div class="menu-item"><div><b>Kafe Latte</b><small>Palm sugar &amp; sea salt</small></div><span class="dots"></span><span class="price">38</span></div>
+        <div class="menu-item"><div><b>Iced Americano</b><small>Bright &amp; clean</small></div><span class="dots"></span><span class="price">30</span></div>
+      </div>
+      <div class="menu-cat">
+        <h3>Manual Brew</h3>
+        <div class="menu-item"><div><b>V60</b><small>Single origin of the week</small></div><span class="dots"></span><span class="price">40</span></div>
+        <div class="menu-item"><div><b>Japanese Iced</b><small>Flash-brewed over ice</small></div><span class="dots"></span><span class="price">42</span></div>
+        <div class="menu-item"><div><b>Cold Brew</b><small>18-hour steep</small></div><span class="dots"></span><span class="price">36</span></div>
+      </div>
+      <div class="menu-cat">
+        <h3>Not Coffee</h3>
+        <div class="menu-item"><div><b>Hojicha Latte</b><small>Roasted green tea</small></div><span class="dots"></span><span class="price">36</span></div>
+        <div class="menu-item"><div><b>Chocolate</b><small>70% dark, steamed milk</small></div><span class="dots"></span><span class="price">34</span></div>
+      </div>
+      <div class="menu-cat">
+        <h3>From the Oven</h3>
+        <div class="menu-item"><div><b>Butter Croissant</b><small>Flaky, every morning</small></div><span class="dots"></span><span class="price">28</span></div>
+        <div class="menu-item"><div><b>Banana Bread</b><small>Toasted, with butter</small></div><span class="dots"></span><span class="price">26</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="story" class="story">
+  <div class="wrap">
+    <div class="story-card">
+      <span class="eyebrow">Meet Kopi, our mascot</span>
+      <h3>Crafted with care, poured with patience.</h3>
+      <div data-mascot></div>
+    </div>
+    <div>
+      <span class="eyebrow" style="color:var(--crema)">Our story</span>
+      <h2>A little room for slow mornings.</h2>
+      <p>Kafe started with one idea: coffee tastes better when nobody's rushing you. We roast in small batches, dial in every shot by hand, and keep the music low enough to hear your friends.</p>
+      <p>Kopi — the sleepy cup on our walls — is a reminder to slow down. Sit, sip, nap if you need to. We won't tell.</p>
+      <div class="stats">
+        <div><b>12</b>beans on rotation</div>
+        <div><b>48h</b>roast-to-bar</div>
+        <div><b>∞</b>refills of water</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="goods">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Take Kafe<br>home</h2>
+      <p>Beans, cups and totes — dressed in the same warm brick you see on our walls.</p>
+    </div>
+    <div class="goods">
+      <div class="good g1">
+        <div><h3>Paper cups</h3><p>Compostable, double-walled</p></div>
+        <div class="good-art"><div class="cup"><span class="logo">Kafe<span class="bean"></span></span></div></div>
+      </div>
+      <div class="good g2">
+        <div><h3>House Blend 250g</h3><p>Chocolate, caramel, red apple · 120k</p></div>
+        <div class="good-art"><div class="bag"><div class="label"><span class="logo">Kafe<span class="bean"></span></span></div><div data-mascot></div></div></div>
+      </div>
+      <div class="good g3">
+        <div><h3>Kopi tote</h3><p>Heavy canvas · 150k</p></div>
+        <div class="good-art"><div class="tote"><div data-mascot></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" id="visit">
+  <div class="visit">
+    <div>
+      <span class="eyebrow" style="color:var(--crema)">Visit us</span>
+      <h2>Come say hi.</h2>
+      <p style="opacity:.85;max-width:36ch;margin-bottom:28px">Jl. Kenangan No. 12, Jakarta Selatan. Look for the red door and the sleepy cup.</p>
+      <a class="btn btn-solid" href="https://maps.google.com" target="_blank" rel="noopener">Get directions →</a>
+    </div>
+    <ul class="hours">
+      <li><span>Mon – Fri</span><span>07:00 – 21:00</span></li>
+      <li><span>Saturday</span><span>08:00 – 22:00</span></li>
+      <li><span>Sunday</span><span>08:00 – 20:00</span></li>
+      <li><span>Holidays</span><span>Ask Kopi</span></li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <span class="logo">Kafe<span class="bean"></span></span>
+      <small>© 2026 Kafe. Brewed slow, served warm.</small>
+    </div>
+    <nav><a href="#menu">Menu</a><a href="#story">Story</a><a href="brand.html">Brand guidelines</a></nav>
+  </div>
+</footer>
+
+<script src="mascot.js"></script>
+</body>
+</html>

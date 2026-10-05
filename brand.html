@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kafe Brand Guidelines</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="assets/mascot.svg">
+  <style>
+    body { background: var(--milk); }
+    .top { background: var(--brick); color: var(--cream); padding: 28px 0 80px; }
+    .top .bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 72px; }
+    .top .bar .logo { font-size: 2rem; }
+    .top .bar a.back { font-family: var(--font-display); text-decoration: none; opacity: .85; }
+    .top h1 { font-size: clamp(3rem, 9vw, 7rem); }
+    .top p { max-width: 52ch; margin-top: 20px; opacity: .85; font-size: 1.1rem; }
+
+    .chapter { padding: 80px 0; border-bottom: 2px solid #e2ddd2; }
+    .chapter-head { display: grid; grid-template-columns: 80px 1fr; gap: 16px; margin-bottom: 40px; }
+    .chapter-head .num { font-family: var(--font-display); font-weight: 700; color: var(--brick); font-size: 1.1rem; }
+    .chapter-head h2 { font-size: clamp(2rem, 4.5vw, 3.2rem); color: var(--maroon); }
+    .chapter-head p { grid-column: 2; max-width: 60ch; margin-top: 12px; }
+    @media (max-width: 640px) { .chapter-head { grid-template-columns: 1fr; } .chapter-head p { grid-column: 1; } }
+
+    .grid { display: grid; gap: 20px; }
+    .g2 { grid-template-columns: repeat(2, 1fr); }
+    .g3 { grid-template-columns: repeat(3, 1fr); }
+    .g4 { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 860px) { .g2, .g3, .g4 { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .g2, .g3, .g4 { grid-template-columns: 1fr; } }
+
+    .tile { border-radius: var(--radius); padding: 28px; overflow: hidden; min-height: 220px; display: flex; flex-direction: column; justify-content: space-between; }
+    .tile .cap { font-size: .85rem; opacity: .75; }
+    .on-brick { background: var(--brick); color: var(--cream); }
+    .on-cream { background: var(--cream); color: var(--brick); --logo-bg: var(--cream); }
+    .on-maroon { background: var(--maroon); color: var(--crema); --logo-bg: var(--maroon); }
+    .on-crema { background: var(--crema); color: var(--maroon); --logo-bg: var(--crema); }
+    .on-milk { background: #fff; color: var(--brick); --logo-bg: #fff; border: 2px solid #e2ddd2; }
+
+    .logo-hero { min-height: 360px; align-items: center; justify-content: center; position: relative; }
+    .logo-hero .logo { font-size: clamp(5rem, 14vw, 10rem); }
+    .clearspace { outline: 2px dashed rgba(242,230,207,.5); outline-offset: 0.35em; }
+    .logo-hero .note { position: absolute; bottom: 20px; left: 28px; font-size: .85rem; opacity: .75; }
+    .tile .logo { font-size: 3.6rem; }
+
+    .mascot-tile [data-mascot] { width: 60%; margin: 0 auto; }
+
+    /* Colours */
+    .swatch { border-radius: var(--radius); overflow: hidden; border: 2px solid #e2ddd2; background: #fff; }
+    .swatch .chip { height: 150px; display: flex; align-items: flex-end; padding: 14px; font-family: var(--font-display); font-weight: 600; }
+    .swatch .meta { padding: 14px 16px; font-size: .9rem; }
+    .swatch .meta b { font-family: var(--font-display); font-size: 1.1rem; display: block; color: var(--maroon); }
+    .swatch .meta code { font-size: .85rem; color: var(--bean); }
+    .swatch button { all: unset; cursor: pointer; }
+    .swatch.primary { grid-column: span 2; }
+    .swatch.primary .chip { height: 220px; font-size: 1.3rem; }
+    .ratio { display: flex; height: 64px; border-radius: 16px; overflow: hidden; margin-top: 28px; }
+    .ratio div { display: flex; align-items: center; padding-left: 12px; font-size: .8rem; font-family: var(--font-display); }
+
+    /* Type */
+    .type-row { display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 28px 0; border-top: 1.5px solid #e2ddd2; align-items: baseline; }
+    .type-row .label { font-size: .9rem; color: var(--oat); }
+    .type-row .label b { display: block; color: var(--maroon); font-family: var(--font-display); font-size: 1.05rem; }
+    @media (max-width: 640px) { .type-row { grid-template-columns: 1fr; } }
+
+    /* Voice / do-don't */
+    .voice h3 { font-size: 1.6rem; margin-bottom: 8px; color: var(--brick); }
+    .do, .dont { border-radius: var(--radius); padding: 24px; }
+    .do { background: #fff; border: 2px solid #e2ddd2; }
+    .dont { background: #fff; border: 2px solid #e2ddd2; }
+    .do h4, .dont h4 { font-family: var(--font-display); margin-bottom: 12px; font-size: 1.1rem; }
+    .do h4 { color: #3f7a3a; } .dont h4 { color: var(--brick); }
+    .do li, .dont li { margin: 0 0 8px 18px; }
+
+    .bad { position: relative; }
+    .bad::after { content: "✕"; position: absolute; top: 14px; right: 18px; font-weight: 700; font-size: 1.3rem; color: var(--brick); background: #fff; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; }
+
+    footer { padding: 48px 0; text-align: center; font-size: .9rem; color: var(--oat); }
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(120px); background: var(--maroon); color: var(--cream); padding: 12px 20px; border-radius: 999px; font-family: var(--font-display); transition: transform .25s ease; }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="bar">
+      <a href="index.html" class="logo">Kafe<span class="bean"></span></a>
+      <a href="index.html" class="back">← Back to site</a>
+    </div>
+    <span class="eyebrow">Brand guidelines · v1.0</span>
+    <h1>Warm, cozy,<br>a little sleepy.</h1>
+    <p>How Kafe looks, sounds and feels. Dark warm colours for a cozy room, chunky rounded type, and a hand-drawn mascot that reminds everyone to slow down.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 01 Logo -->
+  <section class="chapter">
+    <div class="chapter-head">
+      <span class="num">01</span>
+      <div><h2>Logo</h2></div>
+      <p>The Kafe wordmark is set in Fredoka Bold with tight tracking, finished with a coffee bean that sits where a full stop would be. It's the only logo — don't redraw it in another typeface.</p>
+    </div>
+    <div class="tile on-brick logo-hero">
+      <span class="logo clearspace">Kafe<span class="bean"></span></span>
+      <span class="note">Clear space = height of the bean on all sides · Min width 72px digital / 18mm print</span>
+    </div>
+    <div class="grid g4" style="margin-top:20px">
+      <div class="tile on-brick"><span class="logo">Kafe<span class="bean"></span></span><span class="cap">Primary · Cream on Brick</span></div>
+      <div class="tile on-cream"><span class="logo">Kafe<span class="bean"></span></span><span class="cap">Brick on Cream</span></div>
+      <div class="tile on-maroon"><span class="logo">Kafe<span class="bean"></span></span><span class="cap">Crema on Maroon</span></div>
+      <div class="tile on-milk"><span class="logo">Kafe<span class="bean"></span></span><span class="cap">Brick on White (packaging)</span></div>
+    </div>
+    <div class="grid g3" style="margin-top:20px">
+      <div class="tile on-brick bad"><span class="logo" style="font-family:Georgia,serif;letter-spacing:0">Kafe</span><span class="cap">Don't swap the typeface</span></div>
+      <div class="tile bad" style="background:#2f6fd6;color:#fff;--logo-bg:#2f6fd6"><span class="logo">Kafe<span class="bean"></span></span><span class="cap">Don't use off-palette colours</span></div>
+      <div class="tile on-cream bad"><span class="logo" style="transform:scaleX(1.5);transform-origin:left">Kafe<span class="bean"></span></span><span class="cap">Don't stretch or distort</span></div>
+    </div>
+  </section>
+
+  <!-- 02 Mascot -->
+  <section class="chapter">
+    <div class="chapter-head">
+      <span class="num">02</span>
+      <div><h2>Kopi, the mascot</h2></div>
+      <p>Kopi is a sleepy paper cup drawn in a single-weight rounded line. Always one colour, always line-only (fill matches the background). Use on packaging, merch, social and empty states — never next to the logo at the same size.</p>
+    </div>
+    <div class="grid g3">
+      <div class="tile on-brick mascot-tile" style="color:var(--crema);--mascot-fill:var(--brick)"><div data-mascot></div><span class="cap">Crema line on Brick</span></div>
+      <div class="tile on-cream mascot-tile" style="--mascot-fill:var(--cream)"><div data-mascot></div><span class="cap">Brick line on Cream</span></div>
+      <div class="tile on-maroon mascot-tile" style="color:var(--cream);--mascot-fill:var(--maroon)"><div data-mascot></div><span class="cap">Cream line on Maroon</span></div>
+    </div>
+  </section>
+
+  <!-- 03 Colour -->
+  <section class="chapter">
+    <div class="chapter-head">
+      <span class="num">03</span>
+      <div><h2>Colour</h2></div>
+      <p>Brick does the heavy lifting — it's the wall, the cup, the menu. Cream and Crema are the "ink" on top of it. Maroon is for depth; the earthy neutrals support body copy and print details. Click any swatch to copy its hex.</p>
+    </div>
+    <div class="grid g4" id="swatches"></div>
+    <div class="ratio" aria-label="Colour usage ratio">
+      <div style="flex:45;background:var(--brick);color:var(--cream)">Brick 45%</div>
+      <div style="flex:25;background:var(--cream);color:var(--brick)">Cream 25%</div>
+      <div style="flex:12;background:var(--maroon);color:var(--cream)">Maroon</div>
+      <div style="flex:10;background:var(--crema);color:var(--maroon)">Crema</div>
+      <div style="flex:8;background:var(--bean);color:var(--cream)">Bean</div>
+    </div>
+  </section>
+
+  <!-- 04 Type -->
+  <section class="chapter">
+    <div class="chapter-head">
+      <span class="num">04</span>
+      <div><h2>Typography</h2></div>
+      <p>Two Google Fonts. Fredoka for anything with personality — headlines, prices, buttons, menu items. DM Sans for everything you read in sentences.</p>
+    </div>
+    <div class="type-row"><span class="label"><b>Display</b>Fredoka Bold · −2% tracking</span><span class="display" style="font-size:clamp(2.6rem,7vw,5rem);color:var(--brick)">One cup at a time</span></div>
+    <div class="type-row"><span class="label"><b>Heading</b>Fredoka SemiBold</span><span class="display" style="font-size:2rem;font-weight:600;color:var(--maroon)">Crafted with care, poured with patience.</span></div>
+    <div class="type-row"><span class="label"><b>Eyebrow</b>Fredoka SemiBold · caps · +14%</span><span class="eyebrow" style="color:var(--brick)">Espresso bar · Manual brew</span></div>
+    <div class="type-row"><span class="label"><b>Body</b>DM Sans Regular 16–18px · 1.55</span><span style="font-size:1.1rem;max-width:60ch">Kafe started with one idea: coffee tastes better when nobody's rushing you. We roast in small batches and dial in every shot by hand.</span></div>
+    <div class="type-row"><span class="label"><b>Marquee</b>Fredoka Bold · caps · huge</span><span class="display" style="font-size:clamp(2rem,6vw,4rem);text-transform:uppercase;color:var(--crema);background:var(--brick);padding:16px 20px;border-radius:16px;overflow:hidden;white-space:nowrap">Brewed slow · Served warm</span></div>
+  </section>
+
+  <!-- 05 Voice -->
+  <section class="chapter">
+    <div class="chapter-head">
+      <span class="num">05</span>
+      <div><h2>Voice</h2></div>
+      <p>We talk like the barista who remembers your order: warm, short, a little playful. Never salesy, never rushed.</p>
+    </div>
+    <div class="grid g3 voice">
+      <div><h3>Warm</h3><p>"Pull up a chair, the kettle's always on."</p></div>
+      <div><h3>Unhurried</h3><p>"Brewed slow, served warm."</p></div>
+      <div><h3>Playful</h3><p>"Sit, sip, nap if you need to. We won't tell."</p></div>
+    </div>
+    <div class="grid g2" style="margin-top:32px">
+      <div class="do"><h4>✓ Do</h4><ul><li>Lead with feeling, then the facts</li><li>Use short sentences and plain words</li><li>Let Kopi crack the jokes</li><li>Keep generous rounded corners (22–36px) and pill buttons</li></ul></div>
+      <div class="dont"><h4>✕ Don't</h4><ul><li>Shout with "BEST COFFEE EVER!!!"</li><li>Use cold blues, greys or neon</li><li>Use photos with harsh flash or cool white balance</li><li>Put the mascot and logo side by side at equal size</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 06 Applications -->
+  <section class="chapter" style="border:0">
+    <div class="chapter-head">
+      <span class="num">06</span>
+      <div><h2>Applications</h2></div>
+      <p>Packaging lives on white or cream with Brick graphics; in-store surfaces (menus, signage, cups) flip to full Brick with Cream ink.</p>
+    </div>
+    <div class="grid g3">
+      <div class="tile on-brick" style="min-height:300px"><span class="eyebrow">Menu board</span><div><div class="display" style="font-size:2rem;color:var(--cream)">Flat White ........ 35</div><div class="display" style="font-size:2rem;color:var(--crema)">V60 ............... 40</div></div></div>
+      <div class="tile on-cream mascot-tile" style="min-height:300px;--mascot-fill:var(--cream)"><span class="eyebrow">Sticker / social</span><div data-mascot style="width:45%"></div><span class="display" style="font-size:1.6rem">Slow mornings only.</span></div>
+      <div class="tile on-maroon" style="min-height:300px"><span class="eyebrow">Loyalty card</span><div style="display:flex;gap:10px;flex-wrap:wrap">
+        <span style="width:34px;height:34px;border-radius:50%;background:var(--crema)"></span><span style="width:34px;height:34px;border-radius:50%;background:var(--crema)"></span><span style="width:34px;height:34px;border-radius:50%;background:var(--crema)"></span><span style="width:34px;height:34px;border-radius:50%;border:2px dashed var(--crema)"></span><span style="width:34px;height:34px;border-radius:50%;border:2px dashed var(--crema)"></span></div><span class="logo" style="font-size:2.4rem">Kafe<span class="bean"></span></span></div>
+    </div>
+  </section>
+</main>
+
+<footer>Style direction adapted from Orix Creative's “Qavo Cafe” branding shot on Dribbble. Kafe logo, mascot and copy are original.</footer>
+<div class="toast" id="toast">Copied</div>
+
+<script>
+  const colours = [
+    ["Brick", "#9A3B26", "Primary. Walls, cups, menus, buttons.", "#F2E6CF", true],
+    ["Cream", "#F2E6CF", "Logo & text on Brick. Page background.", "#9A3B26"],
+    ["Maroon", "#5D1009", "Depth, footers, text on Cream.", "#F2E6CF"],
+    ["Crema", "#DDB77B", "Highlights, illustrations, prices.", "#5D1009"],
+    ["Cinnamon", "#955B3C", "Secondary warm accents.", "#F2E6CF"],
+    ["Bean", "#4A3C31", "Body text.", "#F2E6CF"],
+    ["Oat", "#958C73", "Muted text, captions.", "#F2E6CF"],
+    ["Steam", "#9D9E9B", "Neutral details, print textures.", "#4A3C31"],
+    ["Milk", "#F0F0F0", "Packaging base, paper.", "#9A3B26"],
+  ];
+  const wrap = document.getElementById("swatches");
+  const toast = document.getElementById("toast");
+  colours.forEach(([name, hex, use, ink, primary]) => {
+    const el = document.createElement("button");
+    el.className = "swatch" + (primary ? " primary" : "");
+    el.style.cssText = "all:unset;cursor:pointer;border-radius:var(--radius);overflow:hidden;border:2px solid #e2ddd2;background:#fff;" + (primary ? "grid-column:span 2" : "");
+    el.innerHTML = `<div class="chip" style="background:${hex};color:${ink};${primary ? "height:220px;font-size:1.3rem" : ""}">${name}</div>
+      <div class="meta"><b>${name}</b><code>${hex}</code><br>${use}</div>`;
+    el.addEventListener("click", () => {
+      navigator.clipboard?.writeText(hex);
+      toast.textContent = `Copied ${hex}`;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 1400);
+    });
+    wrap.appendChild(el);
+  });
+</script>
+<script src="mascot.js"></script>
+</body>
+</html>

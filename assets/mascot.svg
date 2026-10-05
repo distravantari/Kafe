@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+  <!-- steam -->
+  <path d="M78 22c-8 10 8 16 0 28"/>
+  <path d="M102 14c-8 12 8 18 0 32"/>
+  <path d="M126 22c-8 10 8 16 0 28"/>
+  <!-- cup body -->
+  <path d="M44 66h112l-12 104a12 12 0 0 1-12 10H68a12 12 0 0 1-12-10z" fill="var(--mascot-fill, none)"/>
+  <!-- lid rim -->
+  <path d="M38 58h124v12H38z" fill="var(--mascot-fill, none)"/>
+  <!-- handle -->
+  <path d="M152 90c22 0 26 34 0 40"/>
+  <!-- sleepy eyes -->
+  <path d="M74 112c6 6 14 6 20 0"/>
+  <path d="M110 112c6 6 14 6 20 0"/>
+  <!-- smile -->
+  <path d="M94 132c4 5 12 5 16 0"/>
+  <!-- blush -->
+  <circle cx="70" cy="128" r="3" fill="currentColor" stroke="none"/>
+  <circle cx="134" cy="128" r="3" fill="currentColor" stroke="none"/>
+</svg>
