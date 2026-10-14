@@ -103,7 +103,7 @@ const Kafe = {
           const subtotal = lines.reduce((a, l) => a + l.unit * l.qty, 0);
           const tax = Math.round(subtotal * s.taxRate / 100);
           const r = rnd();
-          const method = r < 0.45 ? "QRIS" : r < 0.97 ? "Cash" : "Card";
+          const method = r < 0.45 ? "QRIS" : "Cash";
           const total = subtotal + tax;
           orders.push({ no: no++, at: at.toISOString(), type: rnd() < 0.4 ? "Dine in" : "Takeaway", method,
             lines, subtotal, tax, total, status: "done", paid: method === "Cash" ? Math.ceil(total / 10000) * 10000 : total, sample: true });

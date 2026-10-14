@@ -113,16 +113,23 @@
     .pay-total { text-align: center; padding: 6px 0 18px; }
     .pay-total span { font-size: .9rem; color: var(--oat); }
     .pay-total b { display: block; font-family: var(--font-display); font-size: 2.6rem; color: var(--brick); line-height: 1.1; }
-    .methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px; }
+    .methods { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 18px; }
     .methods button { padding: 14px 8px; border-radius: 16px; background: #fff; border: 2px solid #e0e0e0; font-family: var(--font-display); font-weight: 600; }
     .methods button.on { border-color: var(--brick); background: var(--brick); color: var(--cream); }
     #quick-cash { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 14px; }
     #quick-cash button { padding: 8px 14px; border-radius: 999px; background: var(--crema); color: var(--maroon); font-family: var(--font-display); font-weight: 600; }
     .change { display: flex; justify-content: space-between; font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; color: var(--maroon); }
-    .qris { width: 180px; aspect-ratio: 1; margin: 0 auto 10px; border-radius: 16px; background:
-      conic-gradient(from 90deg at 18% 18%, var(--bean) 25%, transparent 0) 0 0/50% 50%,
-      repeating-linear-gradient(90deg, var(--bean) 0 8px, transparent 8px 14px),
-      repeating-linear-gradient(0deg, transparent 0 9px, #fff 9px 16px); border: 10px solid #fff; box-shadow: 0 0 0 2px #e0e0e0; }
+    /* Static QRIS: the printed QR taped to the cart. Customer types the amount themselves. */
+    .qris-card { width: 230px; margin: 0 auto 14px; background: #fff; border: 2px solid var(--brick); border-radius: 18px; padding: 14px 16px 12px; text-align: center; }
+    .qc-head { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--brick); padding-bottom: 8px; margin-bottom: 8px; }
+    .qc-head b { font-family: var(--font-display); font-size: 1.3rem; letter-spacing: .04em; }
+    .qc-head span { font-size: .62rem; text-align: right; line-height: 1.2; color: var(--oat); }
+    .qc-name { font-family: var(--font-display); font-weight: 700; letter-spacing: .06em; }
+    .qris-card small { display: block; font-size: .7rem; color: var(--oat); }
+    .qris-card img { width: 100%; aspect-ratio: 1; margin: 10px 0 8px; image-rendering: pixelated; }
+    .qc-sample { color: var(--crema) !important; font-family: var(--font-display); font-weight: 700; letter-spacing: .08em; }
+    .qris-check { display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 2px solid #e0e0e0; border-radius: 14px; padding: 12px 14px; cursor: pointer; margin-top: 10px; }
+    .qris-check input { width: 20px; height: 20px; accent-color: var(--brick); flex-shrink: 0; margin-top: 1px; }
     .hint { text-align: center; color: var(--oat); font-size: .9rem; }
 
     /* Receipt */
@@ -238,7 +245,6 @@
       <div class="methods">
         <button data-pay="Cash">Cash</button>
         <button data-pay="QRIS">QRIS</button>
-        <button data-pay="Card">Card</button>
       </div>
       <div id="cash-box">
         <label class="field"><span class="eyebrow" style="color:var(--maroon)">Cash received</span>
@@ -246,7 +252,17 @@
         <div id="quick-cash"></div>
         <div class="change"><span>Change</span><span id="change">—</span></div>
       </div>
-      <div id="qris-box" hidden><div class="qris" aria-label="QRIS code placeholder"></div><p class="hint">Ask the customer to scan, then confirm once paid.</p></div>
+      <div id="qris-box" hidden>
+        <div class="qris-card">
+          <div class="qc-head"><b>QRIS</b><span>Scan pakai<br>e-wallet / m-banking</span></div>
+          <div class="qc-name">GROBAK · SATE</div>
+          <small>NMID ID1020XXXXXXXXX</small>
+          <img src="assets/qris-sample.svg" alt="Contoh QR statis Grobak">
+          <small class="qc-sample">CONTOH — BUKAN QR ASLI</small>
+        </div>
+        <p class="hint">Printed QR on the cart. Customer scans it and types <b id="qris-amount">Rp 0</b> themselves.</p>
+        <label class="qris-check"><input type="checkbox" id="qris-check"><span>I saw the <b id="qris-amount2">Rp 0</b> notification arrive in the merchant app.</span></label>
+      </div>
       <div id="card-box" hidden><p class="hint" style="padding:24px 0">Tap, insert or swipe on the EDC terminal, then confirm once approved.</p></div>
     </div>
     <div class="dlg-foot">

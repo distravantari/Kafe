@@ -114,6 +114,21 @@
     .demo .links { display: flex; gap: 8px; flex-wrap: wrap; }
     .btn-ghost-dark { color: var(--brick); border-color: var(--brick); padding: 10px 18px; font-size: .95rem; }
 
+    /* Static QR */
+    .qr-step { display: grid; grid-template-columns: 260px 1fr; gap: 32px; align-items: start; margin-top: 28px; }
+    .qris-card { background: #fff; border: 2px solid var(--brick); border-radius: 18px; padding: 16px 18px 14px; text-align: center; }
+    .qc-head { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--brick); padding-bottom: 8px; margin-bottom: 8px; }
+    .qc-head b { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: .04em; }
+    .qc-head span { font-size: .65rem; text-align: right; line-height: 1.2; color: var(--muted); }
+    .qc-name { font-family: var(--font-display); font-weight: 700; letter-spacing: .06em; }
+    .qris-card small { display: block; font-size: .72rem; color: var(--muted); }
+    .qris-card img { width: 100%; aspect-ratio: 1; margin: 10px 0 8px; image-rendering: pixelated; }
+    .qris-card .qc-sample { color: var(--crema); font-family: var(--font-display); font-weight: 700; letter-spacing: .08em; }
+    .steps { list-style: none; counter-reset: st; display: flex; flex-direction: column; gap: 12px; }
+    .steps li { counter-increment: st; position: relative; padding-left: 40px; }
+    .steps li::before { content: counter(st); position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--brick); color: var(--cream); display: grid; place-items: center; font-family: var(--font-display); font-weight: 700; font-size: .9rem; }
+    .steps b { font-family: var(--font-display); font-weight: 600; }
+
     /* Sticky nav */
     .topnav { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.94); backdrop-filter: blur(8px); border-bottom: 1.5px solid var(--line); }
     .topnav .wrap { display: flex; align-items: center; gap: 18px; height: 60px; }
@@ -184,7 +199,8 @@
     footer .logo { font-size: 2rem; color: var(--crema); --logo-bg: var(--maroon); }
 
     @media (max-width: 760px) {
-      .two, .options, .calc, .numbers, .decisions, .ps, .why, .demos, .closing, .brand-step { grid-template-columns: 1fr; }
+      .two, .options, .calc, .numbers, .decisions, .ps, .why, .demos, .closing, .brand-step, .qr-step { grid-template-columns: 1fr; }
+      .qris-card { max-width: 260px; margin: 0 auto; }
       .summary { grid-template-columns: 1fr 1fr; }
       .summary div:last-child { grid-column: 1/-1; }
       .topnav nav { display: none; }
@@ -236,7 +252,7 @@
       <div><b>4 minggu</b><span>sampai go-live</span></div>
       <div><b>50 / 50</b><span>bayar bertahap</span></div>
       <div><b>14 hari</b><span>perbaikan bug &amp; penambahan fitur setelah go-live</span></div>
-      <div><b>Bisa upgrade</b><span>Midtrans &amp; website tanpa bangun ulang</span></div>
+      <div><b>QRIS statis</b><span>tanpa payment gateway, uang langsung ke rekening Anda</span></div>
     </div>
   </div>
 
@@ -369,30 +385,28 @@
   <section id="pembayaran">
     <div class="wrap">
       <span class="eyebrow">Pembayaran</span>
-      <h2>Pilih salah satu dulu</h2>
-      <div class="options">
-        <div class="opt">
-          <span class="price">Termasuk fase inti</span>
-          <h3>QRIS statis + tunai</h3>
-          <ul class="dots">
-            <li>Pembeli scan QRIS statis yang ditempel di gerobak, atau bayar tunai.</li>
-            <li>Penjual cek notifikasi masuk di HP, lalu tandai lunas.</li>
-            <li>Owner cocokkan setoran QRIS dan tunai dari laporan harian.</li>
-          </ul>
-          <p class="foot">Paling murah untuk mulai, tapi ada kerja manual dan risiko salah cek saat ramai.</p>
+      <h2>QRIS statis + tunai. Tanpa payment gateway.</h2>
+      <p class="sub">Satu QR yang dicetak dan ditempel di gerobak — dari bank atau e-wallet yang Anda pakai sekarang. Tidak ada integrasi, tidak ada akun gateway, uang langsung masuk ke rekening Anda.</p>
+      <div class="qr-step">
+        <div class="qris-card" aria-label="Contoh QR statis Grobak">
+          <div class="qc-head"><b>QRIS</b><span>Scan pakai<br>e-wallet / m-banking</span></div>
+          <div class="qc-name">GROBAK · SATE</div>
+          <small>NMID ID1020XXXXXXXXX</small>
+          <img src="../../grobak/assets/qris-sample.svg" alt="Contoh QR statis">
+          <small class="qc-sample">CONTOH — BUKAN QR ASLI</small>
         </div>
-        <div class="opt featured">
-          <span class="price">+ Rp 5 jt</span>
-          <h3>Integrasi Midtrans<sup>*</sup></h3>
-          <ul class="dots">
-            <li>QRIS dinamis dengan nominal pas muncul di layar HP saat checkout.</li>
-            <li>Status pembayaran masuk otomatis ke pesanan bila callback Midtrans aktif.</li>
-            <li>Lebih cepat untuk penjual dan lebih rapi untuk rekonsiliasi.</li>
-          </ul>
-          <p class="foot">Biaya transaksi Midtrans dan proses aktivasi merchant dibayar/diurus langsung oleh bisnis ke Midtrans.</p>
+        <div>
+          <h3>Alurnya di gerobak</h3>
+          <ol class="steps">
+            <li><b>Penjual tekan Charge → QRIS.</b> Layar HP menampilkan total besar, misalnya <b>Rp 35.000</b>, supaya pembeli bisa lihat.</li>
+            <li><b>Pembeli scan QR yang ditempel</b> dan mengetik sendiri nominalnya.</li>
+            <li><b>Penjual cek notifikasi masuk</b> di aplikasi merchant/bank, centang “sudah masuk”, lalu konfirmasi. Pesanan tercatat sebagai QRIS.</li>
+            <li><b>Akhir malam, owner cocokkan</b> total QRIS di laporan POS dengan mutasi rekening, dan total tunai dengan uang di laci.</li>
+          </ol>
+          <div class="demo" style="margin-top:20px"><p><b>Coba di demo:</b> bayar dengan QRIS dan lihat QR contohnya.</p><div class="links"><a class="btn btn-ghost-dark" href="../../grobak/pos.html" target="_blank" rel="noopener">Buka POS ↗</a></div></div>
         </div>
       </div>
-      <div class="callout"><b>* Rekomendasi:</b> mulai dari Midtrans kalau sudah ramai di jam puncak atau gerobak dijaga orang lain dan owner tidak mau cek mutasi QRIS satu-satu. Kalau masih kecil, QRIS statis + tunai bisa dipakai dulu lalu di-upgrade tanpa membangun ulang POS.</div>
+      <div class="callout"><b>Yang perlu disadari:</b> QR statis tidak memberi tahu POS secara otomatis bahwa uang sudah masuk — penjual tetap harus cek notifikasi. Karena itu POS mewajibkan centang “sudah masuk” sebelum pesanan QRIS bisa dikonfirmasi, dan laporan harian memisahkan QRIS dari tunai supaya gampang dicocokkan. Kalau nanti antrean sudah terlalu ramai untuk cek manual, QRIS dinamis bisa ditambahkan belakangan tanpa membangun ulang POS.</div>
     </div>
   </section>
 
@@ -423,25 +437,20 @@
       <form class="calc no-print" id="calc" aria-labelledby="calc-title">
         <div>
           <h3 id="calc-title">Hitung paket Anda</h3>
-          <fieldset><legend>Pembayaran</legend><div class="choice">
-            <label><input type="radio" name="pay" value="manual"><span>QRIS statis + tunai</span></label>
-            <label><input type="radio" name="pay" value="midtrans" checked><span>Midtrans</span></label>
-          </div></fieldset>
           <fieldset><legend>Website gerobak</legend><div class="choice">
             <label><input type="radio" name="web" value="no" checked><span>Nanti saja</span></label>
             <label><input type="radio" name="web" value="yes"><span>Sekarang</span></label>
           </div></fieldset>
-          <p style="opacity:.75;font-size:.9rem">Estimasi untuk 1 gerobak, 1 brand. Belum termasuk perangkat fisik dan biaya payment gateway.</p>
+          <p style="opacity:.75;font-size:.9rem">Estimasi untuk 1 gerobak, 1 brand, pembayaran QRIS statis + tunai. Belum termasuk perangkat fisik.</p>
         </div>
         <div class="result" aria-live="polite">
-          <div class="row"><span>POS inti</span><span>Rp 10 jt</span></div>
-          <div class="row" id="r-mid"><span>Integrasi Midtrans</span><span>Rp 5 jt</span></div>
+          <div class="row"><span>POS inti + QRIS statis</span><span>Rp 10 jt</span></div>
           <div class="row" id="r-web"><span>Website satu halaman</span><span>Rp 5 jt</span></div>
           <hr>
           <small>Total estimasi</small>
-          <div class="total" id="total">Rp 15 jt</div>
-          <div class="time" id="time">± 7 minggu</div>
-          <small id="time-note">4 minggu POS inti + 1 minggu Midtrans</small>
+          <div class="total" id="total">Rp 10 jt</div>
+          <div class="time" id="time">4 minggu</div>
+          <small id="time-note">4 minggu POS inti</small>
         </div>
       </form>
     </div>
@@ -454,12 +463,10 @@
       <div class="numbers">
         <div class="num"><b>Rp 10 jt</b><span>POS inti untuk 1 gerobak</span><small>Estimasi komersial Arketype, 14 Oktober 2026; scope fase inti di proposal ini.</small></div>
         <div class="num"><b>4 minggu</b><span>Target delivery POS inti</span><small>Estimasi delivery Arketype, 14 Oktober 2026; berlaku setelah scope, menu, dan akses disetujui.</small></div>
-        <div class="num"><b>+ Rp 5 jt</b><span>Tambahan integrasi Midtrans</span><small>Estimasi komersial Arketype, 14 Oktober 2026; belum termasuk biaya Midtrans.</small></div>
-        <div class="num"><b>+1 minggu</b><span>Tambahan waktu Midtrans</span><small>Estimasi delivery Arketype, 14 Oktober 2026; tergantung merchant account dan callback test.</small></div>
         <div class="num"><b>+ Rp 5 jt</b><span>Tambahan website gerobak satu halaman</span><small>Estimasi komersial Arketype, 14 Oktober 2026; scope website di proposal ini.</small></div>
         <div class="num"><b>+2 minggu</b><span>Tambahan waktu website</span><small>Estimasi delivery Arketype, 14 Oktober 2026; bisa paralel sebagian dengan POS setelah materi brand diterima.</small></div>
-        <div class="num total"><b>Rp 15 jt</b><span>Total POS + Midtrans</span><small>Penjumlahan estimasi Arketype: Rp 10 jt + Rp 5 jt, 14 Oktober 2026.</small></div>
-        <div class="num total"><b>Rp 20 jt</b><span>Total POS + Midtrans + website</span><small>Penjumlahan estimasi Arketype: Rp 10 jt + Rp 5 jt + Rp 5 jt, 14 Oktober 2026.</small></div>
+        <div class="num total"><b>Rp 10 jt</b><span>Total POS + QRIS statis</span><small>Estimasi komersial Arketype, 14 Oktober 2026; QRIS statis termasuk fase inti, tanpa biaya integrasi.</small></div>
+        <div class="num total"><b>Rp 15 jt</b><span>Total POS + website</span><small>Penjumlahan estimasi Arketype: Rp 10 jt + Rp 5 jt, 14 Oktober 2026.</small></div>
       </div>
 
       <h3 style="margin-top:44px">Pembayaran proyek</h3>
@@ -470,7 +477,7 @@
       <ul class="dots">
         <li><b>50%</b> saat scope dan proposal disetujui.</li>
         <li><b>50%</b> setelah go-live dan handover.</li>
-        <li>Harga belum termasuk perangkat fisik: HP/tablet, powerbank, paket data, printer thermal bila dipakai, domain, atau biaya payment gateway.</li>
+        <li>Harga belum termasuk perangkat fisik: HP/tablet, powerbank, paket data, cetak stiker QR, printer thermal bila dipakai, atau domain.</li>
         <li>Perubahan besar setelah scope disetujui dihitung terpisah supaya timeline tidak geser diam-diam.</li>
       </ul>
     </div>
@@ -492,7 +499,7 @@
           <p style="margin-top:8px">Akhir minggu, data menu final dimasukkan, akses owner/penjual diserahkan, SOP pendek penjual diberikan, lalu POS aktif di gerobak pertama.</p>
           <div class="them"><b>Garansi:</b> 14 hari perbaikan bug &amp; penambahan fitur setelah go-live.</div></li>
       </ol>
-      <div class="callout"><b>Yang paling sering bikin mundur bukan coding:</b> menu belum final, harga berubah terus, akun QRIS/Midtrans belum aktif, atau feedback test telat. Kalau empat hal itu cepat, timeline ini realistis.</div>
+      <div class="callout"><b>Yang paling sering bikin mundur bukan coding:</b> menu belum final, harga berubah terus, akun QRIS merchant belum aktif, atau feedback test telat. Kalau empat hal itu cepat, timeline ini realistis.</div>
     </div>
   </section>
 
@@ -515,7 +522,7 @@
       <span class="eyebrow">Langkah berikutnya</span>
       <h2>Keputusan yang perlu dipilih</h2>
       <ol class="decisions">
-        <li>Mulai dengan QRIS statis + tunai atau langsung Midtrans?</li>
+        <li>QRIS statis dari bank atau e-wallet mana yang dipakai?</li>
         <li>Perlu website gerobak sekarang atau nanti?</li>
         <li>Siapa PIC owner yang mengunci menu, harga, dan feedback testing?</li>
         <li>Kapan target gerobak pertama pakai POS?</li>
@@ -555,15 +562,13 @@
 
   const form = document.getElementById("calc");
   function update() {
-    const mid = form.pay.value === "midtrans", web = form.web.value === "yes";
-    const total = 10 + (mid ? 5 : 0) + (web ? 5 : 0);
-    const weeks = 4 + (mid ? 1 : 0) + (web ? 2 : 0);
-    document.getElementById("r-mid").hidden = !mid;
+    const web = form.web.value === "yes";
+    const total = 10 + (web ? 5 : 0);
+    const weeks = 4 + (web ? 2 : 0);
     document.getElementById("r-web").hidden = !web;
     document.getElementById("total").textContent = `Rp ${total} jt`;
     document.getElementById("time").textContent = weeks === 4 ? "4 minggu" : `hingga ± ${weeks} minggu`;
     const parts = ["4 minggu POS inti"];
-    if (mid) parts.push("+1 minggu Midtrans");
     if (web) parts.push("+2 minggu website (sebagian bisa paralel)");
     document.getElementById("time-note").textContent = parts.join(" ");
   }

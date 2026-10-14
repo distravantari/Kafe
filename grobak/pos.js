@@ -129,7 +129,9 @@ function openCheckout() {
   payMethod = "Cash";
   $("#pay-total").textContent = rp(t.total);
   $("#cash-in").value = "";
-  const quick = [...new Set([t.total, Math.ceil(t.total / 50000) * 50000, Math.ceil(t.total / 100000) * 100000, Math.ceil(t.total / 100000) * 100000 + 100000])];
+  const quick = [...new Set([t.total, Math.ceil(t.total / 10000) * 10000, Math.ceil(t.total / 50000) * 50000, Math.ceil(t.total / 100000) * 100000])];
+  $("#qris-amount").textContent = $("#qris-amount2").textContent = rp(t.total);
+  $("#qris-check").checked = false;
   $("#quick-cash").innerHTML = quick.map((v) => `<button type="button" data-cash="${v}">${v === t.total ? "Exact" : rp(v)}</button>`).join("");
   showPayStep(); updateChange();
   $("#pay-modal").showModal();
@@ -148,7 +150,8 @@ function showPayStep() {
 function updateChange() {
   const t = totals();
   const paid = Number($("#cash-in").value || 0);
-  const ok = payMethod !== "Cash" || paid >= t.total;
+  // Static QR has no callback, so the seller confirms they saw the money land.
+  const ok = payMethod === "Cash" ? paid >= t.total : payMethod === "QRIS" ? $("#qris-check").checked : true;
   $("#change").textContent = payMethod === "Cash" && paid ? rp(Math.max(0, paid - t.total)) : "—";
   $("#confirm-pay").disabled = !ok;
 }
@@ -210,6 +213,7 @@ $("#opt-form").addEventListener("submit", (e) => {
 });
 $("#search").addEventListener("input", (e) => { query = e.target.value; renderMenu(); });
 $("#cash-in").addEventListener("input", updateChange);
+$("#qris-check").addEventListener("change", updateChange);
 document.addEventListener("keydown", (e) => {
   if (e.key === "/" && document.activeElement.tagName !== "INPUT") { e.preventDefault(); $("#search").focus(); }
 });

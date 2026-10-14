@@ -129,7 +129,7 @@ const pages = {
       </div>
       <div class="grid3">
         <div class="card"><h3>Sales by category</h3><p class="hint">Net sales</p>${hbars(cats, short)}</div>
-        <div class="card"><h3>How people pay</h3><p class="hint">Share of orders</p>${stackBar(count("method", ["Cash", "QRIS", "Card"]), METHOD_COLOR)}</div>
+        <div class="card"><h3>How people pay</h3><p class="hint">Share of orders</p>${stackBar(count("method", ["Cash", "QRIS"]), METHOD_COLOR)}</div>
         <div class="card"><h3>Dine in vs takeaway</h3><p class="hint">Share of orders</p>${stackBar(count("type", ["Dine in", "Takeaway"]), TYPE_COLOR)}</div>
       </div>`;
   },
@@ -142,7 +142,7 @@ const pages = {
       <div class="toolbar">
         <input type="search" id="o-q" placeholder="Search order # or item…" aria-label="Search orders">
         <select id="o-when" aria-label="Date"><option value="today">Today</option><option value="7d" selected>Last 7 days</option><option value="all">All time</option></select>
-        <select id="o-method" aria-label="Payment"><option value="">All payments</option><option>Cash</option><option>QRIS</option><option>Card</option></select>
+        <select id="o-method" aria-label="Payment"><option value="">All payments</option><option>Cash</option><option>QRIS</option></select>
         <select id="o-type" aria-label="Order type"><option value="">Dine in &amp; takeaway</option><option>Dine in</option><option>Takeaway</option></select>
       </div>
       <p class="muted" id="o-count" style="margin-bottom:10px;font-size:.9rem"></p>
