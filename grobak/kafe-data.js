@@ -65,7 +65,7 @@ const Kafe = {
     return o;
   },
   // Which prep station makes a category. Ready-made sides need no prep.
-  station: (cat) => (cat === "drink" ? "Drinks" : cat === "side" ? null : "Grill"),
+  station: (cat) => (cat === "drink" ? "Minuman" : cat === "side" ? null : "Bakaran"),
   rp: (n) => "Rp " + Math.round(n).toLocaleString("id-ID"),
   catName: (id) => (CATEGORIES.find((c) => c.id === id) || { name: id }).name,
 
@@ -103,13 +103,21 @@ const Kafe = {
           const subtotal = lines.reduce((a, l) => a + l.unit * l.qty, 0);
           const tax = Math.round(subtotal * s.taxRate / 100);
           const r = rnd();
-          const method = r < 0.45 ? "QRIS" : "Cash";
+          const method = r < 0.45 ? "QRIS" : "Tunai";
           const total = subtotal + tax;
-          orders.push({ no: no++, at: at.toISOString(), type: rnd() < 0.4 ? "Dine in" : "Takeaway", method,
-            lines, subtotal, tax, total, status: "done", paid: method === "Cash" ? Math.ceil(total / 10000) * 10000 : total, sample: true });
+          orders.push({ no: no++, at: at.toISOString(), type: rnd() < 0.4 ? "Makan di sini" : "Bungkus", method,
+            lines, subtotal, tax, total, status: "done", paid: method === "Tunai" ? Math.ceil(total / 10000) * 10000 : total, sample: true });
         }
       }
     }
     return orders;
   },
 };
+
+// Earlier builds of this demo stored English values; translate them once so old browsers stay consistent.
+(() => {
+  const ID = { Cash: "Tunai", "Dine in": "Makan di sini", Takeaway: "Bungkus" };
+  const o = Kafe.orders();
+  if (o.some((x) => ID[x.method] || ID[x.type])) Kafe.saveOrders(o.map((x) => ({ ...x, method: ID[x.method] || x.method, type: ID[x.type] || x.type })));
+  if (ID[KafeStore.get("grobak.type")]) KafeStore.set("grobak.type", ID[KafeStore.get("grobak.type")]);
+})();

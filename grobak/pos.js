@@ -8,7 +8,7 @@ const nextOrderNo = () => Kafe.orders().reduce((a, o) => Math.max(a, o.no), 0) +
 // ───────── state ─────────
 const store = KafeStore;
 let cart = store.get("grobak.cart", []);       // [{key, id, name, unit, qty, opts:{}, note}]
-let orderType = store.get("grobak.type", "Dine in");
+let orderType = store.get("grobak.type", "Makan di sini");
 let orderNo = nextOrderNo();
 let activeCat = "all";
 let query = "";
@@ -19,7 +19,7 @@ const save = () => { store.set("grobak.cart", cart); store.set("grobak.type", or
 
 // ───────── menu ─────────
 function renderCats() {
-  const all = [{ id: "all", name: "All" }, ...CATEGORIES];
+  const all = [{ id: "all", name: "Semua" }, ...CATEGORIES];
   $("#cats").innerHTML = all.map((c) =>
     `<button class="cat ${c.id === activeCat ? "on" : ""}" data-cat="${c.id}">${c.name}</button>`).join("");
 }
@@ -32,7 +32,7 @@ function renderMenu() {
   $("#grid").innerHTML = items.length ? items.map((m) => {
     const inCart = cart.filter((c) => c.id === m.id).reduce((a, c) => a + c.qty, 0);
     if (!m.available) return `<div class="item cat-${m.cat} soldout" aria-disabled="true">
-      <span class="tag">Sold out</span><span class="glyph" aria-hidden="true"></span>
+      <span class="tag">Habis</span><span class="glyph" aria-hidden="true"></span>
       <span class="name">${m.name}</span><span class="desc">${m.desc}</span><span class="price">${rp(m.price)}</span></div>`;
     return `<button class="item cat-${m.cat}" data-id="${m.id}">
       ${inCart ? `<span class="badge">${inCart}</span>` : ""}
@@ -42,7 +42,7 @@ function renderMenu() {
       <span class="desc">${m.desc}</span>
       <span class="price">${rp(m.price)}</span>
     </button>`;
-  }).join("") : `<p class="empty-grid">Nothing matches “${query}”.</p>`;
+  }).join("") : `<p class="empty-grid">Tidak ada menu “${query}”.</p>`;
 }
 
 // ───────── options modal ─────────
@@ -59,7 +59,7 @@ function openItem(id) {
     <fieldset><legend>${OPT[o].name}</legend><div class="chips">
       ${OPT[o].choices.map(([label, add], i) => `
         <label class="chip"><input type="radio" name="${o}" value="${i}" ${i === 0 ? "checked" : ""}>
-        <span>${label}${add ? ` <small>+${add / 1000}k</small>` : ""}</span></label>`).join("")}
+        <span>${label}${add ? ` <small>${add > 0 ? "+" : "−"}${Math.abs(add) / 1000}rb</small>` : ""}</span></label>`).join("")}
     </div></fieldset>`).join("");
   updateOptTotal();
   $("#opt-modal").showModal();
@@ -68,7 +68,7 @@ function openItem(id) {
 function optUnit() {
   return pending.m.price + Object.entries(pending.sel).reduce((a, [o, i]) => a + OPT[o].choices[i][1], 0);
 }
-function updateOptTotal() { $("#opt-add").textContent = `Add · ${rp(optUnit())}`; }
+function updateOptTotal() { $("#opt-add").textContent = `Tambah · ${rp(optUnit())}`; }
 
 // ───────── cart ─────────
 function addToCart(m, sel, note) {
@@ -88,7 +88,7 @@ function totals() {
 }
 
 function optSummary(c) {
-  const parts = Object.values(c.opts).filter((v) => !["Normal", "Regular", "Whole", "No", "As is"].includes(v));
+  const parts = Object.values(c.opts).filter((v) => !["Normal", "Sedang"].includes(v));
   if (c.note) parts.push(`“${c.note}”`);
   return parts.join(" · ");
 }
@@ -101,10 +101,10 @@ function renderCart() {
     <li class="line">
       <div class="line-main"><b>${c.name}</b><small>${optSummary(c)}</small></div>
       <div class="qty">
-        <button data-dec="${i}" aria-label="Remove one">−</button><span>${c.qty}</span><button data-inc="${i}" aria-label="Add one">+</button>
+        <button data-dec="${i}" aria-label="Kurangi satu">−</button><span>${c.qty}</span><button data-inc="${i}" aria-label="Tambah satu">+</button>
       </div>
       <span class="line-price">${rp(c.unit * c.qty)}</span>
-    </li>`).join("") : `<li class="empty"><div data-mascot></div><p>No orders yet.<br>Tap something tasty.</p></li>`;
+    </li>`).join("") : `<li class="empty"><div data-mascot></div><p>Belum ada pesanan.<br>Tap menu yang enak.</p></li>`;
   if (!cart.length && window.injectMascots) window.injectMascots();
   $("#subtotal").textContent = rp(t.subtotal);
   $("#tax").textContent = rp(t.tax);
@@ -112,7 +112,7 @@ function renderCart() {
   $("#tax-label").textContent = taxLabel();
   $("#tax-label").hidden = $("#tax").hidden = !SETTINGS.taxRate;  // most carts charge no tax
   $("#charge").disabled = !cart.length;
-  $("#charge").textContent = cart.length ? `Charge ${rp(t.total)}` : "Charge";
+  $("#charge").textContent = cart.length ? `Bayar ${rp(t.total)}` : "Bayar";
   $("#fab-count").textContent = t.count;
   $("#fab-total").textContent = rp(t.total);
   $("#fab").hidden = !cart.length;
@@ -122,26 +122,25 @@ function render() { renderCats(); renderMenu(); renderCart(); }
 function bump() { const f = $("#fab"); f.classList.remove("bump"); void f.offsetWidth; f.classList.add("bump"); }
 
 // ───────── checkout ─────────
-let payMethod = "Cash";
+let payMethod = "Tunai";
 
 function openCheckout() {
   const t = totals();
-  payMethod = "Cash";
+  payMethod = "Tunai";
   $("#pay-total").textContent = rp(t.total);
   $("#cash-in").value = "";
   const quick = [...new Set([t.total, Math.ceil(t.total / 10000) * 10000, Math.ceil(t.total / 50000) * 50000, Math.ceil(t.total / 100000) * 100000])];
   $("#qris-amount").textContent = $("#qris-amount2").textContent = rp(t.total);
   $("#qris-check").checked = false;
-  $("#quick-cash").innerHTML = quick.map((v) => `<button type="button" data-cash="${v}">${v === t.total ? "Exact" : rp(v)}</button>`).join("");
+  $("#quick-cash").innerHTML = quick.map((v) => `<button type="button" data-cash="${v}">${v === t.total ? "Uang pas" : rp(v)}</button>`).join("");
   showPayStep(); updateChange();
   $("#pay-modal").showModal();
 }
 
 function showPayStep() {
   document.querySelectorAll("[data-pay]").forEach((b) => b.classList.toggle("on", b.dataset.pay === payMethod));
-  $("#cash-box").hidden = payMethod !== "Cash";
+  $("#cash-box").hidden = payMethod !== "Tunai";
   $("#qris-box").hidden = payMethod !== "QRIS";
-  $("#card-box").hidden = payMethod !== "Card";
   $("#pay-step").hidden = false;
   $("#receipt").hidden = true;
   updateChange();
@@ -151,28 +150,28 @@ function updateChange() {
   const t = totals();
   const paid = Number($("#cash-in").value || 0);
   // Static QR has no callback, so the seller confirms they saw the money land.
-  const ok = payMethod === "Cash" ? paid >= t.total : payMethod === "QRIS" ? $("#qris-check").checked : true;
-  $("#change").textContent = payMethod === "Cash" && paid ? rp(Math.max(0, paid - t.total)) : "—";
+  const ok = payMethod === "Tunai" ? paid >= t.total : payMethod === "QRIS" ? $("#qris-check").checked : true;
+  $("#change").textContent = payMethod === "Tunai" && paid ? rp(Math.max(0, paid - t.total)) : "—";
   $("#confirm-pay").disabled = !ok;
 }
 
 function confirmPay() {
   const t = totals();
-  const paid = payMethod === "Cash" ? Number($("#cash-in").value) : t.total;
+  const paid = payMethod === "Tunai" ? Number($("#cash-in").value) : t.total;
   const no = "#" + String(orderNo).padStart(3, "0");
   const now = new Date();
   $("#receipt").innerHTML = `
     <div class="rc-head"><span class="logo">Grobak<span class="bean"></span></span>
       <p>${SETTINGS.address}</p>
       <p>${now.toLocaleDateString("id-ID")} · ${now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" })}</p></div>
-    <div class="rc-order"><span>Order</span><b>${no}</b><span>${orderType}</span></div>
+    <div class="rc-order"><span>Pesanan</span><b>${no}</b><span>${orderType}</span></div>
     <ul>${cart.map((c) => `<li><span>${c.qty}× ${c.name}${optSummary(c) ? `<small>${optSummary(c)}</small>` : ""}</span><span>${rp(c.unit * c.qty)}</span></li>`).join("")}</ul>
     <div class="rc-sum"><span>Subtotal</span><span>${rp(t.subtotal)}</span>${SETTINGS.taxRate ? `<span>${taxLabel()}</span><span>${rp(t.tax)}</span>` : ""}
       <b>Total</b><b>${rp(t.total)}</b><span>${payMethod}</span><span>${rp(paid)}</span>
-      ${payMethod === "Cash" ? `<span>Change</span><span>${rp(paid - t.total)}</span>` : ""}</div>
+      ${payMethod === "Tunai" ? `<span>Kembalian</span><span>${rp(paid - t.total)}</span>` : ""}</div>
     <p class="rc-thanks">${SETTINGS.footer}</p>
-    <div class="rc-actions"><button class="btn btn-ghost-dark" type="button" onclick="window.print()">Print</button>
-      <button class="btn btn-brick" type="button" id="new-order">New order →</button></div>`;
+    <div class="rc-actions"><button class="btn btn-ghost-dark" type="button" onclick="window.print()">Cetak</button>
+      <button class="btn btn-brick" type="button" id="new-order">Pesanan baru →</button></div>`;
   Kafe.addOrder({ no: orderNo, at: now.toISOString(), type: orderType, method: payMethod,
     lines: cart.map((c) => ({ id: c.id, name: c.name, cat: (MENU.find((m) => m.id === c.id) || {}).cat, unit: c.unit, qty: c.qty, opts: c.opts, note: c.note })),
     subtotal: t.subtotal, tax: t.tax, total: t.total, paid, status: "new" });
@@ -197,7 +196,7 @@ document.addEventListener("click", (e) => {
   else if (t.dataset.type) { orderType = t.dataset.type; save(); renderCart(); }
   else if (t.dataset.pay) { payMethod = t.dataset.pay; showPayStep(); }
   else if (t.dataset.cash) { $("#cash-in").value = t.dataset.cash; updateChange(); }
-  else if (t.id === "clear" && cart.length && confirm("Clear this order?")) { cart = []; save(); render(); }
+  else if (t.id === "clear" && cart.length && confirm("Hapus pesanan ini?")) { cart = []; save(); render(); }
   else if (t.id === "charge") openCheckout();
   else if (t.id === "confirm-pay") confirmPay();
   else if (t.id === "fab") document.body.classList.add("cart-open");

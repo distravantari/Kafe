@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Grobak Grill Display</title>
+  <title>Grobak Layar Bakaran</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Mali:wght@500;600;700&display=swap" rel="stylesheet">
@@ -87,27 +87,27 @@
 <body>
 
 <header class="bar">
-  <a href="index.html" class="logo" aria-label="Grobak home">Grobak<span class="bean"></span></a>
-  <span class="tag">GRILL</span>
-  <div class="seg" role="group" aria-label="Station">
-    <button data-station="All">All</button><button data-station="Grill">Grill</button><button data-station="Drinks">Drinks</button>
+  <a href="index.html" class="logo" aria-label="Beranda Grobak">Grobak<span class="bean"></span></a>
+  <span class="tag">BAKARAN</span>
+  <div class="seg" role="group" aria-label="Stasiun">
+    <button data-station="All">Semua</button><button data-station="Bakaran">Bakaran</button><button data-station="Minuman">Minuman</button>
   </div>
-  <span class="stat">Avg. make time today <b id="avg">—</b></span>
-  <span class="stat">Served today <b id="served">0</b></span>
+  <span class="stat">Rata-rata waktu bakar <b id="avg">—</b></span>
+  <span class="stat">Selesai hari ini <b id="served">0</b></span>
   <div class="right">
-    <button class="chip-btn" id="sound" aria-pressed="false">🔕 Sound off</button>
-    <button class="chip-btn" id="recall">↺ Recall</button>
-    <button class="chip-btn solid" id="test">+ Test order</button>
+    <button class="chip-btn" id="sound" aria-pressed="false">🔕 Suara mati</button>
+    <button class="chip-btn" id="recall">↺ Panggil ulang</button>
+    <button class="chip-btn solid" id="test">+ Pesanan tes</button>
     <a class="chip-btn" href="pos.html">POS</a>
-    <a class="chip-btn" href="backoffice.html">Back office</a>
+    <a class="chip-btn" href="backoffice.html">Backoffice</a>
     <span id="clock"></span>
   </div>
 </header>
 
 <main class="board">
-  <section class="col" data-col="new"><div class="col-head"><h2>New</h2><span class="count" id="c-new">0</span></div><div class="tickets" id="t-new"></div></section>
-  <section class="col" data-col="making"><div class="col-head"><h2>Making</h2><span class="count" id="c-making">0</span></div><div class="tickets" id="t-making"></div></section>
-  <section class="col" data-col="ready"><div class="col-head"><h2>Ready</h2><span class="count" id="c-ready">0</span></div><div class="tickets" id="t-ready"></div></section>
+  <section class="col" data-col="new"><div class="col-head"><h2>Baru</h2><span class="count" id="c-new">0</span></div><div class="tickets" id="t-new"></div></section>
+  <section class="col" data-col="making"><div class="col-head"><h2>Dibakar</h2><span class="count" id="c-making">0</span></div><div class="tickets" id="t-making"></div></section>
+  <section class="col" data-col="ready"><div class="col-head"><h2>Siap</h2><span class="count" id="c-ready">0</span></div><div class="tickets" id="t-ready"></div></section>
 </main>
 
 <div class="toast" id="toast"></div>
@@ -117,7 +117,7 @@
 <script>
   const $ = (s) => document.querySelector(s);
   const WARN_MIN = 5, LATE_MIN = 10;
-  const HIDE = ["Normal", "Regular", "Whole", "No", "As is"];
+  const HIDE = ["Normal", "Sedang"];
   let station = KafeStore.get("grobak.kds.station", "All");
   let sound = KafeStore.get("grobak.kds.sound", false);
   let known = null; // order numbers already on screen, to detect new arrivals
@@ -136,16 +136,16 @@
 
   function ticket(o) {
     const done = o.doneLines || [];
-    const next = { new: "Start", making: "Mark ready", ready: o.type === "Takeaway" ? "Picked up" : "Served" }[o.status];
+    const next = { new: "Mulai", making: "Tandai siap", ready: o.type === "Bungkus" ? "Sudah diambil" : "Sudah diantar" }[o.status];
     return `<article class="ticket ${o.status === "ready" ? "ready" : ageClass(o.at)}" data-no="${o.no}">
       <div class="t-head"><span class="no">#${pad(o.no)}</span><span class="type">${o.type}</span><span class="timer" data-since="${o.at}">${elapsed(o.at)}</span></div>
       <ul class="t-lines">${prepLines(o).map((l) => {
         const mods = Object.values(l.opts || {}).filter((v) => !HIDE.includes(v));
         const other = station !== "All" && l.st !== station;
-        return `<li class="t-line ${done.includes(l.i) ? "done" : ""} ${other ? "other" : ""}" ${other ? "" : `data-line="${l.i}"`} title="${other ? `${l.st} item` : "Tap to tick off"}">
+        return `<li class="t-line ${done.includes(l.i) ? "done" : ""} ${other ? "other" : ""}" ${other ? "" : `data-line="${l.i}"`} title="${other ? `Item ${l.st}` : "Tap untuk centang"}">
           <span class="q">${l.qty}</span><div><b>${l.name}</b>${mods.length ? `<div class="mods">${mods.map((m) => `<span>${m}</span>`).join("")}</div>` : ""}${l.note ? `<span class="note">“${l.note}”</span>` : ""}</div></li>`;
       }).join("")}</ul>
-      <div class="t-foot">${o.status !== "new" ? `<button class="back" data-back="${o.no}" aria-label="Move back">←</button>` : ""}<button class="go" data-go="${o.no}">${next} →</button></div>
+      <div class="t-foot">${o.status !== "new" ? `<button class="back" data-back="${o.no}" aria-label="Mundurkan">←</button>` : ""}<button class="go" data-go="${o.no}">${next} →</button></div>
     </article>`;
   }
 
@@ -164,8 +164,8 @@
       const ts = list.filter((o) => o.status === col);
       $("#c-" + col).textContent = ts.length;
       $("#t-" + col).innerHTML = ts.map(ticket).join("") || (col === "new"
-        ? `<div class="empty"><div data-mascot></div>All caught up.<br><span style="font-size:.9rem">New POS orders land here.</span></div>`
-        : `<div class="empty">Nothing here</div>`);
+        ? `<div class="empty"><div data-mascot></div>Semua beres.<br><span style="font-size:.9rem">Pesanan baru dari kasir muncul di sini.</span></div>`
+        : `<div class="empty">Kosong</div>`);
     }
     window.injectMascots && window.injectMascots();
     document.querySelectorAll("[data-station]").forEach((b) => b.classList.toggle("on", b.dataset.station === station));
@@ -200,7 +200,7 @@
       const patch = { status: next };
       if (dir > 0 && stamp[next]) patch[stamp[next]] = new Date().toISOString();
       if (next === "ready") patch.doneLines = prepLines(o).map((l) => l.i);
-      if (dir > 0 && next === "done") toast(`#${pad(no)} ${o.type === "Takeaway" ? "picked up" : "served"} · Recall to undo`);
+      if (dir > 0 && next === "done") toast(`#${pad(no)} ${o.type === "Bungkus" ? "sudah diambil" : "sudah diantar"} · Panggil ulang untuk batal`);
       return patch;
     });
     render();
@@ -212,12 +212,12 @@
     const lines = Array.from({ length: 1 + Math.floor(Math.random() * 3) }, () => {
       const m = pick(); const opts = {}; let unit = m.price;
       (m.opts || []).forEach((k) => { const c = OPT[k].choices[Math.random() < 0.6 ? 0 : Math.floor(Math.random() * OPT[k].choices.length)]; opts[k] = c[0]; unit += c[1]; });
-      return { id: m.id, name: m.name, cat: m.cat, unit, qty: Math.random() < 0.8 ? 1 : 2, opts, note: Math.random() < 0.2 ? ["Bumbu dipisah", "Name: Dita", "Matang banget", "Tanpa bawang"][Math.floor(Math.random() * 4)] : "" };
+      return { id: m.id, name: m.name, cat: m.cat, unit, qty: Math.random() < 0.8 ? 1 : 2, opts, note: Math.random() < 0.2 ? ["Bumbu dipisah", "Atas nama Dita", "Matang banget", "Tanpa bawang"][Math.floor(Math.random() * 4)] : "" };
     });
     const s = Kafe.settings();
     const subtotal = lines.reduce((a, l) => a + l.unit * l.qty, 0), tax = Math.round(subtotal * s.taxRate / 100);
     const no = Kafe.orders().reduce((a, o) => Math.max(a, o.no), 0) + 1;
-    Kafe.addOrder({ no, at: new Date().toISOString(), type: Math.random() < 0.6 ? "Dine in" : "Takeaway", method: "QRIS", lines, subtotal, tax, total: subtotal + tax, paid: subtotal + tax, status: "new", sample: true });
+    Kafe.addOrder({ no, at: new Date().toISOString(), type: Math.random() < 0.6 ? "Makan di sini" : "Bungkus", method: "QRIS", lines, subtotal, tax, total: subtotal + tax, paid: subtotal + tax, status: "new", sample: true });
     render();
   }
 
@@ -238,7 +238,7 @@
   let toastTimer;
   function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 2200); }
 
-  function setSound(v) { sound = v; KafeStore.set("grobak.kds.sound", v); $("#sound").textContent = v ? "🔔 Sound on" : "🔕 Sound off"; $("#sound").setAttribute("aria-pressed", v); }
+  function setSound(v) { sound = v; KafeStore.set("grobak.kds.sound", v); $("#sound").textContent = v ? "🔔 Suara nyala" : "🔕 Suara mati"; $("#sound").setAttribute("aria-pressed", v); }
 
   document.addEventListener("click", (e) => {
     const t = e.target.closest("[data-station], [data-go], [data-back], [data-line], #sound, #recall, #test");
@@ -258,8 +258,8 @@
     else if (t.id === "test") testOrder();
     else if (t.id === "recall") {
       const last = Kafe.orders().filter((o) => o.status === "done" && o.doneAt).sort((a, b) => new Date(b.doneAt) - new Date(a.doneAt))[0];
-      if (last) { Kafe.updateOrder(last.no, { status: "ready", doneAt: null }); toast(`#${pad(last.no)} recalled`); render(); }
-      else toast("Nothing to recall yet");
+      if (last) { Kafe.updateOrder(last.no, { status: "ready", doneAt: null }); toast(`#${pad(last.no)} dipanggil ulang`); render(); }
+      else toast("Belum ada yang bisa dipanggil ulang");
     }
   });
 

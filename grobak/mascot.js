@@ -12,7 +12,7 @@ window.injectMascots = function () {
     loadDoodle(name).then((svg) => {
       el.innerHTML = svg;
       el.setAttribute("role", "img");
-      el.setAttribute("aria-label", name === "mascot" ? "Pak Grobak, the satay seller" : `Drawing: ${name}`);
+      el.setAttribute("aria-label", name === "mascot" ? "Pak Grobak, si penjual sate" : `Gambar: ${name}`);
     });
   });
 };

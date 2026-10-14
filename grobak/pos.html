@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -178,60 +178,60 @@
 
 <main class="menu">
   <header class="topbar">
-    <a href="index.html" class="logo" aria-label="Grobak home">Grobak<span class="bean"></span></a>
-    <span class="pos-tag">COUNTER</span>
-    <a href="kitchen.html" class="pos-tag" style="background:transparent;border:1.5px solid var(--cream);text-decoration:none">GRILL</a>
+    <a href="index.html" class="logo" aria-label="Beranda Grobak">Grobak<span class="bean"></span></a>
+    <span class="pos-tag">KASIR</span>
+    <a href="kitchen.html" class="pos-tag" style="background:transparent;border:1.5px solid var(--cream);text-decoration:none">BAKARAN</a>
     <a href="backoffice.html" class="pos-tag" style="background:transparent;border:1.5px solid var(--cream);text-decoration:none">BACK OFFICE</a>
     <label class="search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="search" type="search" placeholder="Search menu…" aria-label="Search menu" autocomplete="off">
+      <input id="search" type="search" placeholder="Cari menu…" aria-label="Cari menu" autocomplete="off">
       <kbd>/</kbd>
     </label>
     <span id="clock"></span>
   </header>
-  <nav id="cats" aria-label="Categories"></nav>
+  <nav id="cats" aria-label="Kategori"></nav>
   <div id="grid"></div>
 </main>
 
-<aside class="cart" aria-label="Current order">
+<aside class="cart" aria-label="Pesanan saat ini">
   <div class="cart-head">
-    <h2>Order <span id="order-no">#001</span></h2>
+    <h2>Pesanan <span id="order-no">#001</span></h2>
     <div style="display:flex;gap:16px;align-items:center">
-      <button id="clear">Clear</button>
-      <button id="close-cart" aria-label="Close cart">×</button>
+      <button id="clear">Hapus</button>
+      <button id="close-cart" aria-label="Tutup pesanan">×</button>
     </div>
   </div>
-  <div class="types" role="group" aria-label="Order type">
-    <button data-type="Dine in">Dine in</button>
-    <button data-type="Takeaway">Takeaway</button>
+  <div class="types" role="group" aria-label="Jenis pesanan">
+    <button data-type="Makan di sini">Makan di sini</button>
+    <button data-type="Bungkus">Bungkus</button>
   </div>
   <ul id="lines"></ul>
   <div class="sum">
     <dl>
       <dt>Subtotal</dt><dd id="subtotal">Rp 0</dd>
-      <dt id="tax-label">Tax</dt><dd id="tax">Rp 0</dd>
+      <dt id="tax-label">Pajak</dt><dd id="tax">Rp 0</dd>
       <dt class="grand">Total</dt><dd class="grand" id="total">Rp 0</dd>
     </dl>
-    <button id="charge" class="btn btn-solid" disabled>Charge</button>
+    <button id="charge" class="btn btn-solid" disabled>Bayar</button>
   </div>
 </aside>
 
-<button id="fab" hidden><span><span id="fab-count">0</span>View order</span><span id="fab-total">Rp 0</span></button>
+<button id="fab" hidden><span><span id="fab-count">0</span>Lihat pesanan</span><span id="fab-total">Rp 0</span></button>
 
 <!-- Item options -->
 <dialog id="opt-modal">
   <form id="opt-form" method="dialog">
     <div class="dlg-head">
       <div><h3 id="opt-title"></h3><p id="opt-desc"></p></div>
-      <button type="button" data-close aria-label="Close">×</button>
+      <button type="button" data-close aria-label="Tutup">×</button>
     </div>
     <div class="dlg-body">
       <div id="opt-groups"></div>
-      <fieldset><legend>Note</legend><textarea id="opt-note" rows="2" placeholder="e.g. bumbu dipisah, tanpa bawang"></textarea></fieldset>
+      <fieldset><legend>Catatan</legend><textarea id="opt-note" rows="2" placeholder="mis. bumbu dipisah, tanpa bawang"></textarea></fieldset>
     </div>
     <div class="dlg-foot">
-      <button type="button" class="btn btn-ghost-dark" data-close>Cancel</button>
-      <button type="submit" class="btn btn-brick" id="opt-add">Add</button>
+      <button type="button" class="btn btn-ghost-dark" data-close>Batal</button>
+      <button type="submit" class="btn btn-brick" id="opt-add">Tambah</button>
     </div>
   </form>
 </dialog>
@@ -239,18 +239,18 @@
 <!-- Checkout -->
 <dialog id="pay-modal">
   <div id="pay-step">
-    <div class="dlg-head"><div><h3>Checkout</h3><p>Choose a payment method</p></div><button type="button" data-close aria-label="Close">×</button></div>
+    <div class="dlg-head"><div><h3>Pembayaran</h3><p>Pilih cara bayar</p></div><button type="button" data-close aria-label="Tutup">×</button></div>
     <div class="dlg-body">
-      <div class="pay-total"><span>Amount due</span><b id="pay-total">Rp 0</b></div>
+      <div class="pay-total"><span>Total bayar</span><b id="pay-total">Rp 0</b></div>
       <div class="methods">
-        <button data-pay="Cash">Cash</button>
+        <button data-pay="Tunai">Tunai</button>
         <button data-pay="QRIS">QRIS</button>
       </div>
       <div id="cash-box">
-        <label class="field"><span class="eyebrow" style="color:var(--maroon)">Cash received</span>
+        <label class="field"><span class="eyebrow" style="color:var(--maroon)">Uang diterima</span>
           <input id="cash-in" type="number" inputmode="numeric" min="0" step="1000" placeholder="0" style="margin-top:8px;font-size:1.2rem"></label>
         <div id="quick-cash"></div>
-        <div class="change"><span>Change</span><span id="change">—</span></div>
+        <div class="change"><span>Kembalian</span><span id="change">—</span></div>
       </div>
       <div id="qris-box" hidden>
         <div class="qris-card">
@@ -260,14 +260,13 @@
           <img src="assets/qris-sample.svg" alt="Contoh QR statis Grobak">
           <small class="qc-sample">CONTOH — BUKAN QR ASLI</small>
         </div>
-        <p class="hint">Printed QR on the cart. Customer scans it and types <b id="qris-amount">Rp 0</b> themselves.</p>
-        <label class="qris-check"><input type="checkbox" id="qris-check"><span>I saw the <b id="qris-amount2">Rp 0</b> notification arrive in the merchant app.</span></label>
+        <p class="hint">QR yang ditempel di gerobak. Pembeli scan lalu ketik sendiri <b id="qris-amount">Rp 0</b>.</p>
+        <label class="qris-check"><input type="checkbox" id="qris-check"><span>Notifikasi <b id="qris-amount2">Rp 0</b> sudah masuk di aplikasi merchant.</span></label>
       </div>
-      <div id="card-box" hidden><p class="hint" style="padding:24px 0">Tap, insert or swipe on the EDC terminal, then confirm once approved.</p></div>
-    </div>
+          </div>
     <div class="dlg-foot">
-      <button type="button" class="btn btn-ghost-dark" data-close>Back</button>
-      <button type="button" class="btn btn-brick" id="confirm-pay">Confirm payment</button>
+      <button type="button" class="btn btn-ghost-dark" data-close>Kembali</button>
+      <button type="button" class="btn btn-brick" id="confirm-pay">Konfirmasi bayar</button>
     </div>
   </div>
   <div id="receipt" hidden></div>
