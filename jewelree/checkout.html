@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <title>Checkout · Jewelree</title>
+  <meta name="theme-color" content="#1E3A5F">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/monogram.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="site.css">
+  <style>
+    .co { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(28px, 5vw, 64px); padding-top: 40px; align-items: start; }
+    .co h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); margin-bottom: 8px; }
+    .steps { display: flex; gap: 18px; font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; color: var(--mineral); margin: 14px 0 30px; flex-wrap: wrap; }
+    .steps .on { color: var(--charcoal); }
+    .steps .done { color: var(--copper); }
+    .box { border: 1px solid var(--line); background: #fff; border-radius: var(--radius-lg); padding: 24px; margin-bottom: 16px; }
+    .box h2 { font-size: 1.6rem; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: baseline; }
+    .box h2 small { font-family: var(--font-body); font-size: .78rem; color: var(--muted); font-weight: 500; }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .stack { display: grid; gap: 14px; }
+    .opt { display: flex; gap: 14px; align-items: center; border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; cursor: pointer; }
+    .opt:has(input:checked) { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(30,58,95,.1); }
+    .opt input { accent-color: var(--ink); width: 18px; height: 18px; }
+    .opt div { flex: 1; }
+    .opt b { display: block; font-size: .95rem; }
+    .opt small { color: var(--muted); font-size: .8rem; }
+    .member-note { background: var(--ivory); border-radius: var(--radius); padding: 14px 16px; font-size: .88rem; display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+    .member-note a { font-weight: 700; }
+    .summary { position: sticky; top: 100px; background: var(--ivory); border-radius: var(--radius-lg); padding: 24px; }
+    .summary h2 { font-size: 1.6rem; margin-bottom: 8px; }
+    .summary .line { grid-template-columns: 60px 1fr auto; }
+    .summary .line .thumb { width: 60px; height: 60px; }
+    .summary .tot { display: flex; justify-content: space-between; font-size: .92rem; padding: 6px 0; }
+    .summary .tot.grand { font-size: 1rem; border-top: 1px solid var(--line); margin-top: 8px; padding-top: 14px; }
+    .summary .tot.grand b { font-family: var(--font-display); font-size: 1.8rem; }
+    .promo { display: flex; gap: 8px; margin: 16px 0 8px; }
+    .promo input { flex: 1; border: 1px solid var(--line); border-radius: var(--radius); padding: 11px 12px; text-transform: uppercase; }
+    .promo button { border: 1px solid var(--charcoal); border-radius: var(--radius); padding: 0 14px; font-size: .7rem; letter-spacing: .16em; font-weight: 700; text-transform: uppercase; }
+    .err { color: var(--bad); font-size: .82rem; }
+
+    .pay-panel { margin-top: 16px; border: 1px dashed var(--mineral); border-radius: var(--radius); padding: 18px; display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: center; }
+    .pay-panel svg { width: 120px; height: 120px; }
+    .pay-panel b { font-family: var(--font-display); font-size: 1.5rem; display: block; }
+    .pay-panel small { color: var(--muted); font-size: .8rem; }
+    .sim { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--copper); font-weight: 700; }
+
+    .done-wrap { max-width: 720px; margin: 60px auto 0; text-align: center; }
+    .done-wrap .mono { width: 70px; margin: 0 auto 18px; color: var(--copper); }
+    .done-wrap h1 { font-size: clamp(2.6rem, 6vw, 4rem); }
+    .done-wrap p { color: var(--muted); max-width: 52ch; margin: 12px auto 0; }
+    .certs { display: grid; gap: 12px; margin: 34px 0; text-align: left; }
+    .cert { display: grid; grid-template-columns: 70px 1fr auto; gap: 16px; align-items: center; border: 1px solid var(--line); background: #fff; padding: 14px; border-radius: var(--radius-lg); }
+    .cert .thumb { width: 70px; height: 70px; overflow: hidden; border-radius: var(--radius); }
+    .cert .thumb svg { width: 100%; height: 100%; }
+    .cert code { font-family: var(--font-body); font-weight: 700; letter-spacing: .14em; color: var(--ink); }
+    .cert small { display: block; color: var(--muted); font-size: .8rem; }
+    @media (max-width: 900px) { .co { grid-template-columns: 1fr; } .summary { position: static; order: -1; } .row2 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div data-site-head></div>
+<main class="wrap" id="main"></main>
+<div data-site-foot></div>
+
+<script src="jewelree-data.js"></script>
+<script src="site.js"></script>
+<script>
+  const main = document.getElementById("main");
+  const PROMOS = { ORIGIN5: 0.05, WELCOME10: 0.1 };
+  const state = { ship: "reg", pay: "QRIS", promo: null };
+  const me = JW.me();
+
+  function lines() { return JW.cart().map((l) => ({ ...l, p: JW.product(l.id) })).filter((l) => l.p); }
+  function totals() {
+    const subtotal = lines().reduce((s, l) => s + l.p.price * l.qty, 0);
+    const ship = JW.SHIPPING.find((s) => s.id === state.ship);
+    const shipping = subtotal >= 5000000 && ship.id === "reg" ? 0 : ship.fee;
+    const tier = me ? JW.tier(me.spend || 0) : null;
+    const memberRate = tier ? { ivory: 0, copper: 0.03, ink: 0.05 }[tier.id] : 0;
+    const rate = Math.max(memberRate, state.promo ? PROMOS[state.promo] : 0);
+    const discount = Math.round(subtotal * rate / 1000) * 1000;
+    return { subtotal, shipping, discount, total: subtotal - discount + shipping, ship, rate, tier, memberRate };
+  }
+
+  function render() {
+    const ls = lines();
+    if (!ls.length) {
+      main.innerHTML = `<div class="done-wrap"><div class="mono">${MONOGRAM}</div><h1>Keranjang kosong</h1><p>Pilih satu piece dulu, lalu kembali ke sini.</p><p style="margin-top:24px"><a class="btn btn-ink" href="index.html#koleksi">Lihat koleksi</a></p></div>`;
+      return;
+    }
+    const t = totals();
+    main.innerHTML = `<div class="co">
+      <form id="form" novalidate>
+        <h1>Checkout</h1>
+        <div class="steps"><span class="done">Keranjang</span><span class="on">Detail &amp; pembayaran</span><span>Selesai</span></div>
+        ${me ? `<div class="member-note"><span>Masuk sebagai <b>${JW.esc(me.name)}</b> · ${t.tier.name} member${t.memberRate ? ` · diskon ${t.memberRate * 100}% otomatis` : ""}</span><span>+${Math.floor(t.total / 10000).toLocaleString("id-ID")} poin</span></div>`
+             : `<div class="member-note"><span>Member dapat poin, harga khusus, dan resize gratis.</span><a href="member.html?next=checkout.html">Masuk / daftar</a></div>`}
+        <div class="box"><h2>Kontak</h2><div class="stack">
+          <div class="row2"><div class="field"><label for="name">Nama lengkap</label><input id="name" required value="${JW.esc(me?.name || "")}" autocomplete="name"></div>
+          <div class="field"><label for="phone">WhatsApp</label><input id="phone" required inputmode="tel" value="${JW.esc(me?.phone || "")}" placeholder="08…" autocomplete="tel"></div></div>
+          <div class="field"><label for="email">Email</label><input id="email" type="email" value="${JW.esc(me?.email || "")}" autocomplete="email"></div>
+        </div></div>
+        <div class="box"><h2>Pengiriman <small>Semua kiriman berasuransi penuh</small></h2><div class="stack">
+          ${JW.SHIPPING.map((s) => `<label class="opt"><input type="radio" name="ship" value="${s.id}" ${s.id === state.ship ? "checked" : ""}><div><b>${s.name}</b><small>${s.eta}</small></div><span>${s.id === "reg" && t.subtotal >= 5000000 ? "Gratis" : s.fee ? JW.rp(s.fee) : "Gratis"}</span></label>`).join("")}
+          <div id="addr" ${state.ship === "pickup" ? "hidden" : ""} class="stack">
+            <div class="field"><label for="address">Alamat</label><input id="address" placeholder="Jalan, nomor, RT/RW" autocomplete="street-address"></div>
+            <div class="row2"><div class="field"><label for="city">Kota</label><input id="city" value="${JW.esc(me?.city || "")}" autocomplete="address-level2"></div><div class="field"><label for="zip">Kode pos</label><input id="zip" inputmode="numeric" autocomplete="postal-code"></div></div>
+          </div>
+        </div></div>
+        <div class="box"><h2>Pembayaran <small>via payment gateway</small></h2><div class="stack">
+          ${[["QRIS", "Semua e-wallet & m-banking, terkonfirmasi otomatis"], ["Virtual Account", "BCA, Mandiri, BNI, BRI"], ["Kartu kredit / debit", "Visa, Mastercard, JCB · 3D Secure"], ["Cicilan 0% (kartu)", "3, 6, atau 12 bulan di bank partner"]].map(([n, d]) => `<label class="opt"><input type="radio" name="pay" value="${n}" ${n === state.pay ? "checked" : ""}><div><b>${n}</b><small>${d}</small></div></label>`).join("")}
+          <p class="sim">Demo: pembayaran disimulasikan, tidak ada uang yang ditarik.</p>
+        </div></div>
+        <p class="err" id="err"></p>
+        <button class="btn btn-ink" style="width:100%" id="pay">Bayar ${JW.rp(t.total)}</button>
+      </form>
+      <aside class="summary">
+        <h2>Ringkasan</h2>
+        ${ls.map((l) => `<div class="line"><span class="thumb">${Art.svg(l.p.art, l.p.bg)}</span><div><b style="font-size:1.05rem">${JW.esc(l.p.name)}</b><small>${l.qty} × ${JW.rp(l.p.price)}${l.size ? " · uk. " + l.size : ""}</small></div><span>${JW.rp(l.p.price * l.qty)}</span></div>`).join("")}
+        <div class="promo"><input id="promo" placeholder="Kode promo" value="${state.promo || ""}" aria-label="Kode promo"><button type="button" id="apply">Pakai</button></div>
+        <small style="color:var(--muted);font-size:.76rem">Coba kode <b>ORIGIN5</b>. Diskon promo dan member tidak digabung.</small>
+        <div style="margin-top:14px">
+          <div class="tot"><span>Subtotal</span><span>${JW.rp(t.subtotal)}</span></div>
+          ${t.discount ? `<div class="tot" style="color:var(--ok)"><span>Diskon ${Math.round(t.rate * 100)}%</span><span>− ${JW.rp(t.discount)}</span></div>` : ""}
+          <div class="tot"><span>Pengiriman</span><span>${t.shipping ? JW.rp(t.shipping) : "Gratis"}</span></div>
+          <div class="tot grand"><span>Total</span><b>${JW.rp(t.total)}</b></div>
+        </div>
+      </aside></div>`;
+
+    const f = document.getElementById("form");
+    f.querySelectorAll("[name=ship]").forEach((r) => r.addEventListener("change", () => { keep(); state.ship = r.value; render(); restore(); }));
+    f.querySelectorAll("[name=pay]").forEach((r) => r.addEventListener("change", () => (state.pay = r.value)));
+    document.getElementById("apply").addEventListener("click", () => {
+      const code = document.getElementById("promo").value.trim().toUpperCase();
+      keep(); state.promo = PROMOS[code] ? code : null; render(); restore();
+      Site.toast(PROMOS[code] ? `Kode ${code} dipakai` : "Kode promo tidak dikenal");
+    });
+    f.addEventListener("submit", (e) => { e.preventDefault(); pay(); });
+  }
+
+  // Keep typed contact details across re-renders.
+  let saved = {};
+  const ids = ["name", "phone", "email", "address", "city", "zip"];
+  function keep() { ids.forEach((id) => { const el = document.getElementById(id); if (el) saved[id] = el.value; }); }
+  function restore() { ids.forEach((id) => { const el = document.getElementById(id); if (el && saved[id] !== undefined) el.value = saved[id]; }); }
+
+  function pay() {
+    const v = (id) => document.getElementById(id)?.value.trim() || "";
+    const err = document.getElementById("err");
+    if (!v("name") || !v("phone")) { err.textContent = "Isi nama dan nomor WhatsApp."; return; }
+    if (state.ship !== "pickup" && (!v("address") || !v("city"))) { err.textContent = "Isi alamat dan kota pengiriman."; return; }
+    err.textContent = "";
+    const t = totals();
+    const btn = document.getElementById("pay");
+    btn.disabled = true;
+    // Show what the gateway step looks like, then confirm as if the webhook arrived.
+    const panel = document.createElement("div"); panel.className = "pay-panel";
+    panel.innerHTML = state.pay === "QRIS"
+      ? `${qr()}<div><span class="sim">Simulasi gateway</span><b>${JW.rp(t.total)}</b><small>Scan QRIS dinamis ini. Nominal sudah terisi dan status terkonfirmasi otomatis — tidak perlu cek mutasi manual.</small></div>`
+      : state.pay === "Virtual Account"
+      ? `<div style="font-family:var(--font-display);font-size:2.6rem;color:var(--ink)">VA</div><div><span class="sim">Simulasi gateway</span><b>8808 0812 3456 7890</b><small>Transfer ${JW.rp(t.total)} sebelum 24 jam. Pesanan terkonfirmasi otomatis begitu dana masuk.</small></div>`
+      : `<div style="font-family:var(--font-display);font-size:2.6rem;color:var(--ink)">3DS</div><div><span class="sim">Simulasi gateway</span><b>${JW.rp(t.total)}</b><small>Di versi live, pembeli diarahkan ke halaman pembayaran aman milik gateway. Data kartu tidak pernah lewat server Jewelree.</small></div>`;
+    btn.before(panel);
+    btn.textContent = "Menunggu konfirmasi pembayaran…";
+    setTimeout(() => complete(t, { name: v("name"), phone: v("phone"), email: v("email"), city: v("city") || "Ambil di atelier", address: v("address") }), 1800);
+  }
+
+  function complete(t, customer) {
+    const ls = lines();
+    const no = "JWL-" + String(Date.now()).slice(-6); // sample orders use 102xx, so live ones never collide
+    const order = { no, at: new Date().toISOString(), customer, items: ls.map((l) => ({ id: l.id, name: l.p.name, price: l.p.price, qty: l.qty, size: l.size })),
+      subtotal: t.subtotal, discount: t.discount, shipping: t.shipping, shipName: t.ship.name, total: t.total, payment: state.pay, status: "Dibayar", source: "Langsung", memberId: me?.id || null, live: true };
+    JW.addOrder(order);
+    // Stock goes down, and each piece gets its own authenticity certificate.
+    const prods = JW.products(); ls.forEach((l) => { const p = prods.find((x) => x.id === l.id); if (p) p.stock = Math.max(0, p.stock - l.qty); }); JW.saveProducts(prods);
+    const certs = ls.flatMap((l) => Array.from({ length: l.qty }, () => ({ cert: JW.issueCert(l.id, customer.name), p: l.p })));
+    let points = 0;
+    if (me) { points = Math.floor(t.total / 10000); JW.saveMe({ id: me.id, spend: (me.spend || 0) + t.total, points: (me.points || 0) + points }); }
+    JW.saveCart([]);
+    window.scrollTo(0, 0);
+    main.innerHTML = `<div class="done-wrap">
+      <div class="mono">${MONOGRAM}</div>
+      <span class="eyebrow" style="color:var(--copper)">Pesanan ${no} · ${state.pay}</span>
+      <h1>Terima kasih, ${JW.esc(customer.name.split(" ")[0])}.</h1>
+      <p>Pembayaran terkonfirmasi. Konfirmasi dan nomor resi dikirim ke WhatsApp ${JW.esc(customer.phone)}. ${points ? `Anda mendapat <b>${points.toLocaleString("id-ID")} poin</b>.` : ""}</p>
+      <div class="certs">${certs.map(({ cert, p }) => `<div class="cert"><span class="thumb">${Art.svg(p.art, p.bg)}</span><div><code>${cert.code}</code><small>${JW.esc(p.name)} · ${cert.serial} · terdaftar atas nama ${JW.esc(customer.name)}</small></div><a class="btn btn-line" style="padding:10px 14px" href="verify.html?code=${cert.code}">Cek</a></div>`).join("")}</div>
+      <p style="font-size:.85rem">Kode di atas juga dicetak di kartu provenance dalam kotak. Pesanan ini sudah masuk ke <a href="backoffice.html#pesanan">back office</a>.</p>
+      <p style="margin-top:26px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a class="btn btn-ink" href="index.html">Kembali ke toko</a>${me ? `<a class="btn btn-line" href="member.html">Lihat poin saya</a>` : `<a class="btn btn-line" href="member.html">Daftar member, simpan poin</a>`}</p>
+    </div>`;
+  }
+
+  // A QR-looking pattern for the simulated dynamic QRIS.
+  function qr() {
+    let s = 9, cells = ""; const r = () => ((s = (s * 16807) % 2147483647) / 2147483647);
+    for (let y = 0; y < 25; y++) for (let x = 0; x < 25; x++) {
+      const finder = (x < 7 && y < 7) || (x > 17 && y < 7) || (x < 7 && y > 17);
+      if (!finder && r() > 0.52) cells += `<rect x="${x}" y="${y}" width="1" height="1"/>`;
+    }
+    const f = (x, y) => `<rect x="${x}" y="${y}" width="7" height="7"/><rect x="${x + 1}" y="${y + 1}" width="5" height="5" fill="#fff"/><rect x="${x + 2}" y="${y + 2}" width="3" height="3"/>`;
+    return `<svg viewBox="-1 -1 27 27" fill="#1A1A1A" shape-rendering="crispEdges" aria-label="Contoh QRIS"><rect x="-1" y="-1" width="27" height="27" fill="#fff"/>${cells}${f(0, 0)}${f(18, 0)}${f(0, 18)}</svg>`;
+  }
+
+  render();
+</script>
+</body>
+</html>

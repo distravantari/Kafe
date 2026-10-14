@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panduan Brand Jewelree</title>
+  <meta name="description" content="Panduan identitas visual Jewelree Atelier: logo, warna, tipografi, bahasa grafis, material, kemasan dan suara brand.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="assets/monogram.svg">
+  <style>
+    body { background: var(--paper); }
+    .back { position: fixed; top: 14px; left: 14px; z-index: 20; font-size: .7rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; color: var(--ivory); background: rgba(26,26,26,.72); backdrop-filter: blur(6px); padding: 9px 14px; border-radius: 999px; border: 1px solid rgba(201,164,106,.4); }
+    .back:hover { background: var(--ink); }
+
+    /* Hero: dark stone with orbits */
+    .hero { position: relative; overflow: hidden; color: var(--ivory); background: radial-gradient(120% 90% at 30% 20%, #2f3a48 0%, #1c2430 45%, #121212 100%); min-height: 640px; display: grid; place-items: center; text-align: center; padding: 96px var(--gutter) 72px; }
+    .hero::before { content: ""; position: absolute; inset: 0; opacity: .5; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    .hero .orbits { inset: -10% -5%; width: 110%; height: 120%; opacity: .35; }
+    .hero-in { position: relative; z-index: 1; }
+    .hero .mono-lg { width: 120px; height: 120px; color: var(--gold); margin: 0 auto 26px; }
+    .hero h1 { font-size: clamp(3rem, 9vw, 6.4rem); font-weight: 400; letter-spacing: .2em; margin-right: -.2em; line-height: 1; }
+    .hero .atelier { display: block; font-size: .78rem; letter-spacing: .9em; margin: 14px -.9em 0 0; font-weight: 600; color: var(--gold-hi); }
+    .hero .tag { font-family: var(--font-display); font-size: clamp(1.1rem, 2.2vw, 1.5rem); letter-spacing: .32em; margin: 44px -.32em 10px 0; color: var(--gold-hi); }
+    .hero .sub { font-size: .68rem; letter-spacing: .3em; opacity: .7; }
+    .hero .sub i { font-style: normal; color: var(--gold); margin: 0 .6em; }
+    .hero .meta { position: absolute; bottom: 22px; left: var(--gutter); right: var(--gutter); display: flex; justify-content: space-between; font-size: .62rem; letter-spacing: .28em; text-transform: uppercase; opacity: .55; z-index: 1; }
+
+    /* Statement band */
+    .statements { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--line); }
+    .statements > div { padding: 56px var(--gutter); }
+    .statements > div + div { border-left: 1px solid var(--line); }
+    .statements h2 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); font-weight: 400; margin: 14px 0 12px; }
+    .statements p { color: var(--muted); max-width: 38ch; }
+    .eyebrow.gold { color: var(--copper); }
+
+    /* Section scaffold */
+    .sec { padding: 88px 0; border-bottom: 1px solid var(--line); }
+    .sec.ivory { background: var(--ivory); }
+    .sec.ink { background: var(--ink); color: var(--ivory); border-color: transparent; }
+    .sec.char { background: var(--charcoal); color: var(--ivory); border-color: transparent; }
+    .head { display: grid; grid-template-columns: 260px 1fr; gap: 40px; margin-bottom: 48px; align-items: end; }
+    .head .num { font-family: var(--font-display); font-size: 1rem; color: var(--copper); display: block; margin-bottom: 8px; }
+    .ink .head .num, .char .head .num { color: var(--gold); }
+    .head h2 { font-size: clamp(2.2rem, 4.4vw, 3.4rem); font-weight: 400; }
+    .head p { max-width: 58ch; color: var(--muted); }
+    .ink .head p, .char .head p { color: rgba(247,242,228,.7); }
+
+    .grid { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .ink .grid, .char .grid { background: rgba(247,242,228,.14); border-color: rgba(247,242,228,.14); }
+    .g2 { grid-template-columns: repeat(2, 1fr); } .g3 { grid-template-columns: repeat(3, 1fr); } .g4 { grid-template-columns: repeat(4, 1fr); } .g5 { grid-template-columns: repeat(5, 1fr); } .g6 { grid-template-columns: repeat(6, 1fr); }
+    .tile { background: var(--paper); padding: 32px; min-width: 0; position: relative; }
+    .ivory .tile { background: var(--ivory); }
+    .ink .tile { background: var(--ink); } .char .tile { background: var(--charcoal); }
+    .tile.dark { background: var(--night); color: var(--ivory); }
+    .tile.navy { background: var(--ink); color: var(--ivory); }
+    .cap { font-size: .66rem; letter-spacing: .24em; text-transform: uppercase; font-weight: 600; opacity: .6; display: block; margin-top: 18px; }
+    .note { font-size: .86rem; color: var(--muted); margin-top: 6px; }
+    .ink .note, .char .note, .tile.dark .note, .tile.navy .note { color: rgba(247,242,228,.65); }
+
+    /* Logo */
+    .stage { min-height: 260px; display: grid; place-items: center; }
+    .stage .logo { font-size: clamp(1.4rem, 3vw, 2.2rem); }
+    .stage .logo .mono { width: 2.3em; height: 2.3em; }
+    .mono-only { width: 120px; color: var(--gold); }
+    .clear { position: relative; width: 210px; aspect-ratio: 1; display: grid; place-items: center;
+      background-image: linear-gradient(rgba(184,115,51,.22) 1px, transparent 1px), linear-gradient(90deg, rgba(184,115,51,.22) 1px, transparent 1px); background-size: 30px 30px; border: 1px dashed var(--copper); }
+    .clear .mono-only { width: 90px; color: var(--ink); background: var(--paper); }
+    .clear b { position: absolute; font-family: var(--font-display); font-size: 1rem; color: var(--copper); font-weight: 600; }
+    .clear .t { top: 4px; } .clear .l { left: 8px; } .clear .r { right: 8px; } .clear .bt { bottom: 4px; }
+    .minsize { display: flex; align-items: flex-end; gap: 28px; }
+    .minsize div { text-align: center; font-size: .72rem; color: var(--muted); }
+    .minsize svg { color: var(--ink); margin: 0 auto 6px; }
+
+    /* Colours */
+    .sw { all: unset; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-start; background: var(--paper); }
+    .sw i { display: block; height: 180px; }
+    .sw div { padding: 18px 20px 22px; }
+    .sw b { font-family: var(--font-display); font-size: 1.35rem; font-weight: 500; display: block; }
+    .sw code { font-size: .74rem; letter-spacing: .06em; color: var(--muted); display: block; margin-top: 4px; }
+    .sw p { font-size: .82rem; margin-top: 10px; }
+    .sw:focus-visible { outline: 2px solid var(--copper); outline-offset: -2px; }
+    .goldnote { display: flex; gap: 22px; align-items: center; margin-top: 28px; padding: 22px 26px; border: 1px solid var(--line); background: var(--paper); }
+    .goldnote i { flex: none; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #f6e2ac, #c9a46a 40%, #8a5f22 75%, #e9c983); }
+
+    /* Type */
+    .spec .big { font-family: var(--font-display); font-size: clamp(4rem, 9vw, 7.5rem); line-height: .9; font-weight: 400; }
+    .spec .sans .big { font-family: var(--font-body); font-weight: 500; letter-spacing: -.03em; }
+    .spec h3 { font-size: 1.9rem; font-weight: 500; margin: 18px 0 2px; }
+    .spec .sans h3 { font-family: var(--font-body); font-weight: 600; font-size: 1.4rem; }
+    .spec .abc { font-size: 1.15rem; letter-spacing: .08em; margin-top: 16px; word-break: break-word; }
+    .spec .serif .abc { font-family: var(--font-display); }
+    .weights { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 12px; font-size: 1.15rem; }
+    .serif .weights { font-family: var(--font-display); }
+    .demo-note { margin-top: 22px; font-size: .8rem; color: var(--muted); border-left: 2px solid var(--copper); padding-left: 14px; }
+
+    /* Graphic language */
+    .orbit-row { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; }
+    .orbit-row svg { color: var(--gold); width: 100%; }
+    .orbit-row blockquote { font-family: var(--font-display); font-size: clamp(1.8rem, 3.4vw, 2.6rem); line-height: 1.15; font-weight: 400; }
+    .orbit-row ul { list-style: none; margin-top: 26px; border-top: 1px solid rgba(247,242,228,.2); }
+    .orbit-row li { padding: 12px 0; border-bottom: 1px solid rgba(247,242,228,.2); font-size: .88rem; display: flex; justify-content: space-between; gap: 12px; }
+    .orbit-row li span { color: var(--gold-hi); letter-spacing: .2em; font-size: .68rem; text-transform: uppercase; font-weight: 600; }
+
+    /* Collections */
+    .col .tile { padding: 0; }
+    .col .art { aspect-ratio: 4/5; overflow: hidden; }
+    .col .art svg { width: 100%; height: 100%; }
+    .col .txt { padding: 22px 24px 28px; }
+    .col h3 { font-size: 1.7rem; font-weight: 500; }
+    .col .txt p { font-size: .76rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+
+    /* Materials */
+    .mat .tile { padding: 0; }
+    .mat .tex { aspect-ratio: 1; }
+    .mat span { display: block; padding: 14px 16px 18px; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; }
+    .noise { background-blend-mode: multiply; }
+    .t-paper { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .35 0 0 0 0 .3 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E"), #ebe3d1; }
+    .t-silver { background: repeating-linear-gradient(90deg, rgba(255,255,255,.35) 0 1px, transparent 1px 3px), linear-gradient(135deg, #e9e9e7, #b8b8b4 40%, #f4f4f2 60%, #9d9d99); }
+    .t-stone { background: radial-gradient(circle at 20% 30%, rgba(255,255,255,.35) 0 8%, transparent 9%), radial-gradient(circle at 70% 60%, rgba(0,0,0,.12) 0 14%, transparent 15%), radial-gradient(circle at 40% 80%, rgba(0,0,0,.08) 0 10%, transparent 11%), linear-gradient(160deg, #cfc7b8, #a69d8d 55%, #8b8272); }
+    .t-copper { background: linear-gradient(120deg, #7a4520, #c98a4c 30%, #f0c08a 45%, #b87333 60%, #6e3c1a 90%); }
+    .t-satin { background: repeating-linear-gradient(100deg, rgba(255,255,255,0) 0 18px, rgba(255,255,255,.18) 24px, rgba(255,255,255,0) 30px), linear-gradient(180deg, #2a4a74, #1e3a5f 50%, #13284a); }
+    .t-glass { background: linear-gradient(135deg, rgba(255,255,255,.7), rgba(255,255,255,0) 40%), radial-gradient(circle at 70% 70%, #cfe0e4, #9fb7bd 60%, #7d969c); }
+
+    /* Packaging */
+    .pack { display: grid; grid-template-columns: 1.5fr 1fr 1fr; grid-template-rows: auto auto; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .pack .tile { display: flex; flex-direction: column; justify-content: space-between; }
+    .pack .box { grid-row: span 2; background: radial-gradient(90% 80% at 40% 30%, #e9e3d6, #cfc6b4); }
+    .box3d { width: min(320px, 100%); aspect-ratio: 1.25; margin: 30px auto; position: relative; background: linear-gradient(160deg, #24476f, #16294a); border-radius: 6px; box-shadow: 0 30px 50px -20px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.06); display: grid; place-items: center; color: var(--gold); }
+    .box3d::after { content: ""; position: absolute; left: 0; right: 0; top: 18%; height: 1px; background: rgba(0,0,0,.35); box-shadow: 0 1px 0 rgba(255,255,255,.06); }
+    .box3d > div { width: 34%; }
+    .box3d small { position: absolute; bottom: 12%; font-size: .52rem; letter-spacing: .5em; color: var(--gold-hi); }
+    .pouch { width: 130px; height: 150px; margin: 10px auto; border-radius: 10px 10px 46px 46px; background: radial-gradient(circle at 40% 30%, #5a7aa0, #2a4a74 60%, #1a3253); position: relative; display: grid; place-items: center; color: var(--gold); }
+    .pouch::before { content: ""; position: absolute; top: 22px; left: 8px; right: 8px; height: 6px; border-top: 2px dotted rgba(231,207,154,.7); }
+    .pouch > div { width: 44px; margin-top: 18px; }
+    .card { background: var(--ivory); border: 1px solid var(--line); padding: 20px; margin: 10px auto; width: 100%; max-width: 240px; box-shadow: 0 14px 30px -18px rgba(0,0,0,.4); text-align: center; color: var(--ink); }
+    .card .logo { font-size: .8rem; }
+    .card p { font-family: var(--font-display); font-style: italic; font-size: 1.15rem; margin-top: 10px; }
+    .prov { display: grid; grid-template-columns: 1fr 74px; gap: 14px; text-align: left; align-items: center; }
+    .prov code { font-size: .7rem; letter-spacing: .08em; display: block; margin-top: 6px; color: var(--copper); }
+    .qr { width: 74px; height: 74px; }
+    .quote-line { font-family: var(--font-display); font-size: 1.5rem; line-height: 1.2; }
+
+    /* Touchpoints */
+    .touch { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 1px; background: rgba(247,242,228,.14); border: 1px solid rgba(247,242,228,.14); }
+    .touch .tile { min-height: 420px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
+    .boutique { position: absolute; inset: 0; background: linear-gradient(180deg, #2a2a2a 0 18%, #3a352d 18% 20%, #d9cfbd 20% 100%); }
+    .boutique .win { position: absolute; left: 10%; right: 10%; top: 26%; bottom: 22%; background: linear-gradient(180deg, #1b2a40, #24476f); border: 6px solid #2b2b2b; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10%; padding: 12% 10%; align-items: end; }
+    .boutique .win div { aspect-ratio: 1; border-radius: 50%; overflow: hidden; }
+    .boutique .sign { position: absolute; top: 5%; left: 0; right: 0; display: flex; justify-content: center; color: var(--gold-hi); font-size: .9rem; }
+    .boutique .floor { position: absolute; left: 0; right: 0; bottom: 0; height: 22%; background: linear-gradient(180deg, #b5aa96, #8f8676); }
+    .touch .lbl { position: relative; z-index: 1; background: linear-gradient(transparent, rgba(0,0,0,.6)); margin: 0 -32px -32px; padding: 60px 32px 28px; }
+    .phone { width: 190px; margin: 0 auto auto; border-radius: 28px; background: #111; padding: 10px; box-shadow: 0 30px 50px -20px rgba(0,0,0,.7); }
+    .phone .scr { border-radius: 20px; overflow: hidden; background: var(--paper); color: var(--text); }
+    .phone .bar { display: flex; justify-content: center; padding: 12px 0 8px; font-size: .5rem; border-bottom: 1px solid var(--line); }
+    .phone .bar .logo { font-size: .55rem; }
+    .phone .art { aspect-ratio: 1; }
+    .phone .art svg { width: 100%; height: 100%; }
+    .phone .pc { padding: 10px 12px 14px; font-size: .62rem; }
+    .phone .pc b { font-family: var(--font-display); font-size: .95rem; font-weight: 500; display: block; }
+    .phone .pc .btn { padding: 7px 10px; font-size: .5rem; width: 100%; margin-top: 8px; letter-spacing: .16em; }
+    .phone .hl { padding: 18px 14px; background: var(--ink); color: var(--ivory); text-align: center; }
+    .phone .hl b { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; display: block; line-height: 1.05; }
+
+    /* Voice */
+    .voice { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .voice .tile h3 { font-size: 1.6rem; font-weight: 500; margin-bottom: 18px; }
+    .voice li { list-style: none; padding: 14px 0; border-top: 1px solid var(--line); }
+    .voice li b { font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; display: block; }
+    .voice li small { color: var(--muted); font-size: .82rem; }
+    .voice .dont b { text-decoration: line-through; text-decoration-color: rgba(155,44,44,.5); color: var(--muted); }
+    .pillars { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .pillars span { border: 1px solid var(--line); padding: 8px 16px; border-radius: 999px; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; }
+
+    footer { background: var(--night); color: var(--ivory); padding: 56px 0; text-align: center; }
+    footer .logo { font-size: 1.1rem; }
+    footer p { font-size: .72rem; letter-spacing: .2em; opacity: .55; margin-top: 18px; text-transform: uppercase; }
+    .toast { position: fixed; bottom: 22px; left: 50%; transform: translate(-50%, 120px); background: var(--ink); color: var(--ivory); padding: 11px 20px; border-radius: 999px; font-size: .8rem; transition: transform .25s ease; z-index: 30; }
+    .toast.on { transform: translate(-50%, 0); }
+
+    @media (max-width: 960px) {
+      .head { grid-template-columns: 1fr; gap: 14px; }
+      .g4, .g6 { grid-template-columns: repeat(2, 1fr); } .g5 { grid-template-columns: repeat(3, 1fr); }
+      .g3 { grid-template-columns: 1fr 1fr; }
+      .orbit-row { grid-template-columns: 1fr; }
+      .pack { grid-template-columns: 1fr 1fr; } .pack .box { grid-row: auto; grid-column: 1 / -1; }
+      .touch { grid-template-columns: 1fr 1fr; } .touch .tile:first-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 640px) {
+      .hero { min-height: 560px; }
+      .hero .mono-lg { width: 92px; height: 92px; }
+      .hero .atelier { letter-spacing: .6em; margin-right: -.6em; }
+      .hero .tag { letter-spacing: .2em; margin-right: -.2em; }
+      .hero .sub { letter-spacing: .16em; line-height: 2; }
+      .hero .meta span:last-child { display: none; }
+      .statements, .g2, .g3, .g5, .g4:not(.col), .voice, .pack, .touch { grid-template-columns: 1fr; }
+      .statements > div + div { border-left: 0; border-top: 1px solid var(--line); }
+      .tile { padding: 24px 20px; }
+      .touch .lbl { margin: 0 -20px -24px; padding: 60px 20px 22px; }
+      .sec { padding: 64px 0; }
+      .sw i { height: 110px; }
+      .minsize { gap: 18px; }
+      .grid > [style*="grid-column"], .pack > [style*="grid-column"], .touch .tile:first-child { grid-column: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back">← Kembali ke website</a>
+
+  <header class="hero">
+    <svg class="orbits" viewBox="0 0 1200 700" fill="none" stroke="currentColor" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <ellipse cx="600" cy="350" rx="560" ry="190" stroke-width="1" transform="rotate(-14 600 350)"/>
+      <ellipse cx="600" cy="350" rx="520" ry="240" stroke-width=".8" transform="rotate(18 600 350)"/>
+      <circle cx="600" cy="350" r="300" stroke-width=".7"/>
+      <ellipse cx="600" cy="350" rx="640" ry="120" stroke-width=".6" transform="rotate(4 600 350)"/>
+    </svg>
+    <div class="hero-in">
+      <div class="mono-lg" data-mono></div>
+      <h1>JEWELREE</h1>
+      <span class="atelier">ATELIER</span>
+      <p class="tag">OBJECTS WITH ORIGIN</p>
+      <p class="sub">FINE JEWELRY<i>|</i>OBJETS D'ART<i>|</i>LASTING STORIES</p>
+    </div>
+    <div class="meta"><span>Panduan Brand · Edisi 01</span><span>Identitas visual &amp; suara</span></div>
+  </header>
+
+  <section class="statements">
+    <div><span class="eyebrow gold">Form, held close</span><h2>Jewelry for a more meaningful tomorrow.</h2><p>Perhiasan yang dekat dengan kulit dan cerita pemiliknya. Bentuk yang tenang, dibuat untuk dipakai setiap hari, bukan disimpan di laci.</p></div>
+    <div><span class="eyebrow gold">Made to be kept</span><h2>Timeless materials, modern craftsmanship, a kinder future.</h2><p>Emas daur ulang, batu yang asal-usulnya jelas, dan kemasan yang layak disimpan. Setiap karya membawa catatan perjalanannya sendiri.</p></div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="head"><div><span class="num">01</span><span class="eyebrow">Logo</span></div><div><h2>Monogram &amp; wordmark</h2><p>Huruf J bertangkai serif di dalam lingkaran, dilintasi satu garis orbit. Gunakan logo utama di setiap titik sentuh pertama; monogram berdiri sendiri hanya saat ruang terbatas atau sebagai cap emboss.</p></div></div>
+      <div class="grid g4">
+        <div class="tile" style="grid-column: span 2"><div class="stage"><span class="logo" data-logo></span></div><span class="cap">Logo utama</span><p class="note">Monogram + wordmark JEWELREE + ATELIER. Monogram selalu emas di latar gelap, Ink Blue di latar terang.</p></div>
+        <div class="tile dark"><div class="stage"><div class="mono-only" data-mono></div></div><span class="cap">Monogram sekunder</span><p class="note">Favicon, cap foil, emboss kotak, ukiran bagian dalam cincin.</p></div>
+        <div class="tile navy"><div class="stage"><span class="logo" data-logo style="font-size:1.2rem"></span></div><span class="cap">Versi terbalik</span><p class="note">Di atas Ink Blue: wordmark Ivory, monogram emas.</p></div>
+        <div class="tile" style="grid-column: span 2"><div class="stage"><div class="clear"><b class="t">J</b><b class="l">J</b><b class="r">J</b><b class="bt">J</b><div class="mono-only" data-mono></div></div></div><span class="cap">Ruang bebas</span><p class="note">Sisakan minimal 1× tinggi huruf J di keempat sisi. Tidak ada teks, garis atau tepi foto di area ini.</p></div>
+        <div class="tile" style="grid-column: span 2"><div class="stage"><div class="minsize"><div><svg width="60" height="60" data-mono-svg></svg>Digital 60 px</div><div><svg width="40" height="40" data-mono-svg></svg>40 px</div><div><svg width="24" height="24" data-mono-svg></svg><b>Min. 24 px</b><br>≈ 15 mm cetak</div></div></div><span class="cap">Ukuran minimum</span><p class="note">Di bawah 15 mm / 24 px garis orbit mulai hilang. Untuk ukiran mikro, pakai J tanpa lingkaran.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec ivory">
+    <div class="wrap">
+      <div class="head"><div><span class="num">02</span><span class="eyebrow">Warna</span></div><div><h2>Palet brand</h2><p>Lima warna yang diambil dari batu, logam dan kertas. Ivory dan Ink Blue membawa sebagian besar permukaan; Copper dipakai hemat, sebagai aksen. Klik swatch untuk menyalin kode hex.</p></div></div>
+      <div class="grid g5" id="swatches"></div>
+      <div class="goldnote"><i></i><div><b style="font-family:var(--font-display);font-size:1.3rem;font-weight:500">Gold #C9A46A</b><p class="note">Aksen metalik, bukan warna permukaan. Khusus untuk foil emas, emboss, garis orbit dan monogram. Di layar, tampilkan sebagai warna flat atau gradasi halus; di cetak, selalu foil.</p></div></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="head"><div><span class="num">03</span><span class="eyebrow">Tipografi</span></div><div><h2>Dua huruf, satu suara</h2><p>Serif display untuk judul dan nama koleksi; grotesk modern untuk teks, harga dan antarmuka. Judul selalu lebih besar dan lebih tipis dari yang terasa perlu.</p></div></div>
+      <div class="grid g2 spec">
+        <div class="tile serif"><div class="big">Aa</div><h3>Canela</h3><span class="eyebrow gold">Elegant · timeless</span><div class="weights"><span style="font-weight:300">Light</span><span style="font-weight:400">Regular</span><span style="font-weight:500">Medium</span><span style="font-weight:600">Semibold</span></div><p class="abc">Aa Bb Cc Dd Ee Ff 1234567890</p><span class="cap">Judul, nama karya, kutipan editorial</span></div>
+        <div class="tile sans"><div class="big">Aa</div><h3>Satoshi</h3><span class="eyebrow gold">Contemporary · readable</span><div class="weights"><span style="font-weight:400">Regular</span><span style="font-weight:500">Medium</span><span style="font-weight:700">Bold</span></div><p class="abc">Aa Bb Cc Dd Ee Ff 1234567890</p><span class="cap">Teks, harga, eyebrow berspasi, UI</span></div>
+      </div>
+      <p class="demo-note">Catatan: demo ini ditampilkan dengan Cormorant Garamond &amp; Manrope (Google Fonts) yang proporsinya mirip. Produksi memakai lisensi Canela &amp; Satoshi.</p>
+    </div>
+  </section>
+
+  <section class="sec ink">
+    <div class="wrap">
+      <div class="head"><div><span class="num">04</span><span class="eyebrow">Bahasa grafis</span></div><div><h2>Garis orbit</h2><p>Elips dan lingkaran tipis berwarna emas yang saling bersilangan. Dipakai sebagai latar, bingkai foto atau pembatas halaman, tidak pernah lebih tebal dari 1 pt.</p></div></div>
+      <div class="orbit-row">
+        <svg viewBox="0 0 600 360" fill="none" stroke="currentColor" aria-hidden="true">
+          <circle cx="300" cy="180" r="150" stroke-width="1.2"/>
+          <ellipse cx="300" cy="180" rx="270" ry="80" stroke-width="1" transform="rotate(-20 300 180)"/>
+          <ellipse cx="300" cy="180" rx="230" ry="110" stroke-width=".8" transform="rotate(24 300 180)"/>
+          <ellipse cx="300" cy="180" rx="150" ry="60" stroke-width=".7" transform="rotate(90 300 180)" opacity=".6"/>
+          <circle cx="300" cy="180" r="3" fill="currentColor"/>
+          <circle cx="47" cy="272" r="4" fill="currentColor"/><circle cx="510" cy="64" r="2.5" fill="currentColor"/>
+        </svg>
+        <div><blockquote>Inspired by connection, craft and continuity.</blockquote>
+          <ul><li>Koneksi<span>Dua orbit bersilang</span></li><li>Keahlian<span>Garis tipis, presisi</span></li><li>Kesinambungan<span>Lingkaran tanpa ujung</span></li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="head"><div><span class="num">05</span><span class="eyebrow">Koleksi</span></div><div><h2>Empat keluarga karya</h2><p>Fotografi produk: satu karya, satu latar batu atau Ink Blue, cahaya samping yang lembut. Tidak ada properti lain di bingkai.</p></div></div>
+      <div class="grid g4 col" id="cols"></div>
+    </div>
+  </section>
+
+  <section class="sec ivory mat">
+    <div class="wrap">
+      <div class="head"><div><span class="num">06</span><span class="eyebrow">Eksplorasi material</span></div><div><h2>Disentuh sebelum dilihat</h2><p>Material dipilih karena tahan lama dan jujur pada asalnya: kertas daur ulang, perak disikat, batu alam, foil tembaga, pita satin dan aksen kaca.</p></div></div>
+      <div class="grid g6">
+        <div class="tile"><div class="tex t-paper"></div><span>Recycled paper</span></div>
+        <div class="tile"><div class="tex t-silver"></div><span>Brushed silver</span></div>
+        <div class="tile"><div class="tex t-stone"></div><span>Natural stone</span></div>
+        <div class="tile"><div class="tex t-copper"></div><span>Copper foil</span></div>
+        <div class="tile"><div class="tex t-satin"></div><span>Satin ribbon</span></div>
+        <div class="tile"><div class="tex t-glass"></div><span>Glass detail</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="head"><div><span class="num">07</span><span class="eyebrow">Kemasan</span></div><div><h2>Unboxing yang layak disimpan</h2><p>Kotak kaku magnetik Ink Blue dengan monogram foil emas, kantong suede, kartu terima kasih, dan kartu keaslian &amp; asal-usul yang menghubungkan karya ke catatan digitalnya.</p></div></div>
+      <div class="pack">
+        <div class="tile box"><div class="box3d"><div data-mono></div><small>JEWELREE</small></div><div><p class="quote-line">Some pieces stay with you longer than time.</p><span class="cap">Kotak magnetik · foil emas · tutup dalam</span></div></div>
+        <div class="tile"><div class="pouch"><div data-mono></div></div><div><span class="cap">Kantong suede</span><p class="note">Ink Blue, tali satin, monogram emboss.</p></div></div>
+        <div class="tile"><div class="card"><span class="logo" data-logo></span><p>Thank you for keeping this story.</p></div><div><span class="cap">Kartu terima kasih</span><p class="note">Kertas daur ulang 400 gsm, tulisan tangan.</p></div></div>
+        <div class="tile" style="grid-column: span 2"><div class="card prov" style="max-width:380px"><div><span class="eyebrow" style="font-size:.56rem">Authenticity &amp; provenance</span><p style="font-size:1rem;margin-top:8px">Scan to explore your piece's journey.</p><code>JW-7K2Q-9M4A</code></div><svg class="qr" id="qr" viewBox="0 0 21 21" shape-rendering="crispEdges" aria-label="Kode QR"></svg></div><div><span class="cap">Kartu keaslian &amp; asal-usul</span><p class="note">Setiap karya punya kode unik. Pelanggan memindai QR untuk melihat material, pengrajin dan tanggal pembuatan. <a href="verify.html?code=JW-7K2Q-9M4A">Coba cek keaslian →</a></p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec char">
+    <div class="wrap">
+      <div class="head"><div><span class="num">08</span><span class="eyebrow">Ritel &amp; digital</span></div><div><h2>Satu brand di setiap titik sentuh</h2><p>Butik, website, kampanye dan editorial berbagi palet, huruf dan ruang kosong yang sama. Pengalaman di layar harus terasa setenang di toko.</p></div></div>
+      <div class="touch">
+        <div class="tile"><div class="boutique"><div class="sign"><span class="logo" data-logo></span></div><div class="win" id="win"></div><div class="floor"></div></div><div class="lbl"><span class="eyebrow" style="color:var(--gold-hi)">Campaign</span><h3 style="font-size:2.2rem;font-weight:400;margin-top:6px">Objects with origin</h3><p class="note">Etalase butik: tiga karya, latar Ink Blue, tanpa harga.</p></div></div>
+        <div class="tile"><div class="phone"><div class="scr"><div class="bar"><span class="logo" data-logo></span></div><div class="art" data-art="pendant:ink"></div><div class="pc"><b>Orbit Pendant</b>Emas 18K · Safir biru<div class="price" style="font-size:.85rem">Rp 7.900.000</div><span class="btn btn-ink">Tambah ke tas</span></div></div></div><span class="cap">Website · kartu produk</span></div>
+        <div class="tile"><div class="phone"><div class="scr"><div class="hl"><span class="eyebrow" style="font-size:.42rem;color:var(--gold-hi)">Journal</span><b>The Modern Heirloom</b></div><div class="art" data-art="ring:stone"></div><div class="pc">Tentang karya yang diwariskan, bukan dibuang.</div></div></div><span class="cap">Editorial · journal</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="head"><div><span class="num">09</span><span class="eyebrow">Suara brand</span></div><div><h2>Tenang, terukur, sedikit kata</h2><p>Kami bicara seperti pengrajin yang yakin pada karyanya: tidak berteriak, tidak memburu-buru. Bahasa Indonesia untuk percakapan, tagline tetap bahasa Inggris.</p></div></div>
+      <div class="voice">
+        <div class="tile"><h3>Lakukan</h3><ul>
+          <li><b>Dibentuk tangan di atelier kami.</b><small>Shaped by hand in our atelier.</small></li>
+          <li><b>Dibuat untuk disimpan, lalu diwariskan.</b><small>Made to be kept, then passed on.</small></li>
+          <li><b>Setiap karya membawa asal-usulnya.</b><small>Every piece carries its origin.</small></li></ul></div>
+        <div class="tile dont"><h3>Hindari</h3><ul>
+          <li><b>DISKON GILA-GILAAN!!! Buruan sebelum habis!</b><small>MASSIVE SALE!!! Hurry, limited stock!</small></li>
+          <li><b>Perhiasan paling mewah dan termurah se-Indonesia.</b><small>The most luxurious, cheapest jewelry anywhere.</small></li>
+          <li><b>Bling-bling kece buat OOTD kamu ✨</b><small>Super blingy pieces for your OOTD ✨</small></li></ul></div>
+      </div>
+      <div class="pillars"><span>Calm</span><span>Considered</span><span>Honest</span><span>Few words</span></div>
+    </div>
+  </section>
+
+  <footer><span class="logo" data-logo></span><p>Objects with origin · Panduan brand untuk demo</p></footer>
+  <div class="toast" id="toast"></div>
+
+  <script src="jewelree-data.js"></script>
+  <script>
+    const logoHTML = `<span class="mono">${MONOGRAM}</span><span class="word"><b>JEWELREE</b><small>ATELIER</small></span>`;
+    document.querySelectorAll("[data-logo]").forEach((el) => el.innerHTML = logoHTML);
+    document.querySelectorAll("[data-mono]").forEach((el) => el.innerHTML = MONOGRAM);
+    document.querySelectorAll("[data-mono-svg]").forEach((el) => el.outerHTML = MONOGRAM.replace("<svg", `<svg width="${el.getAttribute("width")}" height="${el.getAttribute("height")}"`));
+    document.querySelectorAll("[data-art]").forEach((el) => { const [k, bg] = el.dataset.art.split(":"); el.innerHTML = Art.svg(k, bg); });
+
+    const colours = [
+      ["Ivory", "#F7F2E4", "Latar utama, kertas, kartu.", "#2B2B2B"],
+      ["Mineral Grey", "#BDB8AE", "Batu, garis, latar foto netral.", "#2B2B2B"],
+      ["Ink Blue", "#1E3A5F", "Kemasan, judul, tombol utama.", "#F7F2E4"],
+      ["Charcoal", "#2B2B2B", "Teks, ritel, malam.", "#F7F2E4"],
+      ["Copper", "#B87333", "Aksen kecil, foil, sorotan.", "#F7F2E4"],
+    ];
+    const rgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)).join(", ");
+    const sw = document.getElementById("swatches");
+    colours.forEach(([name, hex, use]) => {
+      const b = document.createElement("button");
+      b.className = "sw";
+      b.innerHTML = `<i style="background:${hex}"></i><div><b>${name}</b><code>${hex} · RGB ${rgb(hex)}</code><p>${use}</p></div>`;
+      b.onclick = () => { navigator.clipboard?.writeText(hex).catch(() => {}); toast(`${name} ${hex} disalin`); };
+      sw.appendChild(b);
+    });
+
+    const cols = [["rings", "ring", "stone"], ["pendants", "pendant", "ink"], ["cuffs", "cuff", "stone"], ["earrings", "earrings", "ivory"]];
+    const extra = { earrings: " · modern heirlooms" };
+    document.getElementById("cols").innerHTML = cols.map(([id, art, bg]) => {
+      const c = COLLECTIONS.find((x) => x.id === id);
+      return `<div class="tile"><div class="art">${Art.svg(art, bg)}</div><div class="txt"><h3>${c.en}</h3><p>${c.line}${extra[id] || ""}</p></div></div>`;
+    }).join("");
+    document.getElementById("win").innerHTML = ["ring", "pendant", "hoops"].map((k) => `<div>${Art.svg(k, "ink")}</div>`).join("");
+
+    // Decorative QR: finder patterns plus a seeded pattern (not a scannable code)
+    (function qr() {
+      let s = 7, cells = "";
+      const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
+      const finder = (x, y) => (x < 7 && y < 7) || (x > 13 && y < 7) || (x < 7 && y > 13);
+      for (let y = 0; y < 21; y++) for (let x = 0; x < 21; x++) {
+        let on;
+        if (finder(x, y)) { const fx = x > 13 ? x - 14 : x, fy = y > 13 ? y - 14 : y; on = fx === 0 || fx === 6 || fy === 0 || fy === 6 || (fx > 1 && fx < 5 && fy > 1 && fy < 5); }
+        else on = rnd() > .52;
+        if (on) cells += `<rect x="${x}" y="${y}" width="1" height="1"/>`;
+      }
+      document.getElementById("qr").innerHTML = `<g fill="#1E3A5F">${cells}</g>`;
+    })();
+
+    let t;
+    function toast(msg) { const el = document.getElementById("toast"); el.textContent = msg; el.classList.add("on"); clearTimeout(t); t = setTimeout(() => el.classList.remove("on"), 1600); }
+  </script>
+</body>
+</html>

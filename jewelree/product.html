@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Jewelree Atelier</title>
+  <meta name="description" content="">
+  <meta name="theme-color" content="#1E3A5F">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/monogram.svg">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="site.css">
+  <style>
+    .crumbs { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); padding: 22px 0; }
+    .crumbs a { text-decoration: none; }
+    .pdp { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(28px, 5vw, 70px); align-items: start; }
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .gallery div { aspect-ratio: 4/5; overflow: hidden; border-radius: 2px; }
+    .gallery div:first-child { grid-column: 1 / -1; aspect-ratio: 1; }
+    .gallery svg { width: 100%; height: 100%; }
+    .info { position: sticky; top: 100px; }
+    .info .eyebrow { color: var(--copper); }
+    .info h1 { font-size: clamp(2.6rem, 5vw, 4rem); margin: 10px 0 12px; }
+    .info .price { font-size: 1.8rem; }
+    .info .lede { margin: 18px 0 24px; color: var(--muted); max-width: 46ch; }
+    .specs { display: grid; grid-template-columns: auto 1fr; gap: 8px 22px; font-size: .9rem; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .specs dt { color: var(--muted); }
+    .sizes { display: flex; gap: 8px; flex-wrap: wrap; margin: 22px 0 6px; }
+    .sizes button { width: 50px; height: 46px; border: 1px solid var(--line); border-radius: var(--radius); font-weight: 600; }
+    .sizes button.on { border-color: var(--charcoal); background: var(--charcoal); color: var(--ivory); }
+    .label { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; margin-top: 22px; display: flex; justify-content: space-between; }
+    .label a { color: var(--muted); font-weight: 600; }
+    .buy { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 22px; }
+    .buy .wishbtn { width: 54px; border: 1px solid var(--line); border-radius: var(--radius); display: grid; place-items: center; }
+    .buy .wishbtn svg { width: 20px; height: 20px; }
+    .buy .wishbtn.on svg { fill: var(--copper); stroke: var(--copper); }
+    .stock { font-size: .82rem; margin-top: 12px; color: var(--ok); }
+    .stock.low { color: var(--warn); }
+    .assure { display: grid; gap: 12px; margin-top: 26px; font-size: .88rem; }
+    .assure div { display: flex; gap: 12px; align-items: flex-start; }
+    .assure svg { width: 20px; height: 20px; flex-shrink: 0; color: var(--copper); margin-top: 2px; }
+    details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+    details summary { cursor: pointer; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; list-style: none; display: flex; justify-content: space-between; }
+    details summary::after { content: "+"; font-size: 1rem; }
+    details[open] summary::after { content: "–"; }
+    details p { margin-top: 10px; font-size: .92rem; color: var(--muted); }
+    .related { margin-top: 90px; }
+    .related h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 26px; }
+    @media (max-width: 900px) { .pdp { grid-template-columns: 1fr; } .info { position: static; } }
+  </style>
+</head>
+<body>
+<div data-site-head></div>
+<main class="wrap" id="main"></main>
+<div data-site-foot></div>
+
+<script src="jewelree-data.js"></script>
+<script src="site.js"></script>
+<script>
+  const p = JW.product(new URLSearchParams(location.search).get("p") || "celeste") || JW.products()[0];
+  document.title = `${p.name} · ${p.material} | Jewelree Atelier`;
+  document.querySelector('meta[name="description"]').content = `${p.name}, ${p.material}${p.stone !== "—" ? " dengan " + p.stone.toLowerCase() : ""}. ${p.desc} Bersertifikat, bisa dicek keasliannya.`;
+  // Product structured data so Google can show price and stock in results.
+  const ld = document.createElement("script"); ld.type = "application/ld+json";
+  ld.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "Product", name: p.name, description: p.desc, brand: { "@type": "Brand", name: "Jewelree" }, material: p.material,
+    offers: { "@type": "Offer", priceCurrency: "IDR", price: p.price, availability: p.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock" } });
+  document.head.appendChild(ld);
+
+  let size = p.sizes ? null : "one";
+  const bgs = [p.bg, p.bg === "ink" ? "stone" : "ink", "ivory"];
+  const wished = () => JW.wishlist().includes(p.id);
+  document.getElementById("main").innerHTML = `
+    <div class="crumbs"><a href="index.html">Beranda</a> / <a href="index.html?c=${p.col}#koleksi">${JW.colName(p.col)}</a> / ${JW.esc(p.name)}</div>
+    <div class="pdp">
+      <div class="gallery">${bgs.map((b) => `<div>${Art.svg(p.art, b)}</div>`).join("")}</div>
+      <div class="info">
+        <span class="eyebrow">${COLLECTIONS.find((c) => c.id === p.col).en}${p.tag ? " · " + p.tag : ""}</span>
+        <h1>${JW.esc(p.name)}</h1>
+        <span class="price">${JW.rp(p.price)}</span>
+        <p class="lede">${JW.esc(p.desc)}</p>
+        <dl class="specs"><dt>Material</dt><dd>${p.material}</dd><dt>Batu</dt><dd>${p.stone}</dd><dt>Dibuat</dt><dd>Atelier Jakarta, 3–5 hari kerja bila ukuran khusus</dd></dl>
+        ${p.sizes ? `<div class="label"><span>Ukuran cincin</span><a href="#">Panduan ukuran</a></div><div class="sizes">${p.sizes.map((s) => `<button data-size="${s}">${s}</button>`).join("")}</div>` : ""}
+        <div class="buy"><button class="btn btn-ink" id="add">${p.stock > 0 ? "Tambah ke keranjang" : "Habis — kabari saya"}</button><button class="wishbtn ${wished() ? "on" : ""}" id="wish" aria-label="Wishlist">${ICON.heart}</button></div>
+        <p class="stock ${p.stock <= 3 ? "low" : ""}">${p.stock <= 0 ? "Sedang dibuat ulang" : p.stock <= 3 ? `Tinggal ${p.stock} piece` : "Tersedia, siap kirim"}</p>
+        <div class="assure">
+          <div>${ICON.shield}<span><b>Sertifikat keaslian berkode unik.</b> Cek dan daftarkan kepemilikan di <a href="verify.html">halaman cek keaslian</a>.</span></div>
+          <div>${ICON.bag}<span>Dikemas dalam kotak magnetik Ink Blue, kantong suede, dan kartu perawatan.</span></div>
+        </div>
+        <details><summary>Perawatan</summary><p>Lepaskan saat berenang dan berolahraga. Bersihkan dengan air hangat dan kain mikrofiber. Member mendapat pembersihan profesional gratis.</p></details>
+        <details><summary>Pengiriman &amp; pengembalian</summary><p>Pengiriman berasuransi 2–4 hari, same-day Jabodetabek. Tukar ukuran gratis dalam 14 hari.</p></details>
+      </div>
+    </div>
+    <section class="related"><h2>Anda mungkin juga suka</h2><div class="grid">${JW.products().filter((x) => x.id !== p.id && !x.hidden).sort((a, b) => (b.col === p.col) - (a.col === p.col)).slice(0, 4).map(Site.card).join("")}</div></section>`;
+
+  Site.bindWish(document.querySelector(".related"));
+  document.querySelectorAll("[data-size]").forEach((b) => b.addEventListener("click", () => {
+    size = b.dataset.size; document.querySelectorAll("[data-size]").forEach((x) => x.classList.toggle("on", x === b));
+  }));
+  document.getElementById("add").addEventListener("click", () => {
+    if (p.stock <= 0) return Site.toast("Kami kabari via WhatsApp saat tersedia");
+    if (!size) return Site.toast("Pilih ukuran dulu");
+    JW.addToCart(p.id, p.sizes ? size : null); Site.openCart(true);
+  });
+  document.getElementById("wish").addEventListener("click", (e) => {
+    const on = JW.toggleWish(p.id); e.currentTarget.classList.toggle("on", on); Site.toast(on ? "Disimpan ke wishlist" : "Dihapus dari wishlist");
+  });
+</script>
+</body>
+</html>

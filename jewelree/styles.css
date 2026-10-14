@@ -1,0 +1,97 @@
+/* ───────── Jewelree brand tokens ─────────
+   From the brand guideline: Ivory, Mineral Grey, Ink Blue, Charcoal, Copper.
+   Canela and Satoshi are licensed faces; the demo stands in Cormorant Garamond
+   and Manrope, which share their proportions. */
+:root {
+  --ivory: #F7F2E4;
+  --ivory-2: #EFE8D6;
+  --mineral: #BDB8AE;
+  --ink: #1E3A5F;
+  --ink-2: #16294A;
+  --charcoal: #2B2B2B;
+  --night: #1A1A1A;
+  --copper: #B87333;
+  --gold: #C9A46A;
+  --gold-hi: #E7CF9A;
+  --text: #2B2B2B;
+  --muted: #6E6A62;
+  --line: #E2DACA;
+  --paper: #FBF8F1;
+  --ok: #3F6B4A;
+  --warn: #9A5B1E;
+  --bad: #9B2C2C;
+
+  --font-display: "Cormorant Garamond", "Canela", Georgia, serif;
+  --font-body: "Manrope", "Satoshi", system-ui, sans-serif;
+
+  --radius: 4px;
+  --radius-lg: 10px;
+  --max: 1200px;
+  --gutter: clamp(16px, 4vw, 44px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--paper);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
+input, select, textarea { font: inherit; color: var(--text); }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+
+h1, h2, h3, .display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+/* Spaced small caps used across the guideline ("FORM, HELD CLOSE") */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+}
+.rule { width: 44px; height: 1px; background: currentColor; opacity: .6; margin: 18px 0; }
+
+/* Logo lockup: monogram + wordmark + ATELIER */
+.logo { display: inline-flex; align-items: center; gap: .55em; text-decoration: none; color: inherit; }
+.logo .mono { width: 2.1em; height: 2.1em; color: var(--gold); }
+.logo .word { display: flex; flex-direction: column; line-height: 1; }
+.logo .word b { font-family: var(--font-display); font-weight: 500; font-size: 1.5em; letter-spacing: .14em; }
+.logo .word small { font-size: .5em; letter-spacing: .5em; font-weight: 600; opacity: .75; margin-top: .3em; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  font-family: var(--font-body); font-weight: 600; font-size: .78rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  padding: 15px 26px; border-radius: var(--radius); text-decoration: none;
+  border: 1px solid transparent; transition: background .2s, color .2s, border-color .2s;
+}
+.btn-ink { background: var(--ink); color: var(--ivory); }
+.btn-ink:hover { background: var(--ink-2); }
+.btn-gold { background: var(--gold); color: var(--night); }
+.btn-gold:hover { background: var(--gold-hi); }
+.btn-line { border-color: currentColor; }
+.btn-line:hover { background: rgba(201,164,106,.12); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+
+.price { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; }
+
+/* Orbital line motif from the graphic language panel */
+.orbits { position: absolute; pointer-events: none; color: var(--gold); opacity: .55; }
+
+:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }

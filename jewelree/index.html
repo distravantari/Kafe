@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Jewelree Atelier · Perhiasan Emas 18K Bersertifikat</title>
+  <meta name="description" content="Perhiasan emas 18K buatan tangan dengan safir dan mutiara Lombok. Setiap piece bersertifikat dan bisa dicek keasliannya online.">
+  <link rel="canonical" href="https://jewelree.example/">
+  <meta property="og:title" content="Jewelree Atelier · Objects with origin">
+  <meta property="og:description" content="Perhiasan emas 18K buatan tangan, bersertifikat dan bisa dicek keasliannya.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#1E3A5F">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/monogram.svg">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="site.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"JewelryStore","name":"Jewelree Atelier","slogan":"Objects with origin","address":{"@type":"PostalAddress","streetAddress":"Jl. Senopati 18","addressLocality":"Jakarta","addressCountry":"ID"},"openingHours":"Tu-Su 11:00-20:00","url":"https://jewelree.example/"}
+  </script>
+  <style>
+    .hero { position: relative; background: var(--night); color: var(--ivory); overflow: hidden; }
+    .hero .wrap { display: grid; grid-template-columns: 1fr 1fr; min-height: min(78vh, 720px); align-items: center; gap: 40px; padding-top: 40px; padding-bottom: 40px; }
+    .hero h1 { font-size: clamp(3rem, 7vw, 6.2rem); font-weight: 400; margin: 18px 0 22px; }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero p { max-width: 42ch; opacity: .8; font-size: 1.05rem; }
+    .hero .eyebrow { color: var(--gold); }
+    .hero .ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
+    .hero .art { position: relative; aspect-ratio: 4/5; max-height: 640px; justify-self: end; width: 100%; max-width: 500px; }
+    .hero .art svg { width: 100%; height: 100%; border-radius: 2px; }
+    .hero .art .chip { position: absolute; left: -26px; bottom: 34px; background: var(--paper); color: var(--charcoal); padding: 14px 18px; display: flex; gap: 12px; align-items: center; border-radius: 2px; box-shadow: 0 20px 40px -20px rgba(0,0,0,.6); }
+    .hero .art .chip svg { width: 26px; height: 26px; color: var(--ok); border-radius: 0; }
+    .hero .art .chip b { display: block; font-size: .8rem; }
+    .hero .art .chip small { font-size: .72rem; color: var(--muted); }
+    .hero .orbits { width: 900px; right: -200px; top: -120px; opacity: .25; }
+
+    .pillars { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); }
+    .pillars div { padding: 28px var(--gutter); border-right: 1px solid var(--line); }
+    .pillars div:last-child { border-right: 0; }
+    .pillars b { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; display: block; }
+    .pillars span { font-size: .88rem; color: var(--muted); }
+
+    .sec { padding: clamp(60px, 9vw, 110px) 0 0; }
+    .sec-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 34px; }
+    .sec-head h2 { font-size: clamp(2.2rem, 4.6vw, 3.6rem); margin-top: 10px; }
+    .sec-head .eyebrow { color: var(--copper); }
+
+    .cols4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .col-tile { position: relative; aspect-ratio: 3/4; overflow: hidden; border-radius: 2px; text-decoration: none; color: var(--ivory); }
+    .col-tile svg { width: 100%; height: 100%; transition: transform .6s; }
+    .col-tile:hover svg { transform: scale(1.05); }
+    .col-tile div { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px; background: linear-gradient(transparent, rgba(0,0,0,.55)); }
+    .col-tile b { font-family: var(--font-display); font-size: 1.6rem; font-weight: 500; display: block; }
+    .col-tile small { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; opacity: .85; }
+
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filters button { padding: 9px 16px; border: 1px solid var(--line); border-radius: 999px; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; }
+    .filters button.on { background: var(--charcoal); color: var(--ivory); border-color: var(--charcoal); }
+
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: var(--ink); color: var(--ivory); border-radius: 2px; overflow: hidden; }
+    .split .copy { padding: clamp(32px, 6vw, 72px); display: flex; flex-direction: column; justify-content: center; }
+    .split h2 { font-size: clamp(2.2rem, 4.5vw, 3.4rem); margin: 14px 0 16px; }
+    .split .eyebrow { color: var(--gold); }
+    .split p { opacity: .8; max-width: 44ch; }
+    .split .art { min-height: 360px; }
+    .split .art svg { width: 100%; height: 100%; }
+    .verify-form { display: flex; gap: 8px; margin-top: 26px; flex-wrap: wrap; }
+    .verify-form input { flex: 1; min-width: 200px; background: transparent; border: 1px solid rgba(247,242,228,.4); color: var(--ivory); padding: 14px 16px; border-radius: var(--radius); letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
+    .verify-form input::placeholder { color: rgba(247,242,228,.5); }
+    .hint { font-size: .78rem; opacity: .65; margin-top: 10px; }
+    .hint button { color: var(--gold-hi); text-decoration: underline; }
+
+    .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 10px; }
+    .tier { border: 1px solid var(--line); padding: 26px; border-radius: 2px; background: #fff; }
+    .tier.copper { border-color: var(--copper); }
+    .tier.ink { background: var(--ink); color: var(--ivory); border-color: var(--ink); }
+    .tier h3 { font-size: 2rem; }
+    .tier small { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; opacity: .7; }
+    .tier ul { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 8px; font-size: .9rem; }
+    .tier li::before { content: "—  "; color: var(--copper); }
+
+    .posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .post { text-decoration: none; display: flex; flex-direction: column; gap: 12px; }
+    .post .pic { aspect-ratio: 3/2; overflow: hidden; border-radius: 2px; }
+    .post .pic svg { width: 100%; height: 100%; }
+    .post h3 { font-size: 1.5rem; }
+    .post small { color: var(--muted); font-size: .78rem; }
+
+    .app-band { margin-top: clamp(60px, 9vw, 110px); background: var(--ivory-2); }
+    .app-band .wrap { display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; align-items: center; padding-top: 50px; padding-bottom: 50px; }
+    .app-band h2 { font-size: clamp(2rem, 4vw, 3rem); margin: 10px 0 12px; }
+    .app-band .eyebrow { color: var(--copper); }
+    .phone { width: 220px; height: 420px; border: 8px solid var(--charcoal); border-radius: 34px; justify-self: center; background: var(--paper); overflow: hidden; display: flex; flex-direction: column; align-items: center; padding: 26px 16px; gap: 12px; box-shadow: 0 30px 60px -30px rgba(0,0,0,.5); }
+    .phone .appicon { width: 64px; height: 64px; border-radius: 16px; overflow: hidden; }
+    .phone .appicon img { width: 100%; }
+    .phone small { font-size: .7rem; }
+    .phone .mini { width: 100%; border-radius: 6px; overflow: hidden; aspect-ratio: 1; }
+    .phone .mini svg { width: 100%; height: 100%; }
+
+    @media (max-width: 900px) {
+      .hero .wrap { grid-template-columns: 1fr; min-height: 0; padding-top: 36px; }
+      .hero .art { justify-self: center; max-width: 420px; }
+      .hero .art .chip { left: 12px; }
+      .pillars { grid-template-columns: 1fr; }
+      .pillars div { border-right: 0; border-bottom: 1px solid var(--line); padding: 18px var(--gutter); }
+      .cols4 { grid-template-columns: repeat(2, 1fr); }
+      .split, .app-band .wrap { grid-template-columns: 1fr; }
+      .split .art { min-height: 260px; order: -1; }
+      .tiers, .posts { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div data-site-head></div>
+
+<header class="hero">
+  <svg class="orbits" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width=".6" aria-hidden="true"><circle cx="200" cy="200" r="150"/><ellipse cx="200" cy="200" rx="190" ry="70" transform="rotate(-20 200 200)"/><ellipse cx="200" cy="200" rx="170" ry="110" transform="rotate(35 200 200)"/><circle cx="200" cy="200" r="95"/></svg>
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Fine jewelry · Objets d'art · Lasting stories</span>
+      <h1>Objects with <em>origin.</em></h1>
+      <p>Emas 18K, safir biru, dan mutiara Lombok — dibentuk tangan di atelier kami di Jakarta. Setiap piece membawa sertifikat dengan kode unik yang bisa Anda cek sendiri.</p>
+      <div class="ctas"><a href="#koleksi" class="btn btn-gold">Lihat koleksi</a><a href="verify.html" class="btn btn-line">Cek keaslian</a></div>
+    </div>
+    <div class="art" id="hero-art"></div>
+  </div>
+</header>
+
+<div class="pillars">
+  <div><b>Emas 18K bersertifikat</b><span>Kadar, berat, batu, dan pengrajin tercatat di setiap kode.</span></div>
+  <div><b>Pengiriman berasuransi</b><span>Gratis di atas Rp 5 jt, same-day untuk Jabodetabek.</span></div>
+  <div><b>Resize & polish</b><span>Gratis untuk member — perhiasan yang dibuat untuk disimpan.</span></div>
+</div>
+
+<main>
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head"><div><span class="eyebrow">Koleksi</span><h2>Form, held close.</h2></div></div>
+      <div class="cols4" id="cols"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="koleksi">
+    <div class="wrap">
+      <div class="sec-head"><div><span class="eyebrow">Belanja</span><h2>Semua piece</h2></div><div class="filters" id="filters"></div></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="split">
+        <div class="copy">
+          <span class="eyebrow">Authenticity &amp; provenance</span>
+          <h2>Cek dulu, baru percaya.</h2>
+          <p>Setiap Jewelree datang dengan kartu provenance berkode unik. Masukkan kodenya untuk melihat piece, kadar, pengrajin, dan tanggal dibuat — dan daftarkan kepemilikan atas nama Anda.</p>
+          <form class="verify-form" action="verify.html"><input name="code" placeholder="JW-XXXX-XXXX" aria-label="Kode keaslian" autocomplete="off" required><button class="btn btn-gold">Cek kode</button></form>
+          <p class="hint">Coba: <button type="button" data-code="JW-7K2Q-9M4A">JW-7K2Q-9M4A</button> atau kode yang disalin: <button type="button" data-code="JW-9ZQE-1LTR">JW-9ZQE-1LTR</button></p>
+        </div>
+        <div class="art" id="verify-art"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head"><div><span class="eyebrow">Membership</span><h2>Made to be kept.</h2></div><a href="member.html" class="btn btn-ink">Gabung gratis</a></div>
+      <div class="tiers" id="tiers"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head"><div><span class="eyebrow">Journal</span><h2>The modern heirloom</h2></div><a href="journal.html" class="btn btn-line">Semua artikel</a></div>
+      <div class="posts" id="posts"></div>
+    </div>
+  </section>
+
+  <section class="app-band">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Jewelree di layar utama</span>
+        <h2>Pasang seperti aplikasi. Tanpa App Store.</h2>
+        <p>Website ini bisa dipasang di HP sebagai app: ikon di layar utama, buka layar penuh, katalog tetap tampil walau sinyal hilang, dan notifikasi saat koleksi baru rilis.</p>
+        <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap"><button class="btn btn-ink" data-install>Pasang app</button><a href="member.html" class="btn btn-line">Masuk member</a></div>
+      </div>
+      <div class="phone" aria-hidden="true">
+        <div class="appicon"><img src="assets/icon-192.png" alt=""></div><small><b>Jewelree</b></small>
+        <div class="mini" id="phone-art"></div><small>Orbit Pendant · Rp 7.900.000</small>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div data-site-foot></div>
+
+<script src="jewelree-data.js"></script>
+<script src="site.js"></script>
+<script>
+  const products = JW.products().filter((p) => !p.hidden);
+  document.getElementById("hero-art").innerHTML = Art.svg("pendant", "night") +
+    `<div class="chip">${ICON.shield}<div><b>JW-7K2Q-9M4A · Asli</b><small>Celeste Ring · Wayan S., Mar 2026</small></div></div>`;
+  document.getElementById("verify-art").innerHTML = Art.svg("signet", "stone");
+  document.getElementById("phone-art").innerHTML = Art.svg("pendant", "ink");
+
+  const arts = { rings: ["ring", "stone"], pendants: ["pendant", "ink"], cuffs: ["cuff", "stone"], earrings: ["earrings", "ivory"] };
+  document.getElementById("cols").innerHTML = COLLECTIONS.map((c) => `<a class="col-tile" href="?c=${c.id}#koleksi">${Art.svg(...arts[c.id])}<div><b>${c.en}</b><small>${c.line}</small></div></a>`).join("");
+
+  let col = new URLSearchParams(location.search).get("c") || "all";
+  function renderGrid() {
+    document.getElementById("filters").innerHTML = [["all", "Semua"], ...COLLECTIONS.map((c) => [c.id, c.name])].map(([id, n]) => `<button class="${id === col ? "on" : ""}" data-col="${id}">${n}</button>`).join("");
+    const list = products.filter((p) => col === "all" || p.col === col);
+    const grid = document.getElementById("grid");
+    grid.innerHTML = list.map(Site.card).join("");
+    Site.bindWish(grid);
+    document.querySelectorAll("[data-col]").forEach((b) => b.addEventListener("click", () => { col = b.dataset.col; history.replaceState(null, "", col === "all" ? location.pathname + "#koleksi" : `?c=${col}#koleksi`); renderGrid(); }));
+  }
+  renderGrid();
+
+  document.getElementById("tiers").innerHTML = TIERS.map((t) => `<div class="tier ${t.id}"><small>${t.min ? "Belanja " + JW.rpShort(t.min) + "+" : "Saat daftar"}</small><h3>${t.name}</h3><ul>${t.perks.map((p) => `<li>${p}</li>`).join("")}</ul></div>`).join("");
+
+  document.getElementById("posts").innerHTML = JW.posts().filter((p) => p.status === "Terbit").slice(0, 3).map((p) => `<a class="post" href="journal.html?p=${p.slug}"><div class="pic">${Art.svg(p.art, p.bg)}</div><small>${JW.date(p.date)} · ${Math.max(2, Math.round(p.body.join(" ").split(" ").length / 200) + 2)} menit baca</small><h3>${JW.esc(p.title)}</h3></a>`).join("");
+
+  document.querySelectorAll("[data-code]").forEach((b) => b.addEventListener("click", () => (location.href = "verify.html?code=" + b.dataset.code)));
+</script>
+</body>
+</html>

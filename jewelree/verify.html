@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cek Keaslian Perhiasan · Jewelree Atelier</title>
+  <meta name="description" content="Masukkan kode di kartu provenance untuk memastikan perhiasan Jewelree Anda asli, melihat detail pembuatannya, dan mendaftarkan kepemilikan.">
+  <meta name="theme-color" content="#1E3A5F">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/monogram.svg">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="site.css">
+  <style>
+    .v-hero { background: var(--ink); color: var(--ivory); padding: clamp(50px, 8vw, 96px) 0; position: relative; overflow: hidden; }
+    .v-hero .orbits { width: 700px; right: -220px; top: -160px; opacity: .25; }
+    .v-hero .eyebrow { color: var(--gold); }
+    .v-hero h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); margin: 14px 0 14px; font-weight: 400; }
+    .v-hero p { opacity: .8; max-width: 52ch; }
+    .v-form { display: flex; gap: 10px; margin-top: 30px; max-width: 560px; flex-wrap: wrap; }
+    .v-form input { flex: 1; min-width: 220px; background: rgba(255,255,255,.06); border: 1px solid rgba(247,242,228,.45); color: var(--ivory); padding: 16px 18px; border-radius: var(--radius); font-size: 1.1rem; letter-spacing: .18em; font-weight: 700; text-transform: uppercase; }
+    .v-form input::placeholder { color: rgba(247,242,228,.45); }
+    .tries { margin-top: 14px; font-size: .8rem; opacity: .75; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .tries button { border: 1px solid rgba(247,242,228,.35); border-radius: 999px; padding: 5px 12px; font-size: .74rem; letter-spacing: .1em; }
+    .tries button:hover { border-color: var(--gold); color: var(--gold-hi); }
+
+    #result { margin-top: -40px; position: relative; z-index: 2; }
+    .res { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 30px 60px -40px rgba(0,0,0,.45); }
+    .res-head { display: flex; align-items: center; gap: 14px; padding: 18px 24px; color: #fff; }
+    .res-head svg { width: 28px; height: 28px; flex-shrink: 0; }
+    .res-head b { font-size: 1.05rem; display: block; }
+    .res-head small { opacity: .85; }
+    .res-head.ok { background: var(--ok); } .res-head.warn { background: var(--warn); } .res-head.bad { background: var(--bad); }
+    .res-body { display: grid; grid-template-columns: 300px 1fr; }
+    .res-body .pic svg { width: 100%; height: 100%; min-height: 300px; }
+    .res-body .data { padding: 26px 28px; }
+    .res-body h2 { font-size: 2.4rem; margin-bottom: 4px; }
+    .res-body code { font-family: var(--font-body); letter-spacing: .16em; font-weight: 700; color: var(--ink); }
+    dl { display: grid; grid-template-columns: auto 1fr; gap: 10px 24px; margin: 20px 0; font-size: .92rem; }
+    dt { color: var(--muted); }
+    .timeline { border-top: 1px solid var(--line); padding-top: 16px; margin-top: 8px; }
+    .timeline h3 { font-family: var(--font-body); font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; margin-bottom: 10px; }
+    .timeline ul { list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: .86rem; color: var(--muted); }
+    .timeline li b { color: var(--text); font-weight: 600; }
+    .claim { margin-top: 18px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .claim input { flex: 1; min-width: 180px; border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; }
+    .notfound { padding: 30px 28px; }
+    .notfound p { color: var(--muted); max-width: 56ch; margin-top: 8px; }
+
+    .how { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 70px; }
+    .how div { border-top: 1px solid var(--charcoal); padding-top: 18px; }
+    .how span { font-family: var(--font-display); font-size: 2.4rem; color: var(--copper); line-height: 1; }
+    .how b { display: block; font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; margin: 8px 0 6px; }
+    .how p { font-size: .9rem; color: var(--muted); }
+    .card-mock { margin-top: 60px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: center; }
+    .prov { aspect-ratio: 1.6; background: var(--ivory); border: 1px solid var(--line); border-radius: 6px; padding: 22px; display: grid; grid-template-columns: 1fr auto; gap: 14px; box-shadow: 0 30px 50px -36px rgba(0,0,0,.5); max-width: 440px; }
+    .prov .mono { width: 34px; color: var(--copper); }
+    .prov h4 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; letter-spacing: .1em; margin-top: 8px; }
+    .prov small { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); display: block; }
+    .prov code { font-family: var(--font-body); font-weight: 700; letter-spacing: .16em; font-size: .9rem; color: var(--ink); margin-top: 10px; display: block; }
+    .prov .qr { width: 96px; align-self: end; }
+    @media (max-width: 800px) { .res-body, .how, .card-mock { grid-template-columns: 1fr; } .res-body .pic svg { min-height: 220px; max-height: 260px; } }
+  </style>
+</head>
+<body>
+<div data-site-head></div>
+
+<header class="v-hero">
+  <svg class="orbits" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width=".6" aria-hidden="true"><circle cx="200" cy="200" r="150"/><ellipse cx="200" cy="200" rx="190" ry="70" transform="rotate(-20 200 200)"/><ellipse cx="200" cy="200" rx="170" ry="110" transform="rotate(35 200 200)"/></svg>
+  <div class="wrap">
+    <span class="eyebrow">Authenticity &amp; provenance</span>
+    <h1>Cek keaslian piece Anda.</h1>
+    <p>Masukkan kode di kartu provenance (atau scan QR-nya). Anda akan melihat piece, kadar, pengrajin, dan riwayat pengecekan kode tersebut.</p>
+    <form class="v-form" id="vform"><input id="code" placeholder="JW-XXXX-XXXX" aria-label="Kode keaslian" autocomplete="off" maxlength="14" required><button class="btn btn-gold">Cek kode</button></form>
+    <div class="tries">Coba: <button data-try="JW-7K2Q-9M4A">Asli & terdaftar</button><button data-try="JW-3HTP-6XBN">Asli, belum didaftarkan</button><button data-try="JW-9ZQE-1LTR">Kode disalin</button><button data-try="JW-ABCD-1234">Tidak dikenal</button></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="result"></div>
+
+  <div class="how">
+    <div><span>01</span><b>Kode unik per piece</b><p>Dicetak di kartu provenance dan terhubung ke nomor seri yang diukir di bagian dalam piece.</p></div>
+    <div><span>02</span><b>Setiap cek dicatat</b><p>Kalau kode yang sama dicek dari banyak kota dalam waktu singkat, sistem menandainya sebagai kemungkinan salinan.</p></div>
+    <div><span>03</span><b>Daftarkan kepemilikan</b><p>Daftarkan atas nama Anda untuk garansi, resize, dan bukti saat dijual kembali atau diwariskan.</p></div>
+  </div>
+
+  <div class="card-mock">
+    <div class="prov" aria-label="Contoh kartu provenance">
+      <div><div class="mono">${MONOGRAM}</div><h4>JEWELREE</h4><small>Authenticity &amp; provenance</small><code>JW-7K2Q-9M4A</code><small style="margin-top:8px">Celeste Ring · CEL-0418</small></div>
+      <div class="qr" id="qr"></div>
+    </div>
+    <div><span class="eyebrow" style="color:var(--copper)">Di dalam kotak</span><h2 style="font-size:clamp(2rem,4vw,3rem);margin:10px 0 12px">Scan to explore your piece's journey.</h2><p style="color:var(--muted)">QR di kartu membuka halaman ini dengan kode sudah terisi. Pembeli barang bekas juga bisa memakainya untuk memastikan sebelum membayar.</p></div>
+  </div>
+</main>
+
+<div data-site-foot></div>
+
+<script src="jewelree-data.js"></script>
+<script src="site.js"></script>
+<script>
+  document.querySelector(".prov .mono").innerHTML = MONOGRAM;
+  // Decorative QR for the card mock.
+  (() => { let s = 5, c = ""; const r = () => ((s = (s * 16807) % 2147483647) / 2147483647);
+    for (let y = 0; y < 21; y++) for (let x = 0; x < 21; x++) { const f = (x < 7 && y < 7) || (x > 13 && y < 7) || (x < 7 && y > 13); if (!f && r() > .5) c += `<rect x="${x}" y="${y}" width="1" height="1"/>`; }
+    const f = (x, y) => `<rect x="${x}" y="${y}" width="7" height="7"/><rect x="${x + 1}" y="${y + 1}" width="5" height="5" fill="#F7F2E4"/><rect x="${x + 2}" y="${y + 2}" width="3" height="3"/>`;
+    document.getElementById("qr").innerHTML = `<svg viewBox="0 0 21 21" fill="#1E3A5F" shape-rendering="crispEdges">${c}${f(0, 0)}${f(14, 0)}${f(0, 14)}</svg>`; })();
+
+  const OK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>`;
+  const WARN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v5M12 18v.5"/></svg>`;
+  const BAD = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>`;
+  const mask = (n) => n ? n.split(" ").map((w, i) => (i === 0 ? w : w[0] + ".")).join(" ") : null;
+
+  function check(raw) {
+    const code = JW.normCode(raw);
+    document.getElementById("code").value = code;
+    history.replaceState(null, "", "?code=" + encodeURIComponent(code));
+    const certs = JW.certs(); const c = certs.find((x) => x.code === code);
+    const out = document.getElementById("result");
+    if (!c) {
+      out.innerHTML = `<div class="res"><div class="res-head bad">${BAD}<div><b>Kode tidak ditemukan</b><small>${JW.esc(code)}</small></div></div>
+        <div class="notfound"><h2 style="font-size:2rem">Kami tidak punya catatan untuk kode ini.</h2><p>Periksa lagi penulisannya (huruf O dan angka 0 tidak dipakai). Kalau sudah benar, kemungkinan piece ini bukan produksi Jewelree. Hubungi concierge kami sebelum membeli.</p><p style="margin-top:18px"><a class="btn btn-ink" href="#">WhatsApp concierge</a></p></div></div>`;
+      return;
+    }
+    // Log this check; a code seen in many cities in a short time is flagged as copied.
+    c.scans.push({ at: JW.today(), city: "Lokasi Anda" });
+    const recentCities = new Set(c.scans.slice(-8).map((s) => s.city));
+    if (c.status === "valid" && recentCities.size >= 5) c.status = "flagged";
+    JW.saveCerts(certs);
+    const p = JW.product(c.product);
+    const head = c.status === "revoked" ? `<div class="res-head bad">${BAD}<div><b>Sertifikat dicabut</b><small>Piece ini dilaporkan hilang atau dikembalikan. Hubungi concierge.</small></div></div>`
+      : c.status === "flagged" ? `<div class="res-head warn">${WARN}<div><b>Kode asli, tapi kemungkinan disalin</b><small>Kode ini dicek dari ${recentCities.size} kota berbeda dalam waktu singkat. Pastikan nomor seri ${c.serial} terukir di piece.</small></div></div>`
+      : `<div class="res-head ok">${OK}<div><b>Asli · produksi Jewelree Atelier</b><small>Kode cocok dengan catatan pembuatan kami.</small></div></div>`;
+    out.innerHTML = `<div class="res">${head}
+      <div class="res-body"><div class="pic">${Art.svg(p.art, p.bg)}</div>
+      <div class="data">
+        <code>${c.code}</code>
+        <h2>${JW.esc(p.name)}</h2>
+        <dl><dt>Nomor seri</dt><dd>${c.serial} (terukir di bagian dalam)</dd><dt>Material</dt><dd>${p.material}${p.stone !== "—" ? " · " + p.stone : ""}</dd><dt>Berat</dt><dd>${c.weight}</dd><dt>Pengrajin</dt><dd>${c.artisan}</dd><dt>Dibuat</dt><dd>${JW.date(c.made)}</dd>
+          <dt>Pemilik</dt><dd>${c.owner ? `${JW.esc(mask(c.owner))} · terdaftar ${JW.date(c.registered)}` : "Belum didaftarkan"}</dd></dl>
+        ${!c.owner && c.status === "valid" ? `<form class="claim" id="claim"><input id="owner" placeholder="Nama Anda" required aria-label="Nama pemilik"><button class="btn btn-ink">Daftarkan kepemilikan</button></form>` : ""}
+        <div class="timeline"><h3>Riwayat pengecekan (${c.scans.length})</h3><ul>${c.scans.slice(-6).reverse().map((s) => `<li><b>${JW.date(s.at)}</b> · ${JW.esc(s.city)}</li>`).join("")}</ul></div>
+      </div></div></div>`;
+    document.getElementById("claim")?.addEventListener("submit", (e) => {
+      e.preventDefault(); const name = document.getElementById("owner").value.trim(); if (!name) return;
+      const all = JW.certs(); const x = all.find((y) => y.code === c.code); x.owner = name; x.registered = JW.today(); JW.saveCerts(all);
+      Site.toast("Kepemilikan terdaftar"); check(c.code);
+    });
+  }
+
+  document.getElementById("vform").addEventListener("submit", (e) => { e.preventDefault(); check(document.getElementById("code").value); });
+  document.querySelectorAll("[data-try]").forEach((b) => b.addEventListener("click", () => check(b.dataset.try)));
+  const q = new URLSearchParams(location.search).get("code"); if (q) check(q);
+</script>
+</body>
+</html>

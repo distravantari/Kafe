@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Proposal Jewelree Digital</title>
+  <meta name="description" content="Proposal website, toko online, SEO, PWA, membership, cek keaslian, dan backoffice untuk Jewelree Atelier. Harga modular: bayar hanya yang dipilih.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../jewelree/styles.css">
+  <link rel="icon" href="../../jewelree/assets/monogram.svg">
+  <style>
+    body { background: var(--paper); }
+    .wrap { max-width: 1040px; }
+    p { max-width: 68ch; }
+    .sub { color: var(--muted); font-size: 1.05rem; }
+
+    .topnav { position: sticky; top: 0; z-index: 20; background: rgba(251,248,241,.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+    .topnav .wrap { display: flex; align-items: center; gap: 22px; height: 62px; }
+    .topnav .logo { font-size: .7rem; color: var(--charcoal); }
+    .topnav .logo .mono { color: var(--copper); }
+    .topnav nav { display: flex; gap: 20px; font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; overflow-x: auto; scrollbar-width: none; flex: 1; }
+    .topnav nav a { text-decoration: none; opacity: .7; white-space: nowrap; }
+    .topnav nav a:hover { opacity: 1; }
+    .topnav .btn { padding: 11px 16px; font-size: .66rem; white-space: nowrap; }
+
+    /* Cover */
+    .cover { background: var(--night); color: var(--ivory); padding: 30px 0 90px; position: relative; overflow: hidden; }
+    .cover .orbits { width: 860px; right: -260px; top: -180px; opacity: .3; }
+    .cover .meta { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: .82rem; margin-bottom: 80px; position: relative; }
+    .cover .meta span { opacity: .75; }
+    .tag { display: inline-block; font-size: .64rem; letter-spacing: .26em; text-transform: uppercase; font-weight: 700; border: 1px solid var(--gold); color: var(--gold); padding: 6px 12px; border-radius: 999px; }
+    .cover .eyebrow { color: var(--gold); position: relative; }
+    .cover h1 { font-size: clamp(3rem, 8vw, 6.4rem); font-weight: 400; max-width: 13ch; margin: 16px 0 22px; position: relative; }
+    .cover h1 em { color: var(--gold); }
+    .cover .lede { font-size: clamp(1.05rem, 2vw, 1.22rem); max-width: 56ch; opacity: .85; position: relative; }
+    .flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 34px; font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; position: relative; }
+    .flow span { border: 1px solid rgba(247,242,228,.35); padding: 8px 14px; border-radius: 999px; }
+    .flow i { font-style: normal; color: var(--gold); }
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 34px; position: relative; }
+
+    .summary { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; margin-top: -44px; position: relative; z-index: 2; box-shadow: 0 24px 50px -34px rgba(0,0,0,.5); }
+    .summary div { background: #fff; padding: 20px 18px; }
+    .summary b { display: block; font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; color: var(--ink); line-height: 1.1; }
+    .summary span { font-size: .8rem; color: var(--muted); }
+
+    section { padding: clamp(56px, 8vw, 96px) 0; border-bottom: 1px solid var(--line); }
+    section:last-of-type { border-bottom: 0; }
+    section > .wrap > .eyebrow { color: var(--copper); }
+    h2 { font-size: clamp(2.2rem, 4.8vw, 3.4rem); margin: 12px 0 14px; color: var(--charcoal); }
+    h3 { font-size: 1.6rem; font-weight: 600; margin-bottom: 8px; }
+
+    .callout { background: var(--ivory); border-left: 3px solid var(--copper); padding: 16px 20px; margin-top: 26px; font-size: .95rem; }
+    .callout b { color: var(--ink); }
+
+    .ps { display: grid; grid-template-columns: 1fr 1fr; margin-top: 30px; border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; }
+    .ps > div { padding: 26px; }
+    .ps .before { background: #fff; }
+    .ps .after { background: var(--ink); color: var(--ivory); }
+    .ps h3 { font-size: 1.4rem; margin-bottom: 14px; }
+    .ps .after h3 { color: var(--gold-hi); }
+    .ps ul { list-style: none; display: grid; gap: 12px; font-size: .95rem; }
+    .ps li { padding-left: 24px; position: relative; }
+    .ps .before li::before { content: "✕"; position: absolute; left: 0; color: var(--bad); font-weight: 700; }
+    .ps .after li::before { content: "✓"; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+
+    /* Demo previews */
+    .demos { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 30px; }
+    .demo-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; text-decoration: none; color: inherit; transition: transform .2s, box-shadow .2s; }
+    .demo-card:hover { transform: translateY(-3px); box-shadow: 0 24px 50px -30px rgba(0,0,0,.45); }
+    .shot { position: relative; aspect-ratio: 16/10; overflow: hidden; background: var(--ivory); border-bottom: 1px solid var(--line); }
+    .shot iframe { position: absolute; top: 0; left: 0; width: 1280px; height: 800px; border: 0; transform-origin: 0 0; pointer-events: none; }
+    .demo-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .demo-body h3 { margin: 0; font-size: 1.45rem; display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+    .demo-body h3 .go { font-family: var(--font-body); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--copper); white-space: nowrap; font-weight: 700; }
+    .demo-body .try { font-size: .9rem; color: var(--muted); }
+    .demo-body .try b { color: var(--charcoal); }
+    .mods { display: flex; gap: 6px; flex-wrap: wrap; }
+    .mods span { font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; padding: 4px 9px; border-radius: 999px; background: var(--ivory-2); color: var(--ink); }
+
+    .brand-step { display: grid; grid-template-columns: 1.1fr 1fr; gap: 30px; align-items: center; margin-top: 30px; }
+    .brand-step .shot { border-radius: var(--radius-lg); border: 1px solid var(--line); aspect-ratio: 16/11; }
+    .brand-step .shot iframe { height: 880px; }
+    .swatches { display: flex; gap: 6px; margin: 6px 0 18px; }
+    .swatches i { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(0,0,0,.08); }
+    ul.ticks { list-style: none; display: grid; gap: 10px; }
+    ul.ticks li { position: relative; padding-left: 24px; font-size: .95rem; }
+    ul.ticks li::before { content: ""; position: absolute; left: 0; top: .5em; width: 12px; height: 7px; border-left: 1.5px solid var(--copper); border-bottom: 1.5px solid var(--copper); transform: rotate(-45deg); }
+    ul.ticks li small { color: var(--muted); }
+
+    /* Module cards */
+    .modules { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 30px; }
+    .module { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+    .module.base { border-color: var(--ink); }
+    .module header { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+    .module .letter { width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: var(--gold-hi); display: grid; place-items: center; font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; flex-shrink: 0; }
+    .module h3 { margin: 4px 0 0; font-size: 1.5rem; }
+    .module .who { color: var(--muted); font-size: .85rem; }
+    .module .price-tag { text-align: right; flex-shrink: 0; }
+    .module .price-tag b { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--ink); display: block; line-height: 1; white-space: nowrap; }
+    .module .price-tag small { font-size: .74rem; color: var(--muted); }
+    .module .foot { font-size: .82rem; color: var(--muted); margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--line); }
+    .module .foot b { color: var(--copper); }
+
+    /* Calculator */
+    .calc { margin-top: 36px; background: var(--ink); color: var(--ivory); border-radius: var(--radius-lg); padding: clamp(22px, 4vw, 38px); display: grid; grid-template-columns: 1.3fr 1fr; gap: 30px; position: relative; overflow: hidden; }
+    .calc h3 { color: var(--gold-hi); font-size: 2rem; }
+    .presets { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 20px; }
+    .presets button { border: 1px solid rgba(247,242,228,.35); border-radius: 999px; padding: 8px 14px; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; }
+    .presets button:hover { border-color: var(--gold); color: var(--gold-hi); }
+    .picks { display: grid; gap: 8px; }
+    .pick { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; padding: 12px 14px; border: 1px solid rgba(247,242,228,.2); border-radius: var(--radius-lg); cursor: pointer; transition: background .15s, border-color .15s; }
+    .pick:hover { border-color: rgba(247,242,228,.45); }
+    .pick:has(input:checked) { background: rgba(247,242,228,.08); border-color: var(--gold); }
+    .pick input { width: 18px; height: 18px; accent-color: var(--gold); }
+    .pick input:disabled { opacity: 1; }
+    .pick b { display: block; font-size: .95rem; }
+    .pick small { font-size: .76rem; opacity: .7; display: block; }
+    .pick small.req { color: var(--gold-hi); opacity: 1; }
+    .pick .amt { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; white-space: nowrap; }
+    .retainer { margin-top: 14px; }
+    .result { background: var(--night); border-radius: var(--radius-lg); padding: 24px; display: flex; flex-direction: column; gap: 10px; align-self: start; position: sticky; top: 80px; }
+    .result .row { display: flex; justify-content: space-between; gap: 12px; font-size: .88rem; opacity: .85; }
+    .result .row.disc { color: var(--gold-hi); opacity: 1; }
+    .result hr { border: 0; border-top: 1px dashed rgba(247,242,228,.25); margin: 4px 0; }
+    .result small { opacity: .7; font-size: .78rem; }
+    .result .total { font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 3.2rem); font-weight: 600; color: var(--gold-hi); line-height: 1; }
+    .result .time { font-family: var(--font-display); font-size: 1.4rem; }
+    .terms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 4px; }
+    .terms div { background: rgba(247,242,228,.06); border-radius: var(--radius); padding: 8px 10px; }
+    .terms b { display: block; font-size: .9rem; }
+    .terms span { font-size: .68rem; opacity: .7; }
+    .share { display: flex; gap: 8px; margin-top: 6px; }
+    .share button { flex: 1; border: 1px solid rgba(247,242,228,.35); border-radius: var(--radius); padding: 11px; font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; }
+    .share button:hover { border-color: var(--gold); }
+
+    /* SEO playbook */
+    .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 30px; }
+    .pillar { border-top: 1px solid var(--charcoal); padding-top: 16px; }
+    .pillar span { font-family: var(--font-display); font-size: 2.2rem; color: var(--copper); line-height: 1; }
+    .pillar b { display: block; font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin: 8px 0 6px; }
+    .pillar p { font-size: .9rem; color: var(--muted); }
+    .plan { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 34px; }
+    .plan div { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 20px; }
+    .plan h4 { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; color: var(--copper); margin-bottom: 6px; }
+    .plan b { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; display: block; margin-bottom: 8px; }
+    .plan ul { list-style: none; display: grid; gap: 6px; font-size: .88rem; color: var(--muted); }
+    .plan li::before { content: "—  "; color: var(--copper); }
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; margin-top: 20px; }
+    .kpis div { background: var(--ivory); padding: 16px; }
+    .kpis b { font-family: var(--font-display); font-size: 1.3rem; display: block; }
+    .kpis span { font-size: .78rem; color: var(--muted); }
+
+    /* Feature explainers */
+    .explain { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; align-items: center; margin-top: 30px; }
+    .steps { list-style: none; counter-reset: st; display: grid; gap: 14px; }
+    .steps li { counter-increment: st; position: relative; padding-left: 42px; font-size: .95rem; }
+    .steps li::before { content: counter(st); position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: var(--gold-hi); display: grid; place-items: center; font-family: var(--font-display); font-weight: 600; }
+    .steps b { color: var(--charcoal); }
+    .compare { width: 100%; border-collapse: collapse; font-size: .9rem; margin-top: 24px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; }
+    .compare th, .compare td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--line); }
+    .compare th { font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); background: var(--ivory); }
+    .compare td:not(:first-child) { text-align: center; }
+    .compare .y { color: var(--ok); font-weight: 700; }
+    .compare .n { color: var(--mineral); }
+
+    /* Numbers */
+    .numbers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+    .num { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 20px 22px; }
+    .num b { display: block; font-family: var(--font-display); font-size: clamp(1.7rem, 3.4vw, 2.3rem); font-weight: 600; color: var(--ink); line-height: 1.05; }
+    .num span { display: block; font-weight: 600; margin: 6px 0 6px; font-size: .92rem; }
+    .num small { display: block; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+    .num.dark { background: var(--ink); border-color: var(--ink); color: var(--ivory); }
+    .num.dark b { color: var(--gold-hi); } .num.dark small { color: var(--ivory); opacity: .7; }
+    .split { display: flex; height: 54px; border-radius: var(--radius-lg); overflow: hidden; gap: 2px; margin: 18px 0 14px; }
+    .split div { display: flex; align-items: center; justify-content: center; color: var(--ivory); font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-align: center; padding: 0 6px; }
+    ul.dots { list-style: none; display: grid; gap: 8px; font-size: .95rem; }
+    ul.dots li { position: relative; padding-left: 18px; }
+    ul.dots li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--copper); }
+    .costs { width: 100%; border-collapse: collapse; margin-top: 18px; font-size: .9rem; background: #fff; border: 1px solid var(--line); }
+    .costs td, .costs th { padding: 11px 14px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .costs th { font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); background: var(--ivory); }
+    .costs td:last-child { white-space: nowrap; }
+
+    /* Timeline */
+    .timeline { list-style: none; margin-top: 30px; position: relative; }
+    .timeline::before { content: ""; position: absolute; left: 23px; top: 10px; bottom: 10px; width: 1px; background: var(--line); }
+    .timeline li { position: relative; padding: 0 0 30px 70px; }
+    .timeline li:last-child { padding-bottom: 0; }
+    .timeline .wk { position: absolute; left: 0; top: 0; width: 48px; height: 48px; border-radius: 50%; background: var(--ink); color: var(--gold-hi); display: grid; place-items: center; font-family: var(--font-display); font-weight: 600; font-size: 1rem; }
+    .timeline h3 { padding-top: 8px; margin-bottom: 6px; font-size: 1.45rem; }
+    .them { margin-top: 10px; background: var(--ivory); border-radius: var(--radius); padding: 10px 14px; font-size: .9rem; }
+    .them b { color: var(--copper); }
+
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+    .panel { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 24px; }
+
+    .decisions { list-style: none; counter-reset: d; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 28px; }
+    .decisions li { counter-increment: d; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 20px 22px 20px 70px; position: relative; font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; line-height: 1.25; }
+    .decisions li::before { content: counter(d); position: absolute; left: 20px; top: 18px; width: 34px; height: 34px; border-radius: 50%; background: var(--copper); color: #fff; display: grid; place-items: center; font-size: 1rem; }
+
+    .closing { background: var(--night); color: var(--ivory); border-radius: var(--radius-lg); padding: clamp(28px, 5vw, 56px); margin-top: 32px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: center; position: relative; overflow: hidden; }
+    .closing h2 { color: var(--ivory); margin-top: 0; }
+    .closing p { opacity: .85; }
+    .closing .actions { display: flex; flex-direction: column; gap: 10px; position: relative; }
+    .closing .orbits { width: 520px; right: -160px; bottom: -220px; opacity: .3; }
+
+    footer { background: var(--night); color: var(--ivory); padding: 36px 0; font-size: .85rem; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
+    footer .logo { font-size: .7rem; }
+    .toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); background: var(--charcoal); color: var(--ivory); padding: 12px 20px; border-radius: 999px; font-size: .85rem; opacity: 0; transition: .25s; z-index: 80; pointer-events: none; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (max-width: 820px) {
+      .ps, .demos, .brand-step, .modules, .calc, .explain, .numbers, .two, .decisions, .closing, .plan { grid-template-columns: 1fr; }
+      .pillars, .kpis { grid-template-columns: 1fr 1fr; }
+      .summary { grid-template-columns: 1fr 1fr; }
+      .summary div:last-child { grid-column: 1 / -1; }
+      .topnav nav { display: none; }
+      .topnav .wrap { justify-content: space-between; }
+      .result { position: static; }
+      .compare { font-size: .8rem; } .compare th, .compare td { padding: 9px 8px; }
+    }
+    @media print {
+      .topnav, .calc, .cta-row, .no-print, .demos { display: none !important; }
+      .cover, .num.dark, .ps .after { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      section { break-inside: avoid-page; padding: 28px 0; }
+      .module, .num, .timeline li, .panel { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topnav no-print">
+  <div class="wrap">
+    <a href="#top" class="logo" aria-label="Ke atas" id="nav-logo"></a>
+    <nav aria-label="Bagian proposal"><a href="#brand">Brand</a><a href="#contoh">Contoh</a><a href="#modul">Modul</a><a href="#hitung">Hitung harga</a><a href="#seo">SEO</a><a href="#timeline">Timeline</a><a href="#keputusan">Keputusan</a></nav>
+    <a href="#hitung" class="btn btn-ink">Hitung paket</a>
+  </div>
+</div>
+
+<header class="cover" id="top">
+  <svg class="orbits" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width=".6" aria-hidden="true"><circle cx="200" cy="200" r="150"/><ellipse cx="200" cy="200" rx="190" ry="70" transform="rotate(-20 200 200)"/><ellipse cx="200" cy="200" rx="170" ry="110" transform="rotate(35 200 200)"/><circle cx="200" cy="200" r="95"/></svg>
+  <div class="wrap">
+    <div class="meta"><span class="tag">Proposal</span><span>Untuk: <b>Jewelree Atelier</b> · Disiapkan oleh Arketype · 14 Oktober 2026</span></div>
+    <span class="eyebrow">Website · Toko online · Membership · Cek keaslian</span>
+    <h1>Butik Jewelree, <em>sekarang online.</em></h1>
+    <p class="lede">Satu sistem untuk menjual perhiasan dengan rasa butik: website yang tampil di Google, checkout yang aman, member yang kembali lagi, dan kode keaslian yang membuat pembeli yakin — semuanya dikelola dari satu backoffice.</p>
+    <div class="flow" aria-label="Alur"><span>Ditemukan di Google</span><i>→</i><span>Jatuh cinta</span><i>→</i><span>Checkout</span><i>→</i><span>Cek keaslian</span><i>→</i><span>Jadi member</span></div>
+    <div class="cta-row"><a href="#contoh" class="btn btn-gold">Coba demo yang sudah jalan</a><a href="#hitung" class="btn btn-line">Hitung harga sesuai pilihan</a></div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="summary" aria-label="Ringkasan">
+      <div><b>7 modul</b><span>pilih yang dibutuhkan saja</span></div>
+      <div><b id="sum-from">Rp 12 jt</b><span>mulai dari, sekali bayar</span></div>
+      <div><b id="sum-full">Rp 54 jt</b><span>semua modul, setelah diskon paket</span></div>
+      <div><b>40 / 30 / 30</b><span>bayar bertahap</span></div>
+      <div><b>30 hari</b><span>perbaikan bug &amp; penyesuaian setelah go-live</span></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">Gambaran</span>
+      <h2>Perhiasan dibeli karena percaya.</h2>
+      <p class="sub">Pembeli perhiasan butuh tiga hal sebelum membayar jutaan rupiah online: merasa brand-nya premium, yakin barangnya asli, dan merasa dihargai setelah membeli. Proposal ini membangun ketiganya, modul demi modul.</p>
+      <div class="ps">
+        <div class="before"><h3>Sekarang</h3><ul>
+          <li>Jualan lewat DM Instagram dan WhatsApp — katalog, harga, dan stok tercecer di chat.</li>
+          <li>Tidak muncul di Google saat orang mencari “cincin emas 18K” atau “safir biru asli”.</li>
+          <li>Pembeli ragu keaslian; sertifikat kertas mudah difotokopi.</li>
+          <li>Pelanggan lama tidak tercatat — tidak ada alasan untuk kembali.</li>
+          <li>Owner tidak tahu iklan mana yang benar-benar menghasilkan penjualan.</li>
+        </ul></div>
+        <div class="after"><h3>Dengan sistem ini</h3><ul>
+          <li>Website butik dengan katalog, stok, dan checkout yang menerima QRIS, VA, kartu, dan cicilan.</li>
+          <li>Halaman produk dan journal disusun untuk Google, dengan analytics yang mengukur setiap penjualan.</li>
+          <li>Setiap piece punya kode unik; salinan terdeteksi saat dicek dari banyak kota.</li>
+          <li>Membership dengan poin dan tingkat Ivory → Copper → Ink.</li>
+          <li>Satu backoffice untuk pesanan, produk, member, sertifikat, dan laporan.</li>
+        </ul></div>
+      </div>
+      <div class="callout"><b>Modular:</b> setiap modul punya harga sendiri. Kalau hanya mengambil Website dan SEO, Anda hanya membayar Website dan SEO. Modul lain bisa ditambahkan belakangan tanpa membangun ulang.</div>
+    </div>
+  </section>
+
+  <section id="brand">
+    <div class="wrap">
+      <span class="eyebrow">Langkah pertama · termasuk di modul Website</span>
+      <h2>Guideline Anda, jadi sistem yang hidup.</h2>
+      <p class="sub">Brand guideline yang Anda kirim — Ivory, Mineral, Ink Blue, Charcoal, Copper; Canela dan Satoshi; garis orbit — kami terjemahkan jadi design system digital. Website, backoffice, email, dan kartu sertifikat memakai aturan yang sama.</p>
+      <div class="brand-step">
+        <a class="demo-card" href="../../jewelree/brand.html" target="_blank" rel="noopener">
+          <div class="shot"><iframe src="../../jewelree/brand.html" title="Pratinjau brand guideline" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+          <div class="demo-body"><h3>Brand guideline online <span class="go">Buka ↗</span></h3><p class="try">Bisa dibagikan ke fotografer, percetakan kemasan, dan agensi iklan.</p></div>
+        </a>
+        <div>
+          <h3>Yang Anda dapat</h3>
+          <div class="swatches" aria-hidden="true"><i style="background:#F7F2E4"></i><i style="background:#BDB8AE"></i><i style="background:#1E3A5F"></i><i style="background:#2B2B2B"></i><i style="background:#B87333"></i></div>
+          <ul class="ticks">
+            <li>Guideline online: logo, monogram, clear space, warna, tipografi, garis orbit, kemasan.</li>
+            <li>Design system untuk web: tombol, kartu produk, form, email transaksi.</li>
+            <li>Template kartu provenance dengan QR untuk modul Cek Keaslian.</li>
+            <li>Ikon app dan splash screen untuk modul PWA.</li>
+          </ul>
+          <div class="callout"><b>Catatan font:</b> demo memakai Cormorant Garamond &amp; Manrope sebagai pengganti. Versi live memakai Canela &amp; Satoshi — lisensi web font dibeli atas nama Jewelree.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contoh">
+    <div class="wrap">
+      <span class="eyebrow">Contoh yang sudah jalan</span>
+      <h2>Jangan percaya kata-kata. Coba sendiri.</h2>
+      <p class="sub">Semua layar di bawah sudah bisa diklik, memakai brand Jewelree. Data tersimpan di browser Anda, jadi aman dicoba — termasuk checkout (pembayaran disimulasikan).</p>
+      <div class="demos">
+        <a class="demo-card" href="../../jewelree/index.html" target="_blank" rel="noopener">
+          <div class="shot"><iframe src="../../jewelree/index.html" title="Pratinjau website" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+          <div class="demo-body"><div class="mods"><span>A · Website</span><span>E · PWA</span></div><h3>Website &amp; katalog <span class="go">Buka ↗</span></h3>
+            <p class="try"><b>Coba di HP:</b> filter koleksi, simpan piece ke wishlist, lalu tekan “Pasang app” untuk memasangnya di layar utama.</p></div>
+        </a>
+        <a class="demo-card" href="../../jewelree/product.html?p=orbit-pendant" target="_blank" rel="noopener">
+          <div class="shot"><iframe src="../../jewelree/product.html?p=orbit-pendant" title="Pratinjau halaman produk" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+          <div class="demo-body"><div class="mods"><span>B · Toko online</span></div><h3>Produk, keranjang &amp; checkout <span class="go">Buka ↗</span></h3>
+            <p class="try"><b>Coba:</b> pilih ukuran Celeste Ring, checkout dengan kode <b>ORIGIN5</b>, bayar QRIS. Sertifikat keaslian langsung terbit.</p></div>
+        </a>
+        <a class="demo-card" href="../../jewelree/verify.html?code=JW-9ZQE-1LTR" target="_blank" rel="noopener">
+          <div class="shot"><iframe src="../../jewelree/verify.html?code=JW-7K2Q-9M4A" title="Pratinjau cek keaslian" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+          <div class="demo-body"><div class="mods"><span>G · Cek keaslian</span></div><h3>Cek keaslian <span class="go">Buka ↗</span></h3>
+            <p class="try"><b>Coba:</b> kode <b>JW-7K2Q-9M4A</b> (asli), <b>JW-9ZQE-1LTR</b> (disalin, dicek dari 6 kota), atau kode asal.</p></div>
+        </a>
+        <a class="demo-card" href="../../jewelree/member.html" target="_blank" rel="noopener">
+          <div class="shot"><iframe src="../../jewelree/member.html" title="Pratinjau membership" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+          <div class="demo-body"><div class="mods"><span>F · Membership</span></div><h3>Membership <span class="go">Buka ↗</span></h3>
+            <p class="try"><b>Coba:</b> masuk dengan nomor apa saja, kode demo <b>246810</b>. Lihat kartu member, poin, sertifikat, dan tukar poin.</p></div>
+        </a>
+        <a class="demo-card" href="../../jewelree/journal.html" target="_blank" rel="noopener">
+          <div class="shot"><iframe src="../../jewelree/journal.html" title="Pratinjau journal" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+          <div class="demo-body"><div class="mods"><span>D · SEO &amp; growth</span></div><h3>Journal (blog SEO) <span class="go">Buka ↗</span></h3>
+            <p class="try"><b>Coba:</b> buka satu artikel — ada “Shop the story” yang mengarahkan pembaca ke produk.</p></div>
+        </a>
+        <a class="demo-card" href="../../jewelree/backoffice.html" target="_blank" rel="noopener">
+          <div class="shot"><iframe src="../../jewelree/backoffice.html" title="Pratinjau backoffice" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+          <div class="demo-body"><div class="mods"><span>C · Backoffice</span></div><h3>Backoffice owner <span class="go">Buka ↗</span></h3>
+            <p class="try"><b>Coba:</b> setelah checkout di toko, buka Pesanan — pesanan Anda ada di sana. Lihat juga Sertifikat dan Journal &amp; SEO.</p></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="modul">
+    <div class="wrap">
+      <span class="eyebrow">Modul</span>
+      <h2>Tujuh modul. Bayar yang dipakai.</h2>
+      <p class="sub">Website adalah fondasi. Modul lain dipasang di atasnya. Toko online, Membership, dan Cek Keaslian butuh Backoffice untuk mengelola datanya — kalkulator di bawah menambahkannya otomatis.</p>
+      <div class="modules" id="modules"></div>
+    </div>
+  </section>
+
+  <section id="hitung">
+    <div class="wrap">
+      <span class="eyebrow">Kalkulator</span>
+      <h2>Hitung paket Anda.</h2>
+      <p class="sub">Centang modul yang dibutuhkan. Harga, waktu pengerjaan, dan termin pembayaran langsung menyesuaikan. Pilihan bisa dikirim balik ke kami lewat link.</p>
+      <form class="calc no-print" id="calc" aria-labelledby="calc-title">
+        <div>
+          <h3 id="calc-title">Pilih modul</h3>
+          <div class="presets"><button type="button" data-preset="a,d">Mulai ramping</button><button type="button" data-preset="a,b,c,d">Toko online</button><button type="button" data-preset="a,b,c,d,e,f,g">Lengkap</button></div>
+          <div class="picks" id="picks"></div>
+          <label class="pick retainer"><input type="checkbox" id="ret"><div><b>Konten &amp; SEO bulanan</b><small>Opsional, setelah go-live: 4 artikel/bulan, optimasi halaman, laporan bulanan. Bisa berhenti kapan saja.</small></div><span class="amt">Rp 4 jt/bln</span></label>
+        </div>
+        <div class="result" aria-live="polite">
+          <div id="lines"></div>
+          <hr>
+          <small>Total sekali bayar</small>
+          <div class="total" id="total">—</div>
+          <div class="time" id="time">—</div>
+          <small id="time-note"></small>
+          <hr>
+          <small>Termin pembayaran</small>
+          <div class="terms" id="terms"></div>
+          <small id="monthly"></small>
+          <div class="share"><button type="button" id="copy">Salin link pilihan</button><button type="button" id="wa">Kirim via WhatsApp</button></div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section id="seo">
+    <div class="wrap">
+      <span class="eyebrow">Modul D · SEO &amp; growth</span>
+      <h2>Cara menang di internet.</h2>
+      <p class="sub">Iklan berhenti saat budget habis. Google tidak. Strateginya: muncul saat orang mencari, buktikan keaslian, lalu ukur setiap rupiah iklan sampai ke transaksi.</p>
+      <div class="pillars">
+        <div class="pillar"><span>01</span><b>Ditemukan</b><p>SEO teknis (kecepatan, schema Product/Article/JewelryStore, sitemap), halaman koleksi per kata kunci, dan Google Business Profile untuk atelier.</p></div>
+        <div class="pillar"><span>02</span><b>Dipercaya</b><p>Journal yang menjawab pertanyaan sebelum membeli: sertifikat, kadar, perawatan, ukuran. Cek keaslian jadi bukti, bukan janji.</p></div>
+        <div class="pillar"><span>03</span><b>Diukur</b><p>GA4 + Search Console + Meta Pixel dengan event lengkap: lihat produk, tambah ke keranjang, checkout, bayar. Tahu kanal mana yang menghasilkan uang.</p></div>
+        <div class="pillar"><span>04</span><b>Kembali</b><p>Member, poin, dan notifikasi PWA mengubah pembeli sekali jadi pelanggan. Pembeli yang kembali jauh lebih murah daripada pembeli baru.</p></div>
+      </div>
+      <div class="plan">
+        <div><h4>Hari 1–30</h4><b>Fondasi</b><ul><li>Riset kata kunci &amp; peta halaman</li><li>Pasang GA4, Search Console, Pixel</li><li>Schema &amp; sitemap, kecepatan &lt; 2,5 dtk</li><li>Google Business Profile atelier</li></ul></div>
+        <div><h4>Hari 31–60</h4><b>Konten</b><ul><li>4 artikel journal pembuka</li><li>Halaman koleksi per kata kunci</li><li>Internal link ke produk</li><li>Ulasan pelanggan di Google</li></ul></div>
+        <div><h4>Hari 61–90</h4><b>Optimasi</b><ul><li>Laporan: kanal → transaksi</li><li>Perbaiki halaman yang hampir di halaman 1</li><li>Retargeting pengunjung produk</li><li>Rencana konten kuartal berikutnya</li></ul></div>
+      </div>
+      <div class="kpis"><div><b>Halaman 1</b><span>untuk kata kunci merek &amp; produk inti</span></div><div><b>Tiap rupiah iklan</b><span>terlacak sampai transaksi</span></div><div><b>Organik</b><span>jadi kanal yang terus tumbuh</span></div><div><b>Laporan bulanan</b><span>dalam bahasa bisnis, bukan istilah teknis</span></div></div>
+      <div class="callout"><b>Jujur soal SEO:</b> peringkat Google butuh 3–6 bulan dan tidak ada yang bisa menjaminnya. Yang kami jamin adalah fondasi teknis yang benar, konten awal, dan pengukuran yang membuat keputusan iklan berbasis data.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">Modul E &amp; G</span>
+      <h2>Terasa seperti app. Terbukti asli.</h2>
+      <div class="explain">
+        <div>
+          <h3>PWA: app tanpa App Store</h3>
+          <p class="sub" style="font-size:.95rem">Website yang bisa dipasang di layar utama HP. Satu kode untuk web, Android, dan iPhone.</p>
+          <table class="compare">
+            <thead><tr><th></th><th>Website biasa</th><th>PWA</th><th>App native</th></tr></thead>
+            <tbody>
+              <tr><td>Ikon di layar utama</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+              <tr><td>Katalog saat offline</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+              <tr><td>Notifikasi koleksi baru</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+              <tr><td>Ditemukan di Google</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr>
+              <tr><td>Tanpa review App Store</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr>
+              <tr><td>Biaya</td><td>—</td><td>+ Rp 4 jt</td><td>Rp 80 jt+</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size:.8rem;color:var(--muted);margin-top:10px">Notifikasi di iPhone membutuhkan iOS 16.4+ dan app sudah dipasang di layar utama.</p>
+        </div>
+        <div>
+          <h3>Cek keaslian berkode unik</h3>
+          <ol class="steps" style="margin-top:14px">
+            <li><b>Backoffice menerbitkan kode</b> untuk setiap piece (otomatis saat pesanan dibayar), lengkap dengan nomor seri, pengrajin, dan berat.</li>
+            <li><b>Kode dicetak di kartu provenance</b> dengan QR, masuk ke kotak bersama piece.</li>
+            <li><b>Pembeli scan atau ketik kodenya</b> dan melihat detail piece, lalu mendaftarkan kepemilikan atas namanya.</li>
+            <li><b>Setiap cek dicatat.</b> Kode yang dicek dari banyak kota dalam waktu singkat ditandai sebagai kemungkinan salinan.</li>
+          </ol>
+          <div class="callout">Berguna juga di pasar barang bekas: pembeli kedua bisa memastikan keaslian sebelum membayar — dan itu menjaga harga jual kembali Jewelree.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="harga">
+    <div class="wrap">
+      <span class="eyebrow">Investasi</span>
+      <h2>Harga, termin, dan biaya berjalan</h2>
+      <div class="numbers">
+        <div class="num"><b>Rp 12 jt</b><span>Paling ramping: Website saja</span><small>Estimasi komersial Arketype, 14 Oktober 2026; scope modul A di proposal ini.</small></div>
+        <div class="num"><b id="n-shop">Rp 39 jt</b><span>Toko online: A + B + C + D</span><small>Penjumlahan estimasi modul Arketype, 14 Oktober 2026.</small></div>
+        <div class="num dark"><b id="n-full">Rp 54 jt</b><span>Lengkap, 7 modul</span><small>Rp 60 jt dikurangi diskon paket 10%; estimasi Arketype, 14 Oktober 2026.</small></div>
+      </div>
+      <div class="callout"><b>Sekali bayar untuk pembangunan.</b> Kode dan data milik Jewelree. Yang berjalan bulanan hanya biaya pihak ketiga di bawah — dibayar langsung ke penyedianya, bukan ke kami.</div>
+
+      <h3 style="margin-top:44px">Termin pembayaran</h3>
+      <div class="split" role="img" aria-label="Termin: 40% saat disetujui, 30% saat demo staging, 30% saat go-live">
+        <div style="flex:40;background:var(--ink)">40% · disetujui</div>
+        <div style="flex:30;background:var(--copper)">30% · demo staging</div>
+        <div style="flex:30;background:var(--charcoal)">30% · go-live</div>
+      </div>
+      <ul class="dots">
+        <li><b>40%</b> saat scope dan proposal disetujui.</li>
+        <li><b>30%</b> saat semua modul yang dipilih bisa dicoba di staging.</li>
+        <li><b>30%</b> setelah go-live dan handover.</li>
+        <li>Perubahan besar setelah scope disetujui dihitung terpisah supaya timeline tidak geser diam-diam.</li>
+      </ul>
+
+      <h3 style="margin-top:44px">Biaya berjalan (dibayar Jewelree ke penyedia)</h3>
+      <table class="costs">
+        <thead><tr><th>Item</th><th>Untuk modul</th><th>Perkiraan</th></tr></thead>
+        <tbody>
+          <tr><td>Hosting, database &amp; penyimpanan foto</td><td>Semua</td><td>Rp 300–700 rb / bln</td></tr>
+          <tr><td>Domain (.com atau .id)</td><td>A</td><td>± Rp 250 rb / thn</td></tr>
+          <tr><td>Lisensi web font Canela &amp; Satoshi</td><td>A</td><td>Sesuai tarif foundry, sekali bayar</td></tr>
+          <tr><td>Biaya payment gateway (Midtrans / Xendit)</td><td>B</td><td>Per transaksi; QRIS ± 0,7%, VA ± Rp 4.000, kartu ± 2,9% — cek tarif terbaru</td></tr>
+          <tr><td>WhatsApp/SMS untuk kode login &amp; notifikasi</td><td>F, B</td><td>± Rp 300–700 / pesan</td></tr>
+          <tr><td>Cetak kartu provenance + QR</td><td>G</td><td>Sesuai percetakan</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:.82rem;color:var(--muted);margin-top:10px">Angka biaya berjalan adalah kisaran umum per Oktober 2026 dan bisa berubah sesuai penyedia; akan dikonfirmasi saat setup.</p>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <div class="wrap">
+      <span class="eyebrow">Cara kerja</span>
+      <h2>Apa yang terjadi, minggu demi minggu</h2>
+      <p class="sub">Contoh untuk paket lengkap (± 12 minggu). Paket yang lebih kecil memendekkan fase tengah — kalkulator di atas menghitung durasinya.</p>
+      <ol class="timeline">
+        <li><span class="wk">1</span><h3>Kunci scope &amp; design system</h3>
+          <p>Guideline jadi design system web. Kita kunci daftar produk, struktur koleksi, ongkir, metode bayar, aturan member, dan format kode keaslian. Riset kata kunci dimulai.</p>
+          <div class="them"><b>Dari Anda:</b> foto produk, data produk (nama, harga, kadar, berat), akun bank untuk payment gateway, dan 1 PIC pengambil keputusan.</div></li>
+        <li><span class="wk">2–4</span><h3>Website, katalog &amp; SEO teknis</h3>
+          <p>Homepage, koleksi, halaman produk, atelier, journal, GA4/Search Console/Pixel. Bisa dilihat di staging setiap minggu.</p>
+          <div class="them"><b>Dari Anda:</b> feedback maksimal 2 hari kerja.</div></li>
+        <li><span class="wk">5–8</span><h3>Backoffice, toko online &amp; membership</h3>
+          <p>Produk/stok, pesanan, checkout dengan payment gateway (mode sandbox), ongkir, login WhatsApp, poin, dan tingkat member. Demo staging lengkap di akhir minggu 8.</p>
+          <div class="them"><b>Dari Anda:</b> verifikasi akun payment gateway selesai (biasanya 3–10 hari kerja — mulai sejak minggu 1).</div></li>
+        <li><span class="wk">9–11</span><h3>Cek keaslian, PWA &amp; konten</h3>
+          <p>Penerbitan kode, kartu provenance, halaman cek, deteksi salinan. PWA terpasang dengan notifikasi. 4 artikel journal pembuka terbit.</p></li>
+        <li><span class="wk">12</span><h3>Uji, go-live &amp; handover</h3>
+          <p>Transaksi nyata dalam nominal kecil, cek di HP Android dan iPhone, migrasi data produk final, pelatihan tim, lalu go-live.</p>
+          <div class="them"><b>Garansi:</b> 30 hari perbaikan bug &amp; penyesuaian kecil setelah go-live.</div></li>
+      </ol>
+      <div class="callout"><b>Yang paling sering bikin mundur bukan coding:</b> foto produk belum siap, verifikasi payment gateway belum selesai, data berat/kadar belum lengkap, atau feedback telat. Empat hal itu bisa dikerjakan paralel sejak minggu pertama.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="eyebrow">Batas</span>
+      <h2>Yang belum termasuk</h2>
+      <div class="two">
+        <div class="panel"><h3>Termasuk</h3><ul class="ticks"><li>1 brand, 1 toko online, hingga 150 produk awal diinput.</li><li>Website responsif + PWA untuk Android &amp; iPhone.</li><li>Pelatihan tim dan dokumentasi singkat.</li><li>Kode sumber dan data milik Jewelree.</li></ul></div>
+        <div class="panel"><h3>Belum termasuk</h3><ul class="dots"><li>Pemotretan produk dan model</li><li>App native di Play Store / App Store</li><li>Integrasi marketplace (Tokopedia, Shopee) dan POS butik</li><li>Budget iklan Google/Meta</li><li>Multi-bahasa, multi-cabang, atau penjualan internasional</li></ul></div>
+      </div>
+      <p class="sub" style="margin-top:20px">Semua itu bisa jadi fase berikutnya setelah toko berjalan dan ada data pemakaian nyata.</p>
+    </div>
+  </section>
+
+  <section id="keputusan">
+    <div class="wrap">
+      <span class="eyebrow">Langkah berikutnya</span>
+      <h2>Keputusan yang perlu dipilih</h2>
+      <ol class="decisions">
+        <li>Modul mana yang diambil sekarang? (link dari kalkulator)</li>
+        <li>Payment gateway: Midtrans atau Xendit?</li>
+        <li>Siapa PIC yang mengunci produk, foto, dan feedback?</li>
+        <li>Kapan target go-live — ada momen koleksi atau hari besar?</li>
+      </ol>
+      <div class="closing">
+        <svg class="orbits" viewBox="0 0 400 400" fill="none" stroke="currentColor" stroke-width=".7" aria-hidden="true"><circle cx="200" cy="200" r="150"/><ellipse cx="200" cy="200" rx="190" ry="70" transform="rotate(-20 200 200)"/><ellipse cx="200" cy="200" rx="170" ry="110" transform="rotate(35 200 200)"/></svg>
+        <div>
+          <h2>Empat jawaban, lalu minggu 1 dimulai.</h2>
+          <p>Kirim pilihan modul dari kalkulator, jawab empat keputusan di atas, dan kita kunci scope di minggu pertama.</p>
+        </div>
+        <div class="actions no-print">
+          <a href="#hitung" class="btn btn-gold">Hitung ulang paket</a>
+          <a href="../../jewelree/index.html" target="_blank" rel="noopener" class="btn btn-line">Buka demo toko</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="logo" id="foot-logo"></span>
+    <span style="opacity:.7">Proposal Jewelree Digital · Estimasi per 14 Oktober 2026</span>
+    <button class="btn btn-gold no-print" onclick="window.print()" style="padding:11px 18px">Simpan sebagai PDF</button>
+  </div>
+</footer>
+<div class="toast" role="status" id="toast"></div>
+
+<script>
+  const MONO = `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="50" cy="50" r="44" stroke-width="2.2"/><ellipse cx="50" cy="50" rx="47" ry="17" transform="rotate(-28 50 50)" stroke-width="1.1" opacity=".75"/><path d="M41 27h22M56 27v36c0 9-6 14-13 14-6 0-10-4-11-9" stroke-width="5.2" stroke-linecap="round"/></svg>`;
+  const lockup = `<span class="mono">${MONO}</span><span class="word"><b>JEWELREE</b><small>ATELIER</small></span>`;
+  document.getElementById("nav-logo").innerHTML = lockup;
+  document.getElementById("foot-logo").innerHTML = lockup;
+  document.querySelector("#foot-logo .mono").style.color = "var(--gold)";
+
+  // ───────── Modules: one source for the cards, calculator, and summary numbers ─────────
+  // price in Rp juta (one-time), weeks = extra build weeks on top of the website.
+  const MODULES = [
+    { id: "a", name: "Website & katalog", who: "Fondasi · wajib", price: 12, weeks: 4, base: true,
+      items: ["Homepage, halaman koleksi, halaman produk, atelier/story, kontak & WhatsApp", "Design system dari brand guideline + guideline online", "Responsif HP/tablet/desktop, cepat (target &lt; 2,5 dtk)", "Editor konten ringan untuk banner & teks"], foot: "Termasuk 1 minggu kunci scope dan 1 minggu uji & go-live." },
+    { id: "b", name: "Toko online & checkout", who: "Keranjang sampai uang masuk", price: 12, weeks: 2, needs: ["c"],
+      items: ["Keranjang, ukuran cincin, wishlist, kode promo", "Payment gateway: QRIS dinamis, Virtual Account, kartu, cicilan 0% — status bayar otomatis", "Ongkir berasuransi, same-day, ambil di atelier", "Notifikasi pesanan via email/WhatsApp"], foot: "<b>Butuh Backoffice (C)</b> untuk mengelola pesanan dan stok." },
+    { id: "c", name: "Backoffice", who: "Owner pegang kontrol", price: 8, weeks: 2,
+      items: ["Dasbor omzet, pesanan, AOV, conversion, kanal penjualan", "Produk & stok, harga, tampil/sembunyi", "Pesanan: status, resi, cetak", "Pelanggan, akses tim (owner/admin/staf), export CSV"], foot: "Otomatis ikut bila memilih B, F, atau G." },
+    { id: "d", name: "SEO & growth kit", who: "Ditemukan, dipercaya, diukur", price: 7, weeks: 0,
+      items: ["GA4, Search Console, Meta Pixel + event e-commerce", "SEO teknis: schema, sitemap, meta, kecepatan", "Journal/blog dengan checklist SEO + 4 artikel pembuka", "Riset kata kunci, Google Business Profile, playbook 90 hari"], foot: "Dikerjakan paralel — tidak menambah durasi." },
+    { id: "e", name: "PWA (app di layar utama)", who: "Rasa app, tanpa App Store", price: 4, weeks: 1,
+      items: ["Bisa dipasang di Android & iPhone, layar penuh", "Katalog tetap terbuka saat offline", "Notifikasi koleksi baru & status pesanan", "Ikon app dan splash screen sesuai brand"], foot: "Satu kode untuk web dan app." },
+    { id: "f", name: "Membership", who: "Pembeli jadi pelanggan", price: 10, weeks: 2, needs: ["c"],
+      items: ["Login WhatsApp OTP, tanpa password", "Tingkat Ivory → Copper → Ink, naik otomatis", "Poin, tukar hadiah, harga member, hadiah ulang tahun", "Riwayat pesanan, wishlist, sertifikat milik member"], foot: "<b>Butuh Backoffice (C)</b>. Biaya pesan OTP ditanggung toko." },
+    { id: "g", name: "Cek keaslian", who: "Bukti, bukan janji", price: 7, weeks: 1, needs: ["c"],
+      items: ["Kode unik per piece, terbit otomatis saat pesanan dibayar", "Template kartu provenance + QR siap cetak", "Halaman cek publik + daftarkan kepemilikan", "Log setiap cek, deteksi salinan, cabut sertifikat"], foot: "<b>Butuh Backoffice (C)</b> untuk menerbitkan dan mengelola kode." },
+  ];
+  const BUNDLE = { min: 7, rate: 0.10 }; // all seven modules → 10% off
+  const RETAINER = 4;
+  const byId = Object.fromEntries(MODULES.map((m) => [m.id, m]));
+  const jt = (n) => "Rp " + n.toLocaleString("id-ID", { maximumFractionDigits: 1 }) + " jt";
+
+  document.getElementById("modules").innerHTML = MODULES.map((m) => `<article class="module ${m.base ? "base" : ""}">
+    <header><div style="display:flex;gap:14px"><span class="letter">${m.id.toUpperCase()}</span><div><h3>${m.name}</h3><span class="who">${m.who}</span></div></div>
+      <div class="price-tag"><b>${m.base ? "" : "+ "}${jt(m.price)}</b><small>${m.weeks ? "+" + m.weeks + " minggu" : "paralel"}</small></div></header>
+    <ul class="ticks">${m.items.map((i) => `<li>${i}</li>`).join("")}</ul>
+    <p class="foot">${m.foot}</p></article>`).join("");
+
+  function quote(sel) {
+    const chosen = new Set(sel); chosen.add("a");
+    const forced = new Set();
+    MODULES.forEach((m) => chosen.has(m.id) && (m.needs || []).forEach((n) => { if (!chosen.has(n)) forced.add(n); chosen.add(n); }));
+    const list = MODULES.filter((m) => chosen.has(m.id));
+    const subtotal = list.reduce((s, m) => s + m.price, 0);
+    const discount = list.length >= BUNDLE.min ? Math.round(subtotal * BUNDLE.rate * 10) / 10 : 0;
+    const weeks = list.reduce((s, m) => s + m.weeks, 0);
+    return { list, chosen, subtotal, discount, total: subtotal - discount, weeks };
+  }
+  const full = quote(MODULES.map((m) => m.id));
+  document.getElementById("sum-full").textContent = jt(full.total);
+  document.getElementById("n-full").textContent = jt(full.total);
+  document.getElementById("n-shop").textContent = jt(quote(["a", "b", "c", "d"]).total);
+
+  // ───────── Calculator ─────────
+  const picks = document.getElementById("picks");
+  picks.innerHTML = MODULES.map((m) => `<label class="pick" data-id="${m.id}"><input type="checkbox" value="${m.id}" ${m.base ? "checked disabled" : ""}>
+    <div><b>${m.id.toUpperCase()} · ${m.name}</b><small class="note">${m.base ? "Fondasi, selalu termasuk" : m.who}</small></div><span class="amt">${jt(m.price)}</span></label>`).join("");
+  const boxes = [...picks.querySelectorAll("input")];
+  let userSel = new Set();
+
+  function fromHash() {
+    const m = location.hash.match(/pilih=([a-g,]+)/);
+    if (m) userSel = new Set(m[1].split(",").filter((x) => byId[x] && x !== "a"));
+    const r = location.hash.match(/konten=1/); document.getElementById("ret").checked = !!r;
+  }
+  function render(share = true) {
+    const q = quote([...userSel]);
+    const neededBy = (id) => MODULES.filter((m) => userSel.has(m.id) && (m.needs || []).includes(id)).map((m) => m.id.toUpperCase());
+    boxes.forEach((b) => {
+      const m = byId[b.value]; if (m.base) return;
+      const req = neededBy(m.id);
+      b.checked = q.chosen.has(m.id);
+      b.disabled = req.length > 0 && !userSel.has(m.id);
+      const note = b.closest(".pick").querySelector(".note");
+      note.textContent = req.length ? `Dibutuhkan oleh ${req.join(", ")}` : m.who;
+      note.classList.toggle("req", req.length > 0);
+    });
+    document.getElementById("lines").innerHTML = q.list.map((m) => `<div class="row"><span>${m.id.toUpperCase()} · ${m.name}</span><span>${jt(m.price)}</span></div>`).join("") +
+      (q.discount ? `<div class="row disc"><span>Diskon paket lengkap 10%</span><span>− ${jt(q.discount)}</span></div>` : `<div class="row" style="opacity:.6"><span>Ambil ketujuh modul: diskon 10%</span><span></span></div>`);
+    document.getElementById("total").textContent = jt(q.total);
+    document.getElementById("time").textContent = `± ${q.weeks} minggu`;
+    document.getElementById("time-note").textContent = q.weeks <= 4 ? "Termasuk kunci scope, uji, dan go-live." : `4 minggu website + ${q.weeks - 4} minggu modul tambahan. SEO berjalan paralel.`;
+    document.getElementById("terms").innerHTML = [[40, "disetujui"], [30, "staging"], [30, "go-live"]].map(([p, n]) => `<div><b>${jt(Math.round(q.total * p) / 100)}</b><span>${p}% · ${n}</span></div>`).join("");
+    const ret = document.getElementById("ret").checked;
+    document.getElementById("monthly").textContent = ret ? `+ ${jt(RETAINER)}/bulan untuk konten & SEO setelah go-live (opsional, bisa berhenti kapan saja).` : "";
+    const hash = `pilih=${[...q.chosen].sort().join(",")}${ret ? "&konten=1" : ""}`;
+    if (share) history.replaceState(null, "", "#" + hash);
+    return { q, ret };
+  }
+  boxes.forEach((b) => b.addEventListener("change", () => { b.checked ? userSel.add(b.value) : userSel.delete(b.value); render(); }));
+  document.getElementById("ret").addEventListener("change", render);
+  document.querySelectorAll("[data-preset]").forEach((b) => b.addEventListener("click", () => { userSel = new Set(b.dataset.preset.split(",").filter((x) => x !== "a")); render(); }));
+
+  const toast = (msg) => { const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 2200); };
+  const summaryText = () => { const { q, ret } = render(); return `Jewelree — pilihan modul:\n${q.list.map((m) => `• ${m.id.toUpperCase()} ${m.name} (${jt(m.price)})`).join("\n")}${q.discount ? `\n• Diskon paket −${jt(q.discount)}` : ""}\nTotal: ${jt(q.total)} · ± ${q.weeks} minggu${ret ? `\n+ Konten & SEO ${jt(RETAINER)}/bulan` : ""}\n${location.href}`; };
+  document.getElementById("copy").addEventListener("click", async () => { render(); try { await navigator.clipboard.writeText(location.href); toast("Link pilihan disalin"); } catch { toast("Salin link dari address bar"); } });
+  document.getElementById("wa").addEventListener("click", () => window.open("https://wa.me/?text=" + encodeURIComponent(summaryText()), "_blank", "noopener"));
+
+  fromHash(); render(false);
+  // A shared selection link opens straight at the calculator.
+  if (location.hash.includes("pilih=")) document.getElementById("hitung").scrollIntoView();
+
+  // Scale the live demo previews (rendered at 1280×800) to fit their cards.
+  const fit = () => document.querySelectorAll(".shot").forEach((el) => { const f = el.querySelector("iframe"); if (f) f.style.transform = `scale(${el.clientWidth / 1280})`; });
+  new ResizeObserver(fit).observe(document.body); fit();
+</script>
+</body>
+</html>
