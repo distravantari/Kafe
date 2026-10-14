@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grobak — Sate Hangat, Orang Beneran</title>
+  <meta name="description" content="Grobak: gerobak sate ayam, kambing dan taichan. Cek lokasi mangkal malam ini dan pesan lewat WhatsApp.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Mali:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="assets/mascot.svg">
+  <style>
+    body { background: #fff; }
+    .squig { position: absolute; width: 56px; height: 24px; }
+    .squig path { fill: none; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Nav */
+    .nav { position: sticky; top: 0; z-index: 20; background: #fff; border-bottom: 2px solid var(--brick); }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+    .nav .logo { font-size: 1.8rem; }
+    .nav ul { display: flex; gap: 24px; list-style: none; font-family: var(--font-display); font-weight: 600; }
+    .nav ul a { text-decoration: none; }
+    .nav ul a:hover { color: var(--crema); }
+    .nav .btn { padding: 9px 18px; font-size: .95rem; }
+
+    /* Hero */
+    .hero { position: relative; overflow: hidden; padding: clamp(40px, 7vw, 88px) 0; border-bottom: 2px solid var(--brick); }
+    .hero .wrap { display: grid; grid-template-columns: 1.15fr 1fr; gap: 32px; align-items: center; }
+    .hero .logo { font-size: clamp(4.2rem, 14vw, 10rem); flex-direction: column; align-items: flex-start; line-height: .9; }
+    .hero .logo .bean { width: 1.1em; height: .4em; margin: .05em 0 0 .05em; }
+    .hero p { font-size: 1.15rem; max-width: 34ch; margin: 22px 0 28px; }
+    .hero .tag { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; letter-spacing: .14em; margin-top: 18px; }
+    .ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-art { position: relative; }
+    .hero-art [data-doodle="gerobak"] { width: 100%; }
+    .hero-art [data-mascot] { position: absolute; width: 34%; left: -22%; bottom: -26%; }
+
+    /* Tonight */
+    .tonight { background: var(--brick); color: var(--cream); }
+    .tonight .wrap { display: flex; gap: 18px 32px; align-items: center; justify-content: space-between; flex-wrap: wrap; padding-top: 22px; padding-bottom: 22px; }
+    .tonight b { font-family: var(--font-display); font-size: clamp(1.2rem, 2.6vw, 1.6rem); }
+    .tonight .live { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 600; text-transform: uppercase; letter-spacing: .12em; font-size: .8rem; color: var(--crema); }
+    .tonight .live::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--crema); animation: pulse 1.6s ease-in-out infinite; }
+    @keyframes pulse { 50% { opacity: .3; } }
+
+    section { padding: clamp(56px, 8vw, 100px) 0; position: relative; }
+    .head { text-align: center; margin-bottom: 40px; }
+    .head h2 { font-size: clamp(2.2rem, 5vw, 3.6rem); text-transform: uppercase; }
+    .head p { color: var(--oat); margin-top: 8px; }
+
+    /* Menu */
+    .menu { display: grid; grid-template-columns: repeat(4, 1fr); border: 2px solid var(--brick); border-radius: var(--radius); overflow: hidden; }
+    .menu > div { padding: 24px; border-right: 2px solid var(--brick); }
+    .menu > div:last-child { border-right: 0; }
+    .menu [data-doodle] { width: 56px; margin-bottom: 12px; }
+    .menu h3 { font-size: 1.3rem; text-transform: uppercase; margin-bottom: 12px; }
+    .menu li { list-style: none; display: flex; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1.5px dashed #d4d4d4; }
+    .menu li small { display: block; color: var(--oat); font-size: .8rem; }
+    .menu li span { font-family: var(--font-display); font-weight: 700; }
+    .menu li.hot span { color: var(--crema); }
+
+    /* Schedule */
+    .sched { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .spot { border: 2px solid var(--brick); border-radius: var(--radius); padding: 24px; }
+    .spot .days { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--cinnamon); font-size: .85rem; }
+    .spot h3 { font-size: 1.4rem; margin: 6px 0 4px; }
+    .spot p { color: var(--oat); font-size: .95rem; }
+    .spot.now { background: var(--brick); color: var(--cream); }
+    .spot.now .days { color: var(--crema); }
+    .spot.now p { color: var(--cream); opacity: .8; }
+
+    /* Order */
+    .order { border: 2px solid var(--brick); border-radius: var(--radius-lg); padding: clamp(28px, 5vw, 56px); display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: center; position: relative; }
+    .order h2 { font-size: clamp(2rem, 4.5vw, 3.2rem); text-transform: uppercase; margin-bottom: 12px; }
+    .order ol { list-style: none; counter-reset: s; display: grid; gap: 10px; margin: 18px 0 26px; }
+    .order li { counter-increment: s; display: flex; gap: 12px; align-items: baseline; }
+    .order li::before { content: counter(s); font-family: var(--font-display); font-weight: 700; color: var(--crema); }
+    .order [data-mascot] { max-width: 260px; margin: 0 auto; }
+
+    footer { border-top: 2px solid var(--brick); padding: 40px 0; }
+    footer .wrap { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; }
+    footer .logo { font-size: clamp(3rem, 10vw, 6rem); }
+    footer small { color: var(--oat); display: block; margin-top: 8px; }
+    footer nav { display: flex; gap: 18px; font-family: var(--font-display); font-weight: 600; flex-wrap: wrap; }
+
+    .btn-brick:hover { background: var(--crema); border-color: var(--crema); }
+    .btn-line { color: var(--brick); border-color: var(--brick); }
+    .btn-line:hover { background: var(--brick); color: var(--cream); }
+
+    @media (max-width: 860px) {
+      .nav ul { display: none; }
+      .hero .wrap, .order { grid-template-columns: 1fr; }
+      .hero-art { max-width: 420px; margin: 20px auto 0; }
+      .menu { grid-template-columns: 1fr 1fr; }
+      .menu > div:nth-child(2) { border-right: 0; }
+      .menu > div:nth-child(-n+2) { border-bottom: 2px solid var(--brick); }
+      .sched { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      .menu { grid-template-columns: 1fr; }
+      .menu > div { border-right: 0; border-bottom: 2px solid var(--brick); }
+      .menu > div:last-child { border-bottom: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { .tonight .live::before { animation: none; } }
+  </style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="squig" viewBox="0 0 46 20"><path d="M3 14c4-12 8 8 12-3s8 8 12-3 8 8 12-3"/></symbol>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="#" class="logo" aria-label="Grobak home">Grobak<span class="bean"></span></a>
+    <ul>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#mangkal">Mangkal</a></li>
+      <li><a href="#pesan">Pesan</a></li>
+      <li><a href="brand.html">Brand</a></li>
+      <li><a href="backoffice.html">Back office</a></li>
+    </ul>
+    <a href="#pesan" class="btn btn-brick">Pesan sekarang</a>
+  </div>
+</header>
+
+<section class="hero" style="padding-bottom:clamp(56px,8vw,100px)">
+  <svg class="squig" style="top:28px;right:6%;stroke:var(--crema)"><use href="#squig"/></svg>
+  <svg class="squig" style="bottom:28px;left:4%;stroke:var(--cinnamon)"><use href="#squig"/></svg>
+  <div class="wrap">
+    <div>
+      <span class="logo">Grobak<span class="bean"></span></span>
+      <p class="tag">Sate hangat. Orang beneran.</p>
+      <p>Sate ayam, kambing dan taichan dibakar di atas arang, dikipas tangan, langsung dari gerobak ke tangan Anda.</p>
+      <div class="ctas">
+        <a href="#menu" class="btn btn-brick">Lihat menu</a>
+        <a href="#mangkal" class="btn btn-line">Mangkal di mana?</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div data-doodle="gerobak" style="--accent:var(--crema)"></div>
+      <div data-mascot style="--accent:var(--crema)"></div>
+    </div>
+  </div>
+</section>
+
+<div class="tonight">
+  <div class="wrap">
+    <span class="live">Buka malam ini</span>
+    <b>Jl. Pemuda, depan minimarket · 16.00–23.00</b>
+    <a href="#pesan" class="btn btn-solid" style="padding:10px 18px;font-size:.95rem">Pesan via WhatsApp</a>
+  </div>
+</div>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="head"><h2>Menu</h2><p>Harga dalam ribuan rupiah. 10 tusuk per porsi kecuali disebut lain.</p></div>
+    <div class="menu">
+      <div><div data-doodle="sate"></div><h3>Sate</h3><ul>
+        <li class="hot"><div>Ayam<small>Bumbu kacang</small></div><span>25</span></li>
+        <li><div>Kambing<small>Kecap &amp; bawang</small></div><span>40</span></li>
+        <li><div>Taichan<small>Sambal &amp; jeruk nipis</small></div><span>25</span></li>
+        <li><div>Padang<small>Kuah kuning</small></div><span>30</span></li>
+        <li><div>Kulit<small>Garing</small></div><span>18</span></li>
+      </ul></div>
+      <div><div data-doodle="paket" style="color:var(--crema)"></div><h3>Paket</h3><ul>
+        <li><div>Hemat<small>5 sate + lontong + es teh</small></div><span>25</span></li>
+        <li class="hot"><div>Kenyang<small>10 sate + nasi + es jeruk</small></div><span>35</span></li>
+        <li><div>Rame-rame<small>30 sate + 3 lontong</small></div><span>75</span></li>
+      </ul></div>
+      <div><div data-doodle="side"></div><h3>Pendamping</h3><ul>
+        <li><div>Lontong</div><span>5</span></li>
+        <li><div>Nasi putih</div><span>5</span></li>
+        <li><div>Kerupuk</div><span>2</span></li>
+        <li><div>Telur asin</div><span>6</span></li>
+      </ul></div>
+      <div><div data-doodle="drink" style="color:var(--cinnamon)"></div><h3>Minum</h3><ul>
+        <li><div>Es teh manis</div><span>5</span></li>
+        <li><div>Es jeruk</div><span>8</span></li>
+        <li><div>Teh botol</div><span>6</span></li>
+        <li><div>Air mineral</div><span>4</span></li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="mangkal" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><h2>Mangkal di mana?</h2><p>Gerobak pindah-pindah. Ini jadwal tetapnya.</p></div>
+    <div class="sched">
+      <div class="spot now"><span class="days">Senin – Kamis</span><h3>Jl. Pemuda</h3><p>Depan minimarket · 16.00–23.00</p></div>
+      <div class="spot"><span class="days">Jumat – Sabtu</span><h3>Alun-alun Kota</h3><p>Sisi timur, dekat parkir motor · 17.00–24.00</p></div>
+      <div class="spot"><span class="days">Minggu</span><h3>Car Free Day</h3><p>Pagi 06.00–10.00 · malam libur</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="pesan" style="padding-top:0">
+  <div class="wrap">
+    <div class="order">
+      <svg class="squig" style="top:20px;right:20px;stroke:var(--crema)"><use href="#squig"/></svg>
+      <div>
+        <h2>Pesan dulu, ambil panas</h2>
+        <p>Antre di gerobak itu seru, tapi kalau buru-buru:</p>
+        <ol>
+          <li>Kirim pesanan lewat WhatsApp.</li>
+          <li>Bayar QRIS — kami kirim kode-nya.</li>
+          <li>Datang, sebut nomor pesanan, sate sudah dibungkus.</li>
+        </ol>
+        <a href="#" class="btn btn-brick" onclick="return false">Chat WhatsApp</a>
+      </div>
+      <div data-mascot style="--accent:var(--crema)"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <span class="logo">Grobak<span class="bean"></span></span>
+      <small>© 2026 Grobak. Sate hangat, orang beneran.</small>
+    </div>
+    <nav><a href="#menu">Menu</a><a href="#mangkal">Mangkal</a><a href="brand.html">Brand</a><a href="pos.html">POS</a></nav>
+  </div>
+</footer>
+
+<script src="mascot.js"></script>
+</body>
+</html>

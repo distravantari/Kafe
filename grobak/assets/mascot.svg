@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Pak Grobak: the satay seller, holding up a fresh skewer -->
+  <path d="M44 200c4-28 24-42 50-42s44 12 48 42" fill="var(--mascot-fill, none)"/>
+  <path d="M53 108a42 48 0 1 0 84 0a42 48 0 1 0-84 0z" fill="var(--mascot-fill, none)"/>
+  <path d="M137 106c10-5 14 10 2 14"/>
+  <path d="M51 98c-7-18 5-34 18-34 2-12 21-16 29-8 8-10 28-6 30 8 14 0 20 16 12 28-8-6-16-6-22-2-6-8-18-8-24 0-8-6-20-4-26 6-6-4-12-4-17 2z" fill="currentColor"/>
+  <circle cx="80" cy="110" r="4" fill="currentColor" stroke="none"/>
+  <circle cx="108" cy="110" r="4" fill="currentColor" stroke="none"/>
+  <path d="M95 112c-5 10-7 19 2 21 6 1 10-2 10-2"/>
+  <path d="M82 142c7 6 18 6 24 0"/>
+  <!-- skewer -->
+  <path d="M152 176l26-150"/>
+  <rect x="164" y="54" width="20" height="16" rx="6" transform="rotate(10 174 62)" fill="var(--mascot-fill, none)"/>
+  <rect x="160" y="76" width="20" height="16" rx="6" transform="rotate(10 170 84)" fill="var(--mascot-fill, none)"/>
+  <rect x="156" y="98" width="20" height="16" rx="6" transform="rotate(10 166 106)" fill="var(--mascot-fill, none)"/>
+  <path d="M164 30c-7-7 7-11 0-20M184 34c-7-7 7-11 0-20" stroke="var(--accent, currentColor)"/>
+  <circle cx="152" cy="160" r="13" fill="var(--mascot-fill, none)"/>
+</svg>

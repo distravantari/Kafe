@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 170" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+  <!-- The gerobak: roof, grill, skewers, smoke, one big wheel -->
+  <path d="M28 34h176l-12-18H40z" fill="var(--mascot-fill, none)"/>
+  <path d="M44 34v48M188 34v48"/>
+  <path d="M58 82V70h70v12"/>
+  <path d="M68 70l-8-18M84 70l-8-18M100 70l-8-18M116 70l-8-18"/>
+  <path d="M84 46c-7-7 7-11 0-20M104 46c-7-7 7-11 0-20" stroke="var(--accent, currentColor)"/>
+  <rect x="28" y="82" width="166" height="48" rx="8" fill="var(--mascot-fill, none)"/>
+  <path d="M146 96h32M146 112h22"/>
+  <path d="M194 98h34l6 8"/>
+  <path d="M178 130v26"/>
+  <circle cx="72" cy="140" r="20" fill="var(--mascot-fill, none)"/>
+  <circle cx="72" cy="140" r="4" fill="currentColor"/>
+</svg>
