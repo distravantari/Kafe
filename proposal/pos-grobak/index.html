@@ -248,7 +248,7 @@
 <main>
   <div class="wrap">
     <div class="summary" aria-label="Ringkasan">
-      <div><b>Rp 10 jt</b><span>POS inti, 1 gerobak</span></div>
+      <div><b>Rp 10 jt</b><span>sekali bayar, tanpa langganan</span></div>
       <div><b>4 minggu</b><span>sampai go-live</span></div>
       <div><b>50 / 50</b><span>bayar bertahap</span></div>
       <div><b>14 hari</b><span>perbaikan bug &amp; penambahan fitur setelah go-live</span></div>
@@ -329,11 +329,6 @@
           <div class="demo-body"><span class="scope">Fase inti</span><h3>Backoffice owner <span class="go">Buka ↗</span></h3>
             <p class="try"><b>Coba:</b> lihat omzet hari ini, tandai satu menu “habis”, lalu buka POS — menunya langsung tidak bisa dipesan.</p></div>
         </a>
-        <a class="demo-card" href="../../grobak/kitchen.html" target="_blank" rel="noopener">
-          <div class="shot"><iframe src="../../grobak/kitchen.html?demo" title="Pratinjau layar bakaran" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
-          <div class="demo-body"><span class="scope extra">Fase berikutnya</span><h3>Layar bakaran <span class="go">Buka ↗</span></h3>
-            <p class="try"><b>Coba:</b> klik “+ Pesanan tes”, centang item, lalu geser ke Siap. Tidak termasuk fase inti — ditambah jika tukang bakar dan kasir dipegang orang berbeda.</p></div>
-        </a>
         <a class="demo-card" href="../../grobak/index.html" target="_blank" rel="noopener">
           <div class="shot"><iframe src="../../grobak/index.html" title="Pratinjau website" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
           <div class="demo-body"><span class="scope extra">Opsional + Rp 5 jt</span><h3>Website satu halaman <span class="go">Buka ↗</span></h3>
@@ -359,7 +354,7 @@
             <li>Cart menghitung subtotal, diskon, pajak/service charge bila dipakai, dan total bayar.</li>
             <li>Pilihan makan di tempat atau bungkus.</li>
             <li>Nomor pesanan dan status: baru, dibakar, siap, selesai — tidak ada lagi “yang tadi pesan duluan siapa?”.</li>
-            <li>Tampilan dibuat untuk layar HP: tombol besar, satu tangan. <small>Layar bakaran terpisah hanya ditambah jika memang dibutuhkan.</small></li>
+            <li>Tampilan dibuat untuk layar HP: tombol besar, satu tangan.</li>
             <li>Riwayat transaksi dan struk digital sederhana.</li>
             <li>Hak akses penjual — harga, menu, refund, dan laporan tidak bisa diubah sembarang orang.</li>
           </ul>
@@ -398,7 +393,7 @@
         <div>
           <h3>Alurnya di gerobak</h3>
           <ol class="steps">
-            <li><b>Penjual tekan Charge → QRIS.</b> Layar HP menampilkan total besar, misalnya <b>Rp 35.000</b>, supaya pembeli bisa lihat.</li>
+            <li><b>Penjual tekan Bayar → QRIS.</b> Layar HP menampilkan total besar, misalnya <b>Rp 35.000</b>, supaya pembeli bisa lihat.</li>
             <li><b>Pembeli scan QR yang ditempel</b> dan mengetik sendiri nominalnya.</li>
             <li><b>Penjual cek notifikasi masuk</b> di aplikasi merchant/bank, centang “sudah masuk”, lalu konfirmasi. Pesanan tercatat sebagai QRIS.</li>
             <li><b>Akhir malam, owner cocokkan</b> total QRIS di laporan POS dengan mutasi rekening, dan total tunai dengan uang di laci.</li>
@@ -461,13 +456,14 @@
       <span class="eyebrow">Investasi</span>
       <h2>Harga dan timeline</h2>
       <div class="numbers">
-        <div class="num"><b>Rp 10 jt</b><span>POS inti untuk 1 gerobak</span><small>Estimasi komersial Arketype, 14 Oktober 2026; scope fase inti di proposal ini.</small></div>
+        <div class="num"><b>Rp 10 jt</b><span>POS inti untuk 1 gerobak — sekali bayar</span><small>Estimasi komersial Arketype, 14 Oktober 2026; scope fase inti di proposal ini.</small></div>
         <div class="num"><b>4 minggu</b><span>Target delivery POS inti</span><small>Estimasi delivery Arketype, 14 Oktober 2026; berlaku setelah scope, menu, dan akses disetujui.</small></div>
         <div class="num"><b>+ Rp 5 jt</b><span>Tambahan website gerobak satu halaman</span><small>Estimasi komersial Arketype, 14 Oktober 2026; scope website di proposal ini.</small></div>
         <div class="num"><b>+2 minggu</b><span>Tambahan waktu website</span><small>Estimasi delivery Arketype, 14 Oktober 2026; bisa paralel sebagian dengan POS setelah materi brand diterima.</small></div>
         <div class="num total"><b>Rp 10 jt</b><span>Total POS + QRIS statis</span><small>Estimasi komersial Arketype, 14 Oktober 2026; QRIS statis termasuk fase inti, tanpa biaya integrasi.</small></div>
         <div class="num total"><b>Rp 15 jt</b><span>Total POS + website</span><small>Penjumlahan estimasi Arketype: Rp 10 jt + Rp 5 jt, 14 Oktober 2026.</small></div>
       </div>
+      <div class="callout"><b>Sekali bayar, bukan langganan.</b> Rp 10 jt dibayar satu kali untuk POS dan backoffice — tidak ada biaya langganan bulanan atau tahunan.</div>
 
       <h3 style="margin-top:44px">Pembayaran proyek</h3>
       <div class="split" role="img" aria-label="Termin: 50% saat disetujui, 50% saat go-live">
@@ -511,7 +507,7 @@
         <div class="panel"><h3>Fase inti mencakup</h3>
           <ul class="ticks"><li>1 brand dan 1 gerobak.</li><li>Web app yang dipakai dari HP atau tablet.</li></ul></div>
         <div class="panel"><h3>Belum termasuk</h3>
-          <ul class="dots"><li>Native Android/iOS app</li><li>Integrasi GoFood / GrabFood / ShopeeFood</li><li>Software akuntansi, loyalty program, banyak gerobak/franchise</li><li>Mode offline penuh, layar bakaran terpisah, integrasi printer khusus</li><li>Procurement dan resep/BOM detail</li></ul></div>
+          <ul class="dots"><li>Native Android/iOS app</li><li>Integrasi GoFood / GrabFood / ShopeeFood</li><li>Software akuntansi, loyalty program, banyak gerobak/franchise</li><li>Mode offline penuh, integrasi printer khusus</li><li>Procurement dan resep/BOM detail</li></ul></div>
       </div>
       <p class="sub" style="margin-top:20px">Semua itu bisa jadi fase berikutnya setelah transaksi inti sudah jalan dan ada data pemakaian nyata.</p>
     </div>
